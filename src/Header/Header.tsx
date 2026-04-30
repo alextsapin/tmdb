@@ -1,20 +1,36 @@
 import Container from "@mui/material/Container";
 import { Link, NavLink } from "react-router-dom";
 import logo from '../images/tmdb.png';
-import css from './header.module.css';
+import css from './header.module.less';
 
 export const Header = () => {
     return (
-        <Container className={css.header}>
-            <Link to="/"><img src={logo} alt="logo"/></Link>
+        <header className={css.header}>
+            <Container className={css.wrapper}>
+                <Link className={css.logo} to="/"><img src={logo} alt="logo"/></Link>
 
-            <ul className={css.menu}>
-                <li><NavLink to="/">Main</NavLink></li>
-                <li><NavLink to="/category-movies/">Category movies</NavLink></li>
-                <li><NavLink to="/filtered-movies/">Filtered Movies</NavLink></li>
-                <li><NavLink to="/search/">Search</NavLink></li>
-                <li><NavLink to="/favorites/">Favorites</NavLink></li>
-            </ul>
-        </Container>  
+                <ul className={css.menu}>
+                    <li className={css.item}>
+                        <NavLink to="/" className={css.link}>Main</NavLink>
+                    </li>
+
+                    <li className={css.item}>
+                        <NavLink to="/category-movies/" className={css.link}>Category movies</NavLink>
+                    </li>
+
+                    <li className={css.item}>
+                        <NavLink to="/filtered-movies/" className={css.link}>Filtered Movies</NavLink>
+                    </li>
+
+                    <li className={css.item}>
+                        <NavLink to="/search/" className={css.link}>Search</NavLink>
+                    </li>
+
+                    <li className={css.item}>
+                        <NavLink to="/favorites/" className={css.link}>Favorites</NavLink>
+                    </li>
+                </ul>
+            </Container>  
+        </header>
     );
 }

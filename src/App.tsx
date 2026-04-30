@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from 'react';
 import { getBackdropUrl, getPopularMovies, Movie } from './api/api';
-import './reset.css';
 import './App.css';
 import { Header } from './Header/Header';
 
