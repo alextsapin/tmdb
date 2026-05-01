@@ -1,46 +1,53 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { useEffect, useState } from 'react';
-import { getBackdropUrl, getPopularMovies, Movie } from './api/api';
-import './App.css';
+import { useEffect } from 'react';
+
+import { getBackdropUrl } from './api/api';
 import { Header } from './Header/Header';
+import { useAppDispatch, useAppSelector } from './store/hooks';
+import { loadRandomPosterMovie } from './store/posterSlice';
 
-export const  App = () => {
+import './less/App.less';
+import { loadPopularMovies } from './store/popSlice';
+import { Container } from '@mui/material';
 
-    const [heroMovie, setHeroMovie] = useState<Movie | null>(null);
-    const [loading, setLoading] = useState(true);
+export const App = () => {
+    const dispatch = useAppDispatch();
+
+    const {movie: heroMovie, loading, error} = useAppSelector((state) => state.poster);
 
     useEffect(() => {
-        const loadHeroMovie = async () => {
-        try {
-            const movies = await getPopularMovies(1);
-            const moviesWithBackdrop = movies.filter((movie) => movie.backdrop_path);
-            const randomIndex = Math.floor(Math.random() * moviesWithBackdrop.length);
-            setHeroMovie(moviesWithBackdrop[randomIndex]);
-        } catch (error) {
-            console.error('Ошибка загрузки популярного фильма:', error);
-        } finally {
-            setLoading(false);
-        }
-        };
-
-        loadHeroMovie();
-    }, []);
+        dispatch(loadRandomPosterMovie());
+        dispatch(loadPopularMovies())
+    }, [dispatch]);
 
     return (
         <div>
-            <Header/>          
+            <Header />
 
-            <div className="hero"
-                style={{
-                backgroundImage: heroMovie?.backdrop_path
-                    ? `linear-gradient(
-                        rgba(0, 0, 0, 0.45),
-                        rgba(0, 0, 0, 0.85)
-                    ), url(${getBackdropUrl(heroMovie.backdrop_path)})`
-                    : undefined,
-                }}
-            >
-            </div>
+            {loading && <div className="poster">Загрузка...</div>}
+
+            {error && (
+                <div className="poster">
+                    {error}
+                </div>
+            )}
+
+            {!loading && !error && (
+                <div
+                    className="poster"
+                    style={{
+                        backgroundImage: heroMovie?.backdrop_path
+                            ? `linear-gradient(
+                                rgba(0, 0, 0, 0.45),
+                                rgba(0, 0, 0, 0.85)
+                            ), url(${getBackdropUrl(heroMovie.backdrop_path)})`
+                            : undefined,
+                    }}
+                />
+            )}
+
+            <Container>
+                <h2 className='title title_second'>Popular Movies</h2>
+            </Container>
         </div>
     );
-}
+};
