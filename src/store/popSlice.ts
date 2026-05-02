@@ -1,34 +1,29 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { getPopularMovies, Movie } from '../api/api';
+import { loadTopMovies } from './topSlice';
 
 type PopMovies = {
-    movies: Movie[] | null;
+    popMovies: Movie[] | null;
     loading: boolean;
     error: string | null;
 };
 
 const initialState: PopMovies = {
-    movies: null,
+    popMovies: null,
     loading: false,
     error: null,
 };
 
-export const loadPopularMovies = createAsyncThunk('poster/loadPopulatMovies', async () => {
-    
-        const movies = await getPopularMovies(1);
-        const sixMovies = [];
-
-        for (let i = 0; i < 6; i++) {
-            sixMovies.push(movies[i])
-        }
-
-        return sixMovies;
+export const loadPopularMovies = createAsyncThunk(
+    'pop/loadPopularMovies',
+    async (page?: number) => {
+        return await getPopularMovies(page ?? 1);
     }
 );
 
 const popSlice = createSlice({
-    name: 'poster',
+    name: 'pop',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
@@ -39,9 +34,9 @@ const popSlice = createSlice({
             })
             .addCase(loadPopularMovies.fulfilled, (state, action) => {
                 state.loading = false;
-                state.movies = action.payload;
+                state.popMovies = action.payload;
             })
-            .addCase(loadPopularMovies.rejected, (state, action) => {
+            .addCase(loadTopMovies.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message || 'Ошибка загрузки фильма';
             });

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import { useEffect } from 'react';
 
 import { getBackdropUrl } from './api/api';
@@ -7,16 +8,25 @@ import { loadRandomPosterMovie } from './store/posterSlice';
 
 import './less/App.less';
 import { loadPopularMovies } from './store/popSlice';
-import { Container } from '@mui/material';
+import { Button, Container, Grid } from '@mui/material';
+import { Card } from './Card/Card';
+import { Link } from 'react-router-dom';
+import { loadTopMovies } from './store/topSlice';
+import { loadUpcomingMovies } from './store/upcomingSlice';
 
 export const App = () => {
     const dispatch = useAppDispatch();
 
-    const {movie: heroMovie, loading, error} = useAppSelector((state) => state.poster);
+    const {movie, loading, error} = useAppSelector((state) => state.poster);
+    const {popMovies} = useAppSelector((state) => state.pop);
+    const {topMovies} = useAppSelector((state) => state.top);
+    const {upcomingMovies} = useAppSelector((state) => state.upcoming);
 
     useEffect(() => {
         dispatch(loadRandomPosterMovie());
-        dispatch(loadPopularMovies())
+        dispatch(loadPopularMovies());
+        dispatch(loadTopMovies());
+        dispatch(loadUpcomingMovies());
     }, [dispatch]);
 
     return (
@@ -24,30 +34,57 @@ export const App = () => {
             <Header />
 
             {loading && <div className="poster">Загрузка...</div>}
-
-            {error && (
-                <div className="poster">
-                    {error}
-                </div>
-            )}
+            {error && <div className="poster">{error}</div>}
 
             {!loading && !error && (
-                <div
-                    className="poster"
+                <div className="poster"
                     style={{
-                        backgroundImage: heroMovie?.backdrop_path
+                        backgroundImage: movie?.backdrop_path
                             ? `linear-gradient(
                                 rgba(0, 0, 0, 0.45),
                                 rgba(0, 0, 0, 0.85)
-                            ), url(${getBackdropUrl(heroMovie.backdrop_path)})`
+                            ), url(${getBackdropUrl(movie.backdrop_path)})`
                             : undefined,
                     }}
                 />
             )}
 
             <Container>
-                <h2 className='title title_second'>Popular Movies</h2>
+                <h2 className='title title_second'>Popular movies</h2>
+                <Grid container spacing={2}>
+                    {popMovies?.slice(0, 6).map((m) => (
+                        <Card key={m.id} {...m} />
+                    ))}
+                </Grid>
+                <Button component={Link} to="/category-movies/" sx={{mt: 3}} variant="contained">View more</Button>
+
+                <h2 className='title title_second'>Top rated movies</h2>
+                <Grid container spacing={2}>
+                    {topMovies?.slice(0, 6).map((m) => (
+                        <Card key={m.id} {...m} />
+                    ))}
+                </Grid>
+                <Button component={Link} to="/category-movies/" sx={{mt: 3}} variant="contained">View more</Button>
+
+                <h2 className='title title_second'>Upcoming</h2>
+                <Grid container spacing={2}>
+                    {upcomingMovies?.slice(0, 6).map((m) => (
+                        <Card key={m.id} {...m} />
+                    ))}
+                </Grid>
+                <Button component={Link} to="/category-movies/" sx={{mt: 3}} variant="contained">View more</Button>
+                
+
             </Container>
+
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         </div>
     );
 };
+
+

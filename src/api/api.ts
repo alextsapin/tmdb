@@ -42,6 +42,26 @@ export const getPopularMovies = async (page = 1) => {
     return response.data.results;
 };
 
+export const getTopMovies = async (page = 1) => {
+    const response = await tmdbApi.get<PopularMoviesResponse>('/movie/top_rated', {
+        params: {
+            page,
+        },
+    });
+
+    return response.data.results;
+};
+
+export const getUpcomingMovies = async (page = 1) => {
+    const response = await tmdbApi.get<PopularMoviesResponse>('/movie/upcoming', {
+        params: {
+            page,
+        },
+    });
+
+    return response.data.results;
+};
+
 export const getBackdropUrl = (path: string | null) => {
     if (!path) return '';
     return `https://image.tmdb.org/t/p/original${path}`;
