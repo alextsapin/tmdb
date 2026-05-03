@@ -3,6 +3,8 @@
 
 body {
     font-family: 'Open Sans', Arial, sans-serif;
+    background-color: @dark;
+    color: white;
 }
 
 em, i {
@@ -15,6 +17,16 @@ main {
 
 img {
     max-width: 100%;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+}
+
+#content {
+    flex: auto;
 }
 
 .poster {
@@ -33,7 +45,7 @@ img {
     padding-bottom: 15px;
     margin-bottom: 20px;
     width: 100%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     font-weight: 700;
     text-transform: uppercase;
     text-align: left;

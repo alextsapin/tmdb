@@ -62,6 +62,16 @@ export const getUpcomingMovies = async (page = 1) => {
     return response.data.results;
 };
 
+export const getNowPlayingMovies = async (page = 1) => {
+    const response = await tmdbApi.get<PopularMoviesResponse>('/movie/now_playing', {
+        params: {
+            page,
+        },
+    });
+
+    return response.data.results;
+};
+
 export const getBackdropUrl = (path: string | null) => {
     if (!path) return '';
     return `https://image.tmdb.org/t/p/original${path}`;
