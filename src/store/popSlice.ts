@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { getPopularMovies, Movie } from '../api/api';
-import { loadTopMovies } from './topSlice';
+
 
 type PopMovies = {
     popMovies: Movie[] | null;
@@ -36,7 +36,7 @@ const popSlice = createSlice({
                 state.loading = false;
                 state.popMovies = action.payload;
             })
-            .addCase(loadTopMovies.rejected, (state, action) => {
+            .addCase(loadPopularMovies.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message || 'Ошибка загрузки фильма';
             });
