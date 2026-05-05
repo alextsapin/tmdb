@@ -25,7 +25,7 @@ export type Movie = {
     vote_average: number;
 };
 
-type PopularMoviesResponse = {
+export type MoviesResponse = {
     page: number;
     results: Movie[];
     total_pages: number;
@@ -33,17 +33,17 @@ type PopularMoviesResponse = {
 };
 
 export const getPopularMovies = async (page = 1) => {
-    const response = await tmdbApi.get<PopularMoviesResponse>('/movie/popular', {
+    const response = await tmdbApi.get<MoviesResponse>('/movie/popular', {
         params: {
             page,
         },
     });
 
-    return response.data.results;
+    return response.data;
 };
 
 export const getTopMovies = async (page = 1) => {
-    const response = await tmdbApi.get<PopularMoviesResponse>('/movie/top_rated', {
+    const response = await tmdbApi.get<MoviesResponse>('/movie/top_rated', {
         params: {
             page,
         },
@@ -53,7 +53,7 @@ export const getTopMovies = async (page = 1) => {
 };
 
 export const getUpcomingMovies = async (page = 1) => {
-    const response = await tmdbApi.get<PopularMoviesResponse>('/movie/upcoming', {
+    const response = await tmdbApi.get<MoviesResponse>('/movie/upcoming', {
         params: {
             page,
         },
@@ -63,16 +63,11 @@ export const getUpcomingMovies = async (page = 1) => {
 };
 
 export const getNowPlayingMovies = async (page = 1) => {
-    const response = await tmdbApi.get<PopularMoviesResponse>('/movie/now_playing', {
+    const response = await tmdbApi.get<MoviesResponse>('/movie/now_playing', {
         params: {
             page,
         },
     });
 
     return response.data.results;
-};
-
-export const getBackdropUrl = (path: string | null) => {
-    if (!path) return '';
-    return `https://image.tmdb.org/t/p/original${path}`;
 };

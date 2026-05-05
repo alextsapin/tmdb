@@ -2,17 +2,20 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { getPopularMovies, Movie } from '../api/api';
 
-
 type PopMovies = {
-    popMovies: Movie[] | null;
+    popMovies: Movie[];
     loading: boolean;
     error: string | null;
+    page: number;
+    totalPages: number;
 };
 
 const initialState: PopMovies = {
-    popMovies: null,
+    popMovies: [],
     loading: false,
     error: null,
+    page: 1,
+    totalPages: 1,
 };
 
 export const loadPopularMovies = createAsyncThunk(
@@ -34,11 +37,13 @@ const popSlice = createSlice({
             })
             .addCase(loadPopularMovies.fulfilled, (state, action) => {
                 state.loading = false;
-                state.popMovies = action.payload;
+                state.popMovies = action.payload.results;
+                state.page = action.payload.page;
+                state.totalPages = action.payload.total_pages;
             })
             .addCase(loadPopularMovies.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.message || 'Ошибка загрузки фильма';
+                state.error = action.error.message || 'Ошибка загрузки фильмов';
             });
     },
 });

@@ -1,7 +1,5 @@
 import { useEffect } from "react";
-import { getBackdropUrl } from "../api/api";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { loadRandomPosterMovie } from "../store/posterSlice";
 import { loadPopularMovies } from "../store/popSlice";
 import { loadTopMovies } from "../store/topSlice";
 import { loadUpcomingMovies } from "../store/upcomingSlice";
@@ -9,42 +7,29 @@ import { loadNowPlayingMovies } from "../store/nowSlice";
 import { Button, Container, Grid } from "@mui/material";
 import { Card } from "../Card/Card";
 import { Link } from "react-router-dom";
+import { Poster } from "../Poster/Poster";
 
 export const HomePage = () => {
 
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(loadRandomPosterMovie());
         dispatch(loadPopularMovies());
         dispatch(loadTopMovies());
         dispatch(loadUpcomingMovies());
         dispatch(loadNowPlayingMovies());
     }, [dispatch]);
 
-    const {movie, loading, error} = useAppSelector((state) => state.poster);
     const {popMovies} = useAppSelector((state) => state.pop);
     const {topMovies} = useAppSelector((state) => state.top);
     const {upcomingMovies} = useAppSelector((state) => state.upcoming);
     const {nowPlayingMovies} = useAppSelector((state) => state.nowPlaying);
 
+    console.log(popMovies);
+
     return (
         <>
-            {loading && <div className="poster">Загрузка...</div>}
-            {error && <div className="poster">{error}</div>}
-
-            {!loading && !error && (
-                <div className="poster"
-                    style={{
-                        backgroundImage: movie?.backdrop_path
-                            ? `linear-gradient(
-                                rgba(0, 0, 0, 0.45),
-                                rgba(0, 0, 0, 0.85)
-                            ), url(${getBackdropUrl(movie.backdrop_path)})`
-                            : undefined,
-                    }}
-                />
-            )}
+            <Poster movies={popMovies}/>
             
             <Container id="content">
                 <h2 className='title title_second'>Popular movies</h2>
