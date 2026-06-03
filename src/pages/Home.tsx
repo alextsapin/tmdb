@@ -1,29 +1,27 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { loadPopularMovies } from "../store/popSlice";
-import { loadTopMovies } from "../store/topSlice";
-import { loadUpcomingMovies } from "../store/upcomingSlice";
-import { loadNowPlayingMovies } from "../store/nowSlice";
 import { Button, Container, Grid } from "@mui/material";
 import { Card } from "../Card/Card";
 import { Link } from "react-router-dom";
 import { Poster } from "../Poster/Poster";
+import { loadMoviesByCategory } from "../store/moviesSlice";
+
 
 export const HomePage = () => {
 
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(loadPopularMovies());
-        dispatch(loadTopMovies());
-        dispatch(loadUpcomingMovies());
-        dispatch(loadNowPlayingMovies());
+        dispatch(loadMoviesByCategory({ category: 'popular' }));
+        //dispatch(loadTopMovies());
+        //dispatch(loadUpcomingMovies());
+        //dispatch(loadNowPlayingMovies());
     }, [dispatch]);
 
-    const {popMovies} = useAppSelector((state) => state.pop);
-    const {topMovies} = useAppSelector((state) => state.top);
-    const {upcomingMovies} = useAppSelector((state) => state.upcoming);
-    const {nowPlayingMovies} = useAppSelector((state) => state.nowPlaying);
+    const popMovies = useAppSelector((state) => state.movies.categories.popular);
+    //const {topMovies} = useAppSelector((state) => state.movies.categories.top);
+    //const {upcomingMovies} = useAppSelector((state) => state.movies.categories.upcoming);
+    //const {nowPlayingMovies} = useAppSelector((state) => state.movies.categories.upcoming);
 
     console.log(popMovies);
 
@@ -42,7 +40,7 @@ export const HomePage = () => {
 
                 <h2 className='title title_second'>Top rated movies</h2>
                 <Grid container spacing={2}>
-                    {topMovies?.slice(0, 6).map((m) => (
+                    {popMovies?.slice(0, 6).map((m) => (
                         <Card key={m.id} {...m} />
                     ))}
                 </Grid>
@@ -50,7 +48,7 @@ export const HomePage = () => {
 
                 <h2 className='title title_second'>Upcoming</h2>
                 <Grid container spacing={2}>
-                    {upcomingMovies?.slice(0, 6).map((m) => (
+                    {popMovies?.slice(0, 6).map((m) => (
                         <Card key={m.id} {...m} />
                     ))}
                 </Grid>
@@ -58,7 +56,7 @@ export const HomePage = () => {
 
                 <h2 className='title title_second'>Now playing movies</h2>
                 <Grid container spacing={2}>
-                    {nowPlayingMovies?.slice(0, 6).map((m) => (
+                    {popMovies?.slice(0, 6).map((m) => (
                         <Card key={m.id} {...m} />
                     ))}
                 </Grid>

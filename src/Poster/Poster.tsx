@@ -9,7 +9,8 @@ type PosterProps = {
 
 export const Poster = (props: PosterProps) => {
 
-    const {loading, error} = useAppSelector((state) => state.pop);
+    const loading = useAppSelector((state) => state.movies.loading.popular);
+    const error = useAppSelector((state) => state.movies.error.popular);
     const moviesWithBackdrop = props.movies.filter((movie) => movie.backdrop_path);
     const randomIndex = Math.floor(Math.random() * moviesWithBackdrop.length);
     const randomMovie = moviesWithBackdrop[randomIndex];

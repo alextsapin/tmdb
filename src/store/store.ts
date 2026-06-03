@@ -1,16 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-
-import popReducer from './popSlice';
-import topReducer from './topSlice';
-import upcomingReducer from './upcomingSlice';
-import nowPlayingReducer from './nowSlice';
+import moviesReducer from './moviesSlice';
 
 export const store = configureStore({
     reducer: {
-        pop: popReducer,
-        top: topReducer,
-        upcoming: upcomingReducer,
-        nowPlaying: nowPlayingReducer,
+        movies: moviesReducer,
     },
 });
 

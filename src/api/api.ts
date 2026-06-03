@@ -3,6 +3,12 @@ import axios from 'axios';
 
 const TMDB_ACCESS_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlZGI3YmNkZTYwMmE2ODIxM2Y3MWI5YjUwNTU1Mjk2YSIsIm5iZiI6MTc3NzI4ODgzOC4xNzYsInN1YiI6IjY5ZWY0Njg2OWRlYTczNDZlNDZiMjIxYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.hOoajQFmbun0U6uQzNt2nver0jrFoJmnyL0gyrtqfZ0';
 
+export type MovieCategory =
+    | 'popular'
+    | 'top'
+    | 'upcoming'
+    | 'nowPlaying';
+
 export const tmdbApi = axios.create({
     baseURL: 'https://api.themoviedb.org/3',
     headers: {
@@ -13,6 +19,13 @@ export const tmdbApi = axios.create({
         language: 'ru-RU',
     },
 });
+
+const categoryEndpoints: Record<MovieCategory, string> = {
+    popular: '/movie/popular',
+    top: '/movie/top_rated',
+    upcoming: '/movie/upcoming',
+    nowPlaying: '/movie/now_playing',
+};
 
 export type Movie = {
     id: number;
@@ -32,42 +45,14 @@ export type MoviesResponse = {
     total_results: number;
 };
 
-export const getPopularMovies = async (page = 1) => {
-    const response = await tmdbApi.get<MoviesResponse>('/movie/popular', {
-        params: {
-            page,
-        },
-    });
+export const getMoviesByCategory = async (category: MovieCategory, page = 1) => {
+    const response = await tmdbApi.get(categoryEndpoints[category],
+        {
+            params: {
+                page,
+            },
+        }
+    );
 
     return response.data;
-};
-
-export const getTopMovies = async (page = 1) => {
-    const response = await tmdbApi.get<MoviesResponse>('/movie/top_rated', {
-        params: {
-            page,
-        },
-    });
-
-    return response.data.results;
-};
-
-export const getUpcomingMovies = async (page = 1) => {
-    const response = await tmdbApi.get<MoviesResponse>('/movie/upcoming', {
-        params: {
-            page,
-        },
-    });
-
-    return response.data.results;
-};
-
-export const getNowPlayingMovies = async (page = 1) => {
-    const response = await tmdbApi.get<MoviesResponse>('/movie/now_playing', {
-        params: {
-            page,
-        },
-    });
-
-    return response.data.results;
 };
