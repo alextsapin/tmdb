@@ -6,24 +6,21 @@ import { Link } from "react-router-dom";
 import { Poster } from "../Poster/Poster";
 import { loadMoviesByCategory } from "../store/moviesSlice";
 
-
 export const HomePage = () => {
 
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(loadMoviesByCategory({ category: 'popular' }));
-        //dispatch(loadTopMovies());
-        //dispatch(loadUpcomingMovies());
-        //dispatch(loadNowPlayingMovies());
+        dispatch(loadMoviesByCategory({ category: 'top' }));
+        dispatch(loadMoviesByCategory({ category: 'upcoming' }));
+        dispatch(loadMoviesByCategory({ category: 'nowPlaying' }));
     }, [dispatch]);
 
     const popMovies = useAppSelector((state) => state.movies.categories.popular);
-    //const {topMovies} = useAppSelector((state) => state.movies.categories.top);
-    //const {upcomingMovies} = useAppSelector((state) => state.movies.categories.upcoming);
-    //const {nowPlayingMovies} = useAppSelector((state) => state.movies.categories.upcoming);
-
-    console.log(popMovies);
+    const topMovies = useAppSelector((state) => state.movies.categories.top);
+    const upcomingMovies = useAppSelector((state) => state.movies.categories.upcoming);
+    const nowPlayingMovies = useAppSelector((state) => state.movies.categories.nowPlaying);
 
     return (
         <>
@@ -40,7 +37,7 @@ export const HomePage = () => {
 
                 <h2 className='title title_second'>Top rated movies</h2>
                 <Grid container spacing={2}>
-                    {popMovies?.slice(0, 6).map((m) => (
+                    {topMovies?.slice(0, 6).map((m) => (
                         <Card key={m.id} {...m} />
                     ))}
                 </Grid>
@@ -48,7 +45,7 @@ export const HomePage = () => {
 
                 <h2 className='title title_second'>Upcoming</h2>
                 <Grid container spacing={2}>
-                    {popMovies?.slice(0, 6).map((m) => (
+                    {upcomingMovies?.slice(0, 6).map((m) => (
                         <Card key={m.id} {...m} />
                     ))}
                 </Grid>
@@ -56,7 +53,7 @@ export const HomePage = () => {
 
                 <h2 className='title title_second'>Now playing movies</h2>
                 <Grid container spacing={2}>
-                    {popMovies?.slice(0, 6).map((m) => (
+                    {nowPlayingMovies?.slice(0, 6).map((m) => (
                         <Card key={m.id} {...m} />
                     ))}
                 </Grid>
