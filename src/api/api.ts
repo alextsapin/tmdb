@@ -46,13 +46,11 @@ export type MoviesResponse = {
 };
 
 export const getMoviesByCategory = async (category: MovieCategory, page = 1) => {
-    const response = await tmdbApi.get(categoryEndpoints[category],
-        {
-            params: {
-                page,
-            },
-        }
-    );
+    const response = await tmdbApi.get(categoryEndpoints[category], {
+        params: {
+            page,
+        },
+    });
 
     return response.data;
 };

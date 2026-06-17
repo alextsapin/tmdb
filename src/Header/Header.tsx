@@ -30,7 +30,7 @@ export const Header = () => {
                         <NavLink to="/favorites/" className={css.link}>Favorites</NavLink>
                     </li>
                 </ul>
-            </Container>  
+            </Container>
         </header>
     );
 }

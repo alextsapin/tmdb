@@ -26,8 +26,12 @@ export const Card = (props: Movie) => {
             <Link to="/">
                 <img src={`https://image.tmdb.org/t/p/original${props.poster_path}`} alt={props.title} />
             </Link>
-            <span className={css.average} style={{backgroundColor: getRatingColor(props.vote_average)}}>{props.vote_average}</span>
+            <span
+                className={css.average}
+                style={{ backgroundColor: getRatingColor(props.vote_average) }}
+            >
+                {props.vote_average}
+            </span>
         </Grid>
-   
     )
 }

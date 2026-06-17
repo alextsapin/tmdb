@@ -45,23 +45,31 @@ const initialState: State = {
     }
 }
 
-export const loadMoviesByCategory = createAsyncThunk('movies/loadMoviesByCategory', async ({category, page = 1}: {category: MovieCategory; page?: number;}) => {
-    const data = await getMoviesByCategory(category, page);
+type LoadMoviesByCategoryArgs = {
+    category: MovieCategory;
+    page?: number;
+};
 
-    return {
-        category,
-        movies: data.results,
-    };
-});
+export const loadMoviesByCategory = createAsyncThunk(
+    'movies/loadMoviesByCategory',
+    async ({ category, page = 1 }: LoadMoviesByCategoryArgs) => {
+        const { results: movies } = await getMoviesByCategory(category, page);
+        return { category, movies };
+    },
+);
 
-const moviesSlice = createSlice({name: 'movies', initialState, reducers: {}, extraReducers: (builder) => {
-    builder.addCase(
-        loadMoviesByCategory.fulfilled,
-        (state, action) => {
-            state.categories[action.payload.category] =
-                action.payload.movies;
-        }
-    );
+const moviesSlice = createSlice({
+    name: 'movies',
+    initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder.addCase(
+            loadMoviesByCategory.fulfilled,
+            (state, action) => {
+                state.categories[action.payload.category] =
+                    action.payload.movies;
+            },
+        );
     },
 });
 

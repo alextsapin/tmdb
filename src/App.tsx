@@ -13,7 +13,7 @@ import { NotFoundPage } from './pages/NotFound';
 export const App = () => {
     return (
         <>
-            <Header/>
+            <Header />
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 {/* <Route path="/category-movies/" element={<CategoryMoviesPage />} /> */}
@@ -22,7 +22,7 @@ export const App = () => {
                 <Route path="/favorites/" element={<FavoritesPage />} />
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
-            <Footer/>
+            <Footer />
         </>
     );
 };

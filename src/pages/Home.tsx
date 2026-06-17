@@ -24,8 +24,8 @@ export const HomePage = () => {
 
     return (
         <>
-            <Poster movies={popMovies}/>
-            
+            <Poster movies={popMovies} />
+
             <Container id="content">
                 <h2 className='title title_second'>Popular movies</h2>
                 <Grid container spacing={2}>
