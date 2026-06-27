@@ -45,12 +45,14 @@ export type MoviesResponse = {
     total_results: number;
 };
 
-export const getMoviesByCategory = async (category: MovieCategory, page = 1) => {
-    const response = await tmdbApi.get(categoryEndpoints[category], {
-        params: {
-            page,
-        },
-    });
+// Получение фильмов по категории
+export const getMoviesByCategory = async (category: MovieCategory, page = 1): Promise<MoviesResponse> => {
+    const { data } = await tmdbApi.get<MoviesResponse>(categoryEndpoints[category], { params: { page } });
+    return data;
+};
 
-    return response.data;
+// Поиск фильмов
+export const searchMovies = async (query: string, page = 1): Promise<MoviesResponse> => {
+    const { data } = await tmdbApi.get<MoviesResponse>('/search/movie', {params: { query, page }});
+    return data;
 };
