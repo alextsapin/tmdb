@@ -54,5 +54,6 @@ export const getMoviesByCategory = async (category: MovieCategory, page = 1): Pr
 // Поиск фильмов
 export const searchMovies = async (query: string, page = 1): Promise<MoviesResponse> => {
     const { data } = await tmdbApi.get<MoviesResponse>('/search/movie', {params: { query, page }});
+    console.log(data);
     return data;
 };

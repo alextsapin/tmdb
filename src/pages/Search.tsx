@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Container, Grid } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 import { Card } from "../Card/Card";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { loadSearchMovies } from "../store/searchSlice";
+import { Paginator } from "../Paginator/Paginator";
 
 export const SearchPage = () => {
     const dispatch = useAppDispatch();
@@ -11,20 +12,19 @@ export const SearchPage = () => {
     const [searchParams] = useSearchParams();
 
     const query = searchParams.get('query') || '';
-    const page = Number(searchParams.get('page')) || 1;
+    const [page, setPage] = useState<number>(Number(searchParams.get('page')) || 1);
 
     const movies = useAppSelector((state) => state.search.movies);
     const loading = useAppSelector((state) => state.search.loading);
     const error = useAppSelector((state) => state.search.error);
     const totalResults = useAppSelector((state) => state.search.totalResults);
+    const totalPages = useAppSelector((state) => state.search.totalPages);
 
     useEffect(() => {
         if (!query.trim()) return;
 
         dispatch(loadSearchMovies({query, page}));
     }, [dispatch, query, page]);
-
-    console.log(movies);
 
     return (
         <Container id="content">
@@ -53,6 +53,9 @@ export const SearchPage = () => {
                     ))}
                 </Grid>
             )}
+
+            {totalResults > 20 && <Paginator totalResults={totalResults} totalPages={totalPages} page={page} setPage={setPage}/>} 
+
         </Container>
     );
 };
