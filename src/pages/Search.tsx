@@ -5,6 +5,7 @@ import { Card } from "../Card/Card";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { loadSearchMovies } from "../store/searchSlice";
 import { Paginator } from "../Paginator/Paginator";
+import { SearchForm } from "../SearchForm/SearchForm";
 
 export const SearchPage = () => {
     const dispatch = useAppDispatch();
@@ -29,6 +30,8 @@ export const SearchPage = () => {
     return (
         <Container id="content">
             <h1 className="title title_second">Search</h1>
+
+            <SearchForm />
 
             {!query && <p>Enter movie title</p>}
 
