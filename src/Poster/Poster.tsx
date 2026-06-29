@@ -35,7 +35,7 @@ export const Poster = (props: PosterProps) => {
                     : undefined,
             }}
         >
-            <Container>
+            <Container className={css.wrapper}>
                 <SearchForm />  
             </Container>
         </div>

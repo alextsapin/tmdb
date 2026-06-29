@@ -1,15 +1,14 @@
 .poster {
+    position: relative;
     height: 600px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-
     overflow: hidden;
     &::before {
         content: '';
         position: absolute;
         inset: 0;
-
         background:
             linear-gradient(
                 to right,
@@ -27,6 +26,14 @@
 
         pointer-events: none;
     }
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
 }
 
 .spinner {
