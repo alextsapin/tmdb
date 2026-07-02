@@ -3,6 +3,7 @@ import { Grid } from '@mui/material';
 import { Movie } from '../api/api';
 import css from './card.module.less';
 import { Link } from 'react-router-dom';
+import { Like } from '../Like/Like';
 
 const getRatingColor = (rating: number) => {
     if (rating >= 7) {
@@ -23,6 +24,7 @@ const getRatingColor = (rating: number) => {
 export const Card = (props: Movie) => {
     return (
         <Grid className={css.card} size={2}>
+            <Like />
             <Link to="/">
                 <img src={`https://image.tmdb.org/t/p/original${props.poster_path}`} alt={props.title} />
             </Link>
