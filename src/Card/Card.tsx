@@ -4,6 +4,7 @@ import { Movie } from '../api/api';
 import css from './card.module.less';
 import { Link } from 'react-router-dom';
 import { Like } from '../Like/Like';
+import noImage from '../images/no-image-available.webp'
 
 const getRatingColor = (rating: number) => {
     if (rating >= 7) {
@@ -22,11 +23,17 @@ const getRatingColor = (rating: number) => {
 };
 
 export const Card = (props: Movie) => {
+    let posterUrl = noImage;
+
+    if (props.poster_path) {
+        posterUrl = `https://image.tmdb.org/t/p/original${props.poster_path}`;
+    }
+
     return (
         <Grid className={css.card} size={2}>
             <Like />
             <Link to="/">
-                <img src={`https://image.tmdb.org/t/p/original${props.poster_path}`} alt={props.title} />
+                <img src={posterUrl} alt={props.title} />
             </Link>
             <span
                 className={css.average}

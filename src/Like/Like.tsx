@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import css from './like.module.less';
 
-import noLike from './images/like.png';
-import like from './images/like-red.png';
+import noLike from '../images/like.png';
+import like from '../images/like-red.png';
 
 export const Like = () => {
     const [isLiked, setIsLiked] = useState(false);
