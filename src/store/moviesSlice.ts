@@ -50,12 +50,14 @@ type LoadMoviesByCategoryArgs = {
     page?: number;
 };
 
-export const loadMoviesByCategory = createAsyncThunk(
-    'movies/loadMoviesByCategory',
+export const loadMoviesByCategory = createAsyncThunk('movies/loadMoviesByCategory', 
     async ({ category, page = 1 }: LoadMoviesByCategoryArgs) => {
+
+        await new Promise(resolve => setTimeout(resolve, 1000));
         const { results: movies } = await getMoviesByCategory(category, page);
-        return { category, movies };
-    },
+        
+        return {category, movies};
+    }
 );
 
 const moviesSlice = createSlice({
@@ -64,10 +66,26 @@ const moviesSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(
+            loadMoviesByCategory.pending,
+            (state, action) => {
+                const category = action.meta.arg.category;
+                state.loading[category] = true;
+                state.error[category] = null;
+            },
+        );
+        builder.addCase(
             loadMoviesByCategory.fulfilled,
             (state, action) => {
-                state.categories[action.payload.category] =
-                    action.payload.movies;
+                state.categories[action.payload.category] = action.payload.movies;
+                state.loading[action.payload.category] = false;
+            },
+        );
+        builder.addCase(
+            loadMoviesByCategory.rejected,
+            (state, action) => {
+                const category = action.meta.arg.category;
+                state.loading[category] = false;
+                state.error[category] = action.error.message || null;
             },
         );
     },
