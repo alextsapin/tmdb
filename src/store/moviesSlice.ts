@@ -85,9 +85,9 @@ const moviesSlice = createSlice({
                 const category = action.meta.arg.category;
                 state.loading[category] = false;
                 state.error[category] = action.error.message || null;
-            },
+            }
         );
-    },
+    }
 });
 
 export default moviesSlice.reducer;

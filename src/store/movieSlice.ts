@@ -23,6 +23,23 @@ const movieSlice = createSlice({
     name: "movie",
     initialState,
     reducers: {},
+    extraReducers: (builder) => {
+        builder.addCase(loadMovieById.pending, (state, action) => {
+            state.loading = true;
+            state.error = null;
+        });
+
+        builder.addCase(loadMovieById.fulfilled, (state, action) => {
+            //state.categories[action.payload.category] = action.payload.movies;
+            state.movie = action.payload;
+            state.loading = false;
+        });
+
+        builder.addCase(loadMovieById.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message || null;
+        });
+    }
 });
 
 export default movieSlice.reducer;
