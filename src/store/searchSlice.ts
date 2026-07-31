@@ -24,9 +24,7 @@ type LoadSearchMoviesArgs = {
     page?: number;
 };
 
-export const loadSearchMovies = createAsyncThunk(
-    'search/loadSearchMovies',
-    async ({ query, page = 1 }: LoadSearchMoviesArgs) => {
+export const loadSearchMovies = createAsyncThunk('search/loadSearchMovies',async ({ query, page = 1 }: LoadSearchMoviesArgs) => {
         return await searchMovies(query, page);
     },
 );

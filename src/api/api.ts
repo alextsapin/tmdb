@@ -3,12 +3,6 @@ import axios from 'axios';
 
 const TMDB_ACCESS_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlZGI3YmNkZTYwMmE2ODIxM2Y3MWI5YjUwNTU1Mjk2YSIsIm5iZiI6MTc3NzI4ODgzOC4xNzYsInN1YiI6IjY5ZWY0Njg2OWRlYTczNDZlNDZiMjIxYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.hOoajQFmbun0U6uQzNt2nver0jrFoJmnyL0gyrtqfZ0';
 
-export type MovieCategory =
-    | 'popular'
-    | 'top'
-    | 'upcoming'
-    | 'nowPlaying';
-
 export const tmdbApi = axios.create({
     baseURL: 'https://api.themoviedb.org/3',
     headers: {
@@ -19,6 +13,12 @@ export const tmdbApi = axios.create({
         language: 'ru-RU',
     },
 });
+
+export type MovieCategory =
+    | 'popular'
+    | 'top'
+    | 'upcoming'
+    | 'nowPlaying';
 
 const categoryEndpoints: Record<MovieCategory, string> = {
     popular: '/movie/popular',
@@ -38,6 +38,14 @@ export type Movie = {
     vote_average: number;
 };
 
+export type MovieDetails = Movie & {
+    runtime: number;
+    genres: {
+        id: number;
+        name: string;
+    }[];
+};
+
 export type MoviesResponse = {
     page: number;
     results: Movie[];
@@ -54,6 +62,11 @@ export const getMoviesByCategory = async (category: MovieCategory, page = 1): Pr
 // Поиск фильмов
 export const searchMovies = async (query: string, page = 1): Promise<MoviesResponse> => {
     const { data } = await tmdbApi.get<MoviesResponse>('/search/movie', {params: { query, page }});
-    console.log(data);
+    return data;
+};
+
+// Получение фильма по ID
+export const getMovieById = async (id: number): Promise<MovieDetails> => {
+    const { data } = await tmdbApi.get<MovieDetails>(`/movie/${id}`);
     return data;
 };

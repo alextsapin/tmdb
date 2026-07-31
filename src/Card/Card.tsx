@@ -31,8 +31,8 @@ export const Card = (props: Movie) => {
 
     return (
         <Grid className={css.card} size={2}>
-            <Like />
-            <Link className={css.link} to="/">
+            <Link className={css.link} to={`/movie/${props.id}`}>
+                <Like />
                 <img src={posterUrl} alt={props.title} />
                 <span className={css.average} style={{backgroundColor: getRatingColor(props.vote_average)}}>{props.vote_average}</span>
             </Link>

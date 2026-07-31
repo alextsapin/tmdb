@@ -1,3 +1,4 @@
+import { MoviePage } from './pages/Movie';
 import { Header } from './Header/Header';
 import { Footer } from './Footer/Footer';
 
@@ -16,6 +17,7 @@ export const App = () => {
             <Header />
             <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/movie/:id" element={<MoviePage />}/>
                 {/* <Route path="/category-movies/" element={<CategoryMoviesPage />} /> */}
                 <Route path="/filtered-movies/" element={<FilteredMoviesPage />} />
                 <Route path="/search/" element={<SearchPage />} />
