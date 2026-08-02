@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { loadMovieById } from "../../store/movieSlice";
+import { loadMovieById, loadMovieCast } from "../../store/movieSlice";
 import { Container, Grid } from "@mui/material";
 import { getRatingColor, runtimeConverter } from "../../utils/utils";
 import noImage from '../../images/no-image-available.webp'
@@ -15,10 +15,13 @@ export const MoviePage = () => {
 
     useEffect(() => {
         if (!id) return;
-        dispatch(loadMovieById(Number(id)));
+        const movieId = Number(id);
+        dispatch(loadMovieById(movieId));
+        dispatch(loadMovieCast(movieId));
     }, [dispatch, id]);
 
     const movie = useAppSelector((state) => state.movie.movie);
+    const cast = useAppSelector((state) => state.movie.cast);
     const loading = useAppSelector((state) => state.movie.loading);
     const error = useAppSelector((state) => state.movie.error);
 
@@ -27,6 +30,7 @@ export const MoviePage = () => {
     if (!movie) return <p>Movie not found</p>;
 
     console.log(movie);
+    console.log(cast);
 
 
     const posterUrl = `https://image.tmdb.org/t/p/original${movie.poster_path}`;
@@ -48,6 +52,25 @@ export const MoviePage = () => {
 
                         <p>Runtime: {runtimeConverter(movie.runtime)}</p>
                     </div>
+
+                    <p className={css.text}>{movie.overview}</p>
+
+                    <ul className={css.genres}>
+                        {movie.genres.map(el => <li key={el.id} className={css.genre}>{el.name}</li>)}
+                    </ul>
+
+                    {cast && cast.length > 0 && (
+                        <section className={css.cast}>
+                            <h2>В ролях</h2>
+                            <ul>
+                                {cast.slice(0, 10).map((actor) => (
+                                    <li key={actor.id}>
+                                        {actor.name} — {actor.character}
+                                    </li>
+                                ))}
+                            </ul>
+                        </section>
+                    )}
                 </Grid>
             </Grid>
         </Container>

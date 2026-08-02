@@ -53,6 +53,19 @@ export type MoviesResponse = {
     total_results: number;
 };
 
+export type Actor = {
+    id: number
+    name: string
+    popularity: number
+    profile_path: string
+    character: string
+}
+
+export type MovieCast = {
+    id: number
+    cast: Actor[]
+}
+
 // Получение фильмов по категории
 export const getMoviesByCategory = async (category: MovieCategory, page = 1): Promise<MoviesResponse> => {
     const { data } = await tmdbApi.get<MoviesResponse>(categoryEndpoints[category], { params: { page } });
@@ -69,4 +82,9 @@ export const searchMovies = async (query: string, page = 1): Promise<MoviesRespo
 export const getMovieById = async (id: number): Promise<MovieDetails> => {
     const { data } = await tmdbApi.get<MovieDetails>(`/movie/${id}`);
     return data;
+};
+
+export const getMovieCast = async (id: number): Promise<Actor[]> => {
+    const { data } = await tmdbApi.get<MovieCast>(`/movie/${id}/credits`);
+    return data.cast;
 };
