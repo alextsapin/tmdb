@@ -4,16 +4,28 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 type MovieState = {
     movie: MovieDetails | null;
-    cast: Actor[] | null
-    loading: boolean;
-    error: string | null;
+    cast: Actor[]
+    loading: {
+        movie: boolean;
+        cast: boolean;
+    }
+    error: {
+        movie: string | null;
+        cast: string | null;
+    }
 };
 
 const initialState: MovieState = {
     movie: null,
-    cast: null,
-    loading: false,
-    error: null,
+    cast: [],
+    loading: {
+        movie: false,
+        cast: false
+    },
+    error: {
+        movie: null,
+        cast: null
+    }
 };
 
 export const loadMovieById = createAsyncThunk("movie/loadMovie", async (id: number) => {
@@ -31,34 +43,34 @@ const movieSlice = createSlice({
     extraReducers: (builder) => {
         // Movie
         builder.addCase(loadMovieById.pending, (state, action) => {
-            state.loading = true;
-            state.error = null;
+            state.loading.movie = true;
+            state.error.movie = null;
         });
 
         builder.addCase(loadMovieById.fulfilled, (state, action) => {
             state.movie = action.payload;
-            state.loading = false;
+            state.loading.movie = false;
         });
 
         builder.addCase(loadMovieById.rejected, (state, action) => {
-            state.loading = false;
-            state.error = action.error.message || null;
+            state.loading.movie = false;
+            state.error.movie = action.error.message || null;
         });
 
         // Cast
         builder.addCase(loadMovieCast.pending, (state, action) => {
-            state.loading = true;
-            state.error = null;
+            state.loading.cast = true;
+            state.error.cast = null;
         });
 
         builder.addCase(loadMovieCast.fulfilled, (state, action) => {
             state.cast = action.payload;
-            state.loading = false;
+            state.loading.cast = false;
         });
 
         builder.addCase(loadMovieCast.rejected, (state, action) => {
-            state.loading = false;
-            state.error = action.error.message || null;
+            state.loading.cast = false;
+            state.error.cast = action.error.message || null;
         });
     }
 });

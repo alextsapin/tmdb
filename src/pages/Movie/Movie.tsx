@@ -1,5 +1,5 @@
-import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { loadMovieById, loadMovieCast } from "../../store/movieSlice";
 import { Container, Grid } from "@mui/material";
@@ -7,9 +7,7 @@ import { getRatingColor, runtimeConverter } from "../../utils/utils";
 import noImage from '../../images/no-image-available.webp'
 import css from "./movie.module.less";
 
-
 export const MoviePage = () => {
-
     const { id } = useParams();
     const dispatch = useAppDispatch();
 
@@ -22,24 +20,20 @@ export const MoviePage = () => {
 
     const movie = useAppSelector((state) => state.movie.movie);
     const cast = useAppSelector((state) => state.movie.cast);
-    const loading = useAppSelector((state) => state.movie.loading);
-    const error = useAppSelector((state) => state.movie.error);
+    const loading = useAppSelector((state) => state.movie.loading.movie);
+    const error = useAppSelector((state) => state.movie.error.movie);
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
     if (!movie) return <p>Movie not found</p>;
 
-    console.log(movie);
-    console.log(cast);
-
-
-    const posterUrl = `https://image.tmdb.org/t/p/original${movie.poster_path}`;
+    const posterUrl = movie.poster_path ? `https://image.tmdb.org/t/p/original${movie.poster_path}` : noImage;
     
     return (
-        <Container id="content" sx={{ mt: 5 }}>
+        <Container id="content" sx={{mt: 5}}>
             <Grid container spacing={2}>
                 <Grid size={3}>
-                    <img src={posterUrl ?? noImage} alt={movie.title} />
+                    <img src={posterUrl} alt={movie.title} />
                 </Grid>
                 <Grid size={9}>
                     <h1 className={css.title}>{movie.title}</h1>
@@ -58,22 +52,23 @@ export const MoviePage = () => {
                     <ul className={css.genres}>
                         {movie.genres.map(el => <li key={el.id} className={css.genre}>{el.name}</li>)}
                     </ul>
+                </Grid>
 
-                    {cast && cast.length > 0 && (
+                {cast && cast.length > 0 && (
                         <section className={css.cast}>
                             <h2>В ролях</h2>
-                            <ul>
-                                {cast.slice(0, 10).map((actor) => (
-                                    <li key={actor.id}>
-                                        {actor.name} — {actor.character}
+                            <ul className={css.list}>
+                                {[...cast].sort((a, b) => b.popularity - a.popularity).slice(0, 6).map((actor) => (
+                                    <li key={actor.id} className={css.item}>
+                                        <img className={css.photo} src={actor.profile_path ? `https://image.tmdb.org/t/p/original${actor.profile_path}` : noImage} alt={actor.name} />
+                                        <p className={css.name}>{actor.name}</p>
+                                        <p className={css.character}>{actor.character}</p>
                                     </li>
                                 ))}
                             </ul>
                         </section>
                     )}
-                </Grid>
             </Grid>
         </Container>
-        
     );
 };
