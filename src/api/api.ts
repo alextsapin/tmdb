@@ -84,7 +84,14 @@ export const getMovieById = async (id: number): Promise<MovieDetails> => {
     return data;
 };
 
+// Получение актеров фильма
 export const getMovieCast = async (id: number): Promise<Actor[]> => {
     const { data } = await tmdbApi.get<MovieCast>(`/movie/${id}/credits`);
     return data.cast;
+};
+
+// Получение похожих фильмов
+export const getSimilarMovies = async (id: number): Promise<Movie[]> => {
+    const { data } = await tmdbApi.get<MoviesResponse>(`/movie/${id}/similar`);
+    return data.results;
 };

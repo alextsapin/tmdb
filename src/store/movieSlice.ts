@@ -1,30 +1,36 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { MovieDetails, Actor, getMovieById, getMovieCast } from "../api/api";
+import { MovieDetails, Actor, getMovieById, getMovieCast, Movie, getSimilarMovies } from "../api/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 type MovieState = {
     movie: MovieDetails | null;
-    cast: Actor[]
+    cast: Actor[];
+    similar: Movie[];
     loading: {
         movie: boolean;
         cast: boolean;
+        similar: boolean;
     }
     error: {
         movie: string | null;
         cast: string | null;
+        similar: string | null;
     }
 };
 
 const initialState: MovieState = {
     movie: null,
     cast: [],
+    similar: [],
     loading: {
         movie: false,
-        cast: false
+        cast: false,
+        similar: false
     },
     error: {
         movie: null,
-        cast: null
+        cast: null,
+        similar: null
     }
 };
 
@@ -34,6 +40,10 @@ export const loadMovieById = createAsyncThunk("movie/loadMovie", async (id: numb
 
 export const loadMovieCast = createAsyncThunk("movie/loadMovieCast", async (id: number) => {
     return getMovieCast(id);
+});
+
+export const loadSimilarMovies = createAsyncThunk("movie/loadSimilarMovies", async (id: number) => {
+    return getSimilarMovies(id);
 });
 
 const movieSlice = createSlice({
@@ -71,6 +81,22 @@ const movieSlice = createSlice({
         builder.addCase(loadMovieCast.rejected, (state, action) => {
             state.loading.cast = false;
             state.error.cast = action.error.message || null;
+        });
+
+        // Similar
+        builder.addCase(loadSimilarMovies.pending, (state, action) => {
+            state.loading.similar = true;
+            state.error.similar = null;
+        });
+
+        builder.addCase(loadSimilarMovies.fulfilled, (state, action) => {
+            state.similar = action.payload;
+            state.loading.similar = false;
+        });
+
+        builder.addCase(loadSimilarMovies.rejected, (state, action) => {
+            state.loading.similar = false;
+            state.error.similar = action.error.message || null;
         });
     }
 });
