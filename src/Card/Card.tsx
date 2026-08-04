@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Grid } from '@mui/material';
 import { Movie } from '../api/api';
 import css from './card.module.less';
@@ -12,8 +11,8 @@ export const Card = (props: Movie) => {
     
     return (
         <Grid className={css.card} size={2}>
+            <Like {...props} />
             <Link className={css.link} to={`/movie/${props.id}`}>
-                <Like />
                 <img src={posterUrl} alt={props.title} />
                 <span className={css.average} style={{backgroundColor: getRatingColor(props.vote_average)}}>
                     {props.vote_average.toFixed(1)}
