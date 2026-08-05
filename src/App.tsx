@@ -1,24 +1,27 @@
-import { MoviePage } from './pages/Movie/Movie';
-import { Header } from './Header/Header';
+import { ReactElement } from 'react';
+
+import { Route, Routes } from 'react-router-dom';
+
 import { Footer } from './Footer/Footer';
+import { Header } from './Header/Header';
+import { Category } from './pages/Category';
+import { FavoritesPage } from './pages/Favorites';
+import { FilteredMoviesPage } from './pages/Filtered';
+import { Home } from './pages/Home';
+import { MoviePage } from './pages/Movie/Movie';
+import { NotFoundPage } from './pages/NotFound';
+import { SearchPage } from './pages/Search';
 
 import './less/App.less';
-import { HomePage } from './pages/Home';
-import { Route, Routes } from 'react-router-dom';
-//import { CategoryMoviesPage } from './pages/CategoryMovies';
-import { FilteredMoviesPage } from './pages/FilteredMovies';
-import { SearchPage } from './pages/Search';
-import { FavoritesPage } from './pages/Favorites';
-import { NotFoundPage } from './pages/NotFound';
 
-export const App = () => {
+export const App = (): ReactElement => {
     return (
         <>
             <Header />
             <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/movie/:id" element={<MoviePage />}/>
-                {/* <Route path="/category-movies/" element={<CategoryMoviesPage />} /> */}
+                <Route path="/" element={<Home />} />
+                <Route path="/movie/:id" element={<MoviePage />} />
+                <Route path="/category-movies/" element={<Category />} />
                 <Route path="/filtered-movies/" element={<FilteredMoviesPage />} />
                 <Route path="/search/" element={<SearchPage />} />
                 <Route path="/favorites/" element={<FavoritesPage />} />

@@ -7,7 +7,7 @@ import { Poster } from "../Poster/Poster";
 import { loadMoviesByCategory } from "../store/moviesSlice";
 import { MovieCardSkeleton } from "../Skeleton/MovieCardSkeleton";
 
-export const HomePage = () => {
+export const Home = () => {
 
     const dispatch = useAppDispatch();
 
