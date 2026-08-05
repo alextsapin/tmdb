@@ -1,25 +1,28 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getMoviesByCategory, Movie, MovieCategory } from "../api/api";
+/* eslint-disable no-magic-numbers */
+/* eslint-disable no-promise-executor-return */
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
+import { getMoviesByCategory, Movie, MovieCategory } from '../api/api';
 
 type State = {
     categories: {
-        popular: Movie[],
-        top: Movie[],
-        upcoming: Movie[],
-        nowPlaying: Movie[]
-    },
+        popular: Movie[];
+        top: Movie[];
+        upcoming: Movie[];
+        nowPlaying: Movie[];
+    };
     loading: {
         popular: boolean;
         top: boolean;
         upcoming: boolean;
         nowPlaying: boolean;
-    },
+    };
     error: {
         popular: string | null;
         top: string | null;
         upcoming: string | null;
         nowPlaying: string | null;
-    }
+    };
 };
 
 const initialState: State = {
@@ -42,52 +45,46 @@ const initialState: State = {
         top: null,
         upcoming: null,
         nowPlaying: null,
-    }
-}
+    },
+};
 
 type LoadMoviesByCategoryArgs = {
     category: MovieCategory;
     page?: number;
 };
 
-export const loadMoviesByCategory = createAsyncThunk('movies/loadMoviesByCategory', 
+export const loadMoviesByCategory = createAsyncThunk(
+    'movies/loadMoviesByCategory',
     async ({ category, page = 1 }: LoadMoviesByCategoryArgs) => {
         await new Promise(resolve => setTimeout(resolve, 1000));
         const { results: movies } = await getMoviesByCategory(category, page);
-        
-        return {category, movies};
-    }
+
+        return { category, movies };
+    },
 );
 
 const moviesSlice = createSlice({
     name: 'movies',
     initialState,
     reducers: {},
-    extraReducers: (builder) => {
-        builder.addCase(
-            loadMoviesByCategory.pending,
-            (state, action) => {
-                const category = action.meta.arg.category;
-                state.loading[category] = true;
-                state.error[category] = null;
-            },
-        );
-        builder.addCase(
-            loadMoviesByCategory.fulfilled,
-            (state, action) => {
-                state.categories[action.payload.category] = action.payload.movies;
-                state.loading[action.payload.category] = false;
-            },
-        );
-        builder.addCase(
-            loadMoviesByCategory.rejected,
-            (state, action) => {
-                const category = action.meta.arg.category;
-                state.loading[category] = false;
-                state.error[category] = action.error.message || null;
-            }
-        );
-    }
+    extraReducers: builder => {
+        builder.addCase(loadMoviesByCategory.pending, (state, action) => {
+            const { category } = action.meta.arg;
+
+            state.loading[category] = true;
+            state.error[category] = null;
+        });
+        builder.addCase(loadMoviesByCategory.fulfilled, (state, action) => {
+            state.categories[action.payload.category] = action.payload.movies;
+            state.loading[action.payload.category] = false;
+        });
+        builder.addCase(loadMoviesByCategory.rejected, (state, action) => {
+            const { category } = action.meta.arg;
+
+            state.loading[category] = false;
+            state.error[category] = action.error.message || null;
+        });
+    },
 });
 
 export default moviesSlice.reducer;

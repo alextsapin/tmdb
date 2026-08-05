@@ -1,7 +1,7 @@
-import { Container } from "@mui/material"
+import { JSX } from 'react';
 
-export const FilteredMoviesPage = () => {
-    return (
-        <Container id="content"></Container>
-    )
-}
+import { Container } from '@mui/material';
+
+export const FilteredMoviesPage = (): JSX.Element => {
+    return <Container id="content" />;
+};

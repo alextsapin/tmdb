@@ -1,6 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { MovieDetails, Actor, getMovieById, getMovieCast, Movie, getSimilarMovies } from "../api/api";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
+import {
+    MovieDetails,
+    Actor,
+    getMovieById,
+    getMovieCast,
+    Movie,
+    getSimilarMovies,
+} from '../api/api';
 
 type MovieState = {
     movie: MovieDetails | null;
@@ -10,12 +18,12 @@ type MovieState = {
         movie: boolean;
         cast: boolean;
         similar: boolean;
-    }
+    };
     error: {
         movie: string | null;
         cast: string | null;
         similar: string | null;
-    }
+    };
 };
 
 const initialState: MovieState = {
@@ -25,32 +33,38 @@ const initialState: MovieState = {
     loading: {
         movie: false,
         cast: false,
-        similar: false
+        similar: false,
     },
     error: {
         movie: null,
         cast: null,
-        similar: null
-    }
+        similar: null,
+    },
 };
 
-export const loadMovieById = createAsyncThunk("movie/loadMovie", async (id: number) => {
+export const loadMovieById = createAsyncThunk('movie/loadMovie', async (id: number) => {
     return getMovieById(id);
 });
 
-export const loadMovieCast = createAsyncThunk("movie/loadMovieCast", async (id: number) => {
-    return getMovieCast(id);
-});
+export const loadMovieCast = createAsyncThunk(
+    'movie/loadMovieCast',
+    async (id: number) => {
+        return getMovieCast(id);
+    },
+);
 
-export const loadSimilarMovies = createAsyncThunk("movie/loadSimilarMovies", async (id: number) => {
-    return getSimilarMovies(id);
-});
+export const loadSimilarMovies = createAsyncThunk(
+    'movie/loadSimilarMovies',
+    async (id: number) => {
+        return getSimilarMovies(id);
+    },
+);
 
 const movieSlice = createSlice({
-    name: "movie",
+    name: 'movie',
     initialState,
     reducers: {},
-    extraReducers: (builder) => {
+    extraReducers: builder => {
         // Movie
         builder.addCase(loadMovieById.pending, (state, action) => {
             state.loading.movie = true;
@@ -98,7 +112,7 @@ const movieSlice = createSlice({
             state.loading.similar = false;
             state.error.similar = action.error.message || null;
         });
-    }
+    },
 });
 
 export default movieSlice.reducer;

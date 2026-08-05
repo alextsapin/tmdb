@@ -1,9 +1,11 @@
-import { useAppSelector } from "../store/hooks";
+import { JSX } from 'react';
 
-import { Container, Grid } from "@mui/material"
-import { Card } from "../Card/Card";
+import { Container, Grid } from '@mui/material';
 
-export const FavoritesPage = () => {
+import { Card } from '../Card/Card';
+import { useAppSelector } from '../store/hooks';
+
+export const FavoritesPage = (): JSX.Element => {
     const favorites = useAppSelector(state => state.favorites.movies);
 
     return (
@@ -14,5 +16,5 @@ export const FavoritesPage = () => {
                 ))}
             </Grid>
         </Container>
-    )
-}
+    );
+};

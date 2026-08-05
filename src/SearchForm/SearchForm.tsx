@@ -1,17 +1,22 @@
+import { JSX } from 'react';
+
 import { Formik, Form, Field } from 'formik';
-import css from './searchForm.module.less';
 import { useNavigate } from 'react-router-dom';
 
-export const SearchForm = () => {
+import css from './searchForm.module.less';
+
+export const SearchForm = (): JSX.Element => {
     const navigate = useNavigate();
 
     return (
-        <Formik initialValues={{search: ''}} 
-            onSubmit={(values, {setSubmitting}) => {
+        <Formik
+            initialValues={{ search: '' }}
+            onSubmit={(values, { setSubmitting }) => {
                 const query = values.search.trim();
 
                 if (!query) {
                     setSubmitting(false);
+
                     return;
                 }
 
@@ -19,7 +24,7 @@ export const SearchForm = () => {
                 setSubmitting(false);
             }}
         >
-            {({values, isSubmitting, resetForm}) => {
+            {({ values, isSubmitting, resetForm }) => {
                 const isDisabled = isSubmitting || !values.search.trim();
 
                 return (
@@ -33,16 +38,20 @@ export const SearchForm = () => {
                             />
 
                             {values.search && (
-                                <button type="button"
+                                <button
+                                    type="button"
                                     className={css.clearBtn}
-                                    onClick={() => { resetForm() }}
+                                    onClick={() => {
+                                        resetForm();
+                                    }}
                                 >
                                     ×
                                 </button>
                             )}
                         </div>
 
-                        <button type="submit"
+                        <button
+                            type="submit"
                             className={css.searchBtn}
                             disabled={isDisabled}
                         >
@@ -52,5 +61,5 @@ export const SearchForm = () => {
                 );
             }}
         </Formik>
-    )
-}
+    );
+};
