@@ -1,53 +1,66 @@
 .poster {
     position: relative;
-    height: 600px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    height: clamp(600px, 70vh, 700px);
     overflow: hidden;
+}
+
+.background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center 12%;
+    filter: blur(0);
+    opacity: 1;
+    transition: filter .35s ease, opacity .35s ease;
     &::before {
         content: '';
         position: absolute;
         inset: 0;
+        
         background:
-            linear-gradient(
-                to right,
-                #02111f 0,
-                rgba(2, 17, 31, 0.1) 0,
-                rgba(2, 17, 31, 0.99) 100%,
-                #02111f 10%
-            ),
+            /* Верхнее затемнение */
             linear-gradient(
                 to bottom,
-                rgba(0, 0, 0) 0%,
-                rgba(0, 0, 0, 0) 0%,
-                #02111f 99%
+                rgba(0, 0, 0, .45) 0%,
+                rgba(0, 0, 0, .12) 18%,
+                rgba(0, 0, 0, 0) 35%
+            ),
+
+            /* Затемнение по бокам */
+            linear-gradient(
+                to right,
+                #02111f 0%,
+                rgba(2, 17, 31, .15) 28%,
+                rgba(2, 17, 31, .35) 55%,
+                rgba(2, 17, 31, .75) 80%,
+                #02111f 100%
+            ),
+
+            /* Затемнение снизу */
+            linear-gradient(
+                to bottom,
+                rgba(2, 17, 31, 0) 55%,
+                rgba(2, 17, 31, .45) 75%,
+                #02111f 100%
             );
 
         pointer-events: none;
     }
 }
 
+.isLoading {
+    filter: blur(50px);
+    opacity: .4;
+}
+
 .wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    height: 100%;
-}
-
-.spinner {
-    display: block;
-    margin: 20px auto;
-    max-height: 600px;
-}
-
-.title {
-    margin-top: 150px;
-    font-size: 48px;
-    font-weight: 800;
-    text-transform: uppercase;
-    color: white;
     position: relative;
-    z-index: 1;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
