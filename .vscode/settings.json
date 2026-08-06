@@ -19,5 +19,35 @@
     },
     "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "explorerSort.defaultSort": "name",
+    "explorerSort.respectGitignore": true,
+    "explorerSort.rules": [
+        {
+            "name": "TSX before styles, folders first",
+            "pathPattern": "**",
+            "priorities": [
+                {
+                    "condition": "type === 'directory'",
+                    "priority": 1000
+                },
+                {
+                    "condition": "name.endsWith('.tsx')",
+                    "priority": 100
+                },
+                {
+                    "condition": "name.endsWith('.ts')",
+                    "priority": 90
+                },
+                {
+                    "condition": "name.endsWith('.module.less')",
+                    "priority": 50
+                },
+                {
+                    "condition": "name.endsWith('.less')",
+                    "priority": 40
+                }
+            ]
+        }
+    ]
 }

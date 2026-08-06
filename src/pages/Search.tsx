@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-magic-numbers */
 import { JSX, useEffect, useState } from 'react';
 
@@ -7,6 +8,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Card } from '../Card/Card';
 import { Paginator } from '../Paginator/Paginator';
 import { SearchForm } from '../SearchForm/SearchForm';
+import { Spinner } from '../Spinner/Spinner';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { loadSearchMovies } from '../store/searchSlice';
 
@@ -26,25 +28,20 @@ export const SearchPage = (): JSX.Element => {
 
     useEffect(() => {
         if (!query.trim()) return;
-
         dispatch(loadSearchMovies({ query, page }));
     }, [dispatch, query, page]);
 
+    if (loading) return <Spinner />;
+
     return (
         <Container id="content">
-            <h1 className="title title_second">Search</h1>
+            <h1 className="title title_first">Search</h1>
 
             <SearchForm />
 
-            {!query && <p>Enter movie title</p>}
+            {!query && <small>Enter movie title</small>}
 
-            {query && (
-                <p>
-                    Search results for: <strong>{query}</strong>
-                </p>
-            )}
-
-            {loading && <p>Loading...</p>}
+            {query && <p className="search-results">Search results for: <strong>{query}</strong></p>}
 
             {error && <p>{error}</p>}
 
