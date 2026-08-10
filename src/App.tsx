@@ -6,7 +6,7 @@ import { Footer } from './Footer/Footer';
 import { Header } from './Header/Header';
 import { Category } from './pages/Category';
 import { FavoritesPage } from './pages/Favorites';
-import { FilteredMoviesPage } from './pages/Filtered';
+import { FilteredMovies } from './pages/Filtered';
 import { Home } from './pages/Home';
 import { MoviePage } from './pages/Movie/Movie';
 import { NotFoundPage } from './pages/NotFound';
@@ -22,7 +22,7 @@ export const App = (): ReactElement => {
                 <Route path="/" element={<Home />} />
                 <Route path="/movie/:id" element={<MoviePage />} />
                 <Route path="/category-movies/" element={<Category />} />
-                <Route path="/filtered-movies/" element={<FilteredMoviesPage />} />
+                <Route path="/filtered-movies/" element={<FilteredMovies />} />
                 <Route path="/search/" element={<SearchPage />} />
                 <Route path="/favorites/" element={<FavoritesPage />} />
                 <Route path="*" element={<NotFoundPage />} />

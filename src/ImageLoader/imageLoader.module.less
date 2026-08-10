@@ -1,18 +1,14 @@
 .wrapper {
     position: relative;
     width: 100%;
-    aspect-ratio: 2 / 3;
-    overflow: hidden;
-    background: rgba(255, 255, 255, 0.04);
+    height: 100%;
 }
 
 .loader {
     position: absolute;
     inset: 0;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background: #252f42;
+    animation: pulse 1.2s ease-in-out infinite;
 }
 
 .image {
@@ -21,9 +17,21 @@
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    transition: opacity 0.25s ease;
+    transition: opacity .35s ease;
 }
 
 .loaded {
     opacity: 1;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: .6;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: .6;
+    }
 }

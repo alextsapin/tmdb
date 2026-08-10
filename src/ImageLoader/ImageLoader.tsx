@@ -1,6 +1,5 @@
-import { JSX, useEffect, useState } from 'react';
-
-import { HashLoader } from 'react-spinners';
+/* eslint-disable prettier/prettier */
+import { JSX, useState } from 'react';
 
 import css from './imageLoader.module.less';
 
@@ -8,36 +7,30 @@ type ImageLoaderProps = {
     src: string;
     alt: string;
     fallbackSrc?: string;
+    onLoad?: () => void;
 };
 
-export const ImageLoader = ({ src, alt, fallbackSrc }: ImageLoaderProps): JSX.Element => {
-    const [imageSrc, setImageSrc] = useState(src);
-    const [isLoaded, setIsLoaded] = useState(false);
-
-    useEffect(() => {
-        setImageSrc(src);
-        setIsLoaded(false);
-    }, [src]);
+export const ImageLoader = ({src, alt, fallbackSrc, onLoad}: ImageLoaderProps): JSX.Element => {
+    const [currentSrc, setCurrentSrc] = useState(src);
+    const [loaded, setLoaded] = useState(false);
 
     return (
         <div className={css.wrapper}>
-            {!isLoaded && (
-                <div className={css.loader}>
-                    <HashLoader color="#1e88e5" size={45} />
-                </div>
-            )}
+            {!loaded && <div className={css.loader} />}
 
             <img
-                className={`${css.image} ${isLoaded ? css.loaded : ''}`}
-                src={imageSrc}
+                className={`${css.image} ${loaded ? css.loaded : ''}`}
+                src={currentSrc}
                 alt={alt}
-                loading="lazy"
-                onLoad={() => setIsLoaded(true)}
+                onLoad={() => {
+                    setLoaded(true);
+                    onLoad?.();
+                }}
                 onError={() => {
-                    if (fallbackSrc && imageSrc !== fallbackSrc) {
-                        setImageSrc(fallbackSrc);
+                    if (fallbackSrc && currentSrc !== fallbackSrc) {
+                        setCurrentSrc(fallbackSrc);
                     } else {
-                        setIsLoaded(true);
+                        setLoaded(true);
                     }
                 }}
             />

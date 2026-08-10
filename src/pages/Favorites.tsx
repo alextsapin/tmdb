@@ -10,7 +10,7 @@ export const FavoritesPage = (): JSX.Element => {
 
     return (
         <Container id="content">
-            <h1 className="title title_first">Favorites</h1>
+            <h1>Favorites</h1>
             <Grid container spacing={2}>
                 {favorites.map(movie => (
                     <Card key={movie.id} {...movie} />
