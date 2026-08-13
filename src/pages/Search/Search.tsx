@@ -46,7 +46,7 @@ export const SearchPage = (): JSX.Element => {
             <SearchForm onResetMovies={resetMoviesHandler} />
 
             {query && (
-                <div className={css.resultsHeader}>
+                <div className={css.results}>
                     <p>Search results for: <b>{query}</b></p>
                     {totalResults > 0 && <span>{totalResults} movies found</span>}
                 </div>
@@ -57,7 +57,7 @@ export const SearchPage = (): JSX.Element => {
             {!loading && query && totalResults === 0 && <p>No movies found</p>}
 
             {!loading && movies && movies.length > 0 && (
-                <Grid container spacing={2}>
+                <Grid container columnSpacing={2} rowSpacing={4}>
                     {movies.map(movie => (
                         <Card key={movie.id} {...movie} />
                     ))}

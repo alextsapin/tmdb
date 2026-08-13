@@ -20,7 +20,7 @@ export const Card = (props: Movie): JSX.Element => {
         : noImage;
 
     return (
-        <Grid className={css.card} size={2}>
+        <Grid className={css.card} size={{ xs: 12, sm: 6, md: 4, lg: 2 }}>
             <Link className={css.link} to={`/movie/${props.id}`}>
                 <ImageLoader
                     src={posterUrl}

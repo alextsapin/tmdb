@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-magic-numbers */
 import { JSX } from 'react';
 
@@ -12,15 +13,10 @@ type PaginatorProps = {
     setPage: (page: number) => void;
 };
 
-export const Paginator = ({
-    totalResults,
-    totalPages,
-    page,
-    setPage,
-}: PaginatorProps): JSX.Element => {
+export const Paginator = ({ totalResults, totalPages, page, setPage }: PaginatorProps): JSX.Element => {
     const pages = [];
 
-    for (let i = 1; i < totalPages; i += 1) {
+    for (let i = 1; i <= totalPages; i += 1) {
         pages.push(i);
     }
 
@@ -33,14 +29,9 @@ export const Paginator = ({
 
     return (
         <div className={css.paginator}>
-            {page > 1 && (
-                <Button variant="contained" onClick={() => setPage(page - 1)}>
-                    -1
-                </Button>
-            )}
+            {page > 1 && <Button variant="contained" onClick={() => setPage(page - 1)}>Prev</Button>}
 
-            {pages
-                .filter(p => Number(p) >= leftPage && Number(p) <= rightPage)
+            {pages.filter(p => Number(p) >= leftPage && Number(p) <= rightPage)
                 .map(p =>
                     p === page ? (
                         <Button key={p} variant="contained" disabled>
@@ -53,11 +44,7 @@ export const Paginator = ({
                     ),
                 )}
 
-            {page < Math.ceil(totalResults / 20) && (
-                <Button variant="contained" onClick={() => setPage(page + 1)}>
-                    +1
-                </Button>
-            )}
+            {page < totalPages && <Button variant="contained" onClick={() => setPage(page + 1)}>Next</Button>}
         </div>
     );
 };
