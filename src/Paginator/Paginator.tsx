@@ -7,13 +7,12 @@ import { Button } from '@mui/material';
 import css from './paginator.module.less';
 
 type PaginatorProps = {
-    totalResults: number;
     totalPages: number;
     page: number;
     setPage: (page: number) => void;
 };
 
-export const Paginator = ({ totalResults, totalPages, page, setPage }: PaginatorProps): JSX.Element => {
+export const Paginator = ({ totalPages, page, setPage }: PaginatorProps): JSX.Element => {
     const pages = [];
 
     for (let i = 1; i <= totalPages; i += 1) {

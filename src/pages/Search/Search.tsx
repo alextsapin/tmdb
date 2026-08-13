@@ -64,14 +64,7 @@ export const SearchPage = (): JSX.Element => {
                 </Grid>
             )}
 
-            {totalResults > 20 && (
-                <Paginator
-                    totalResults={totalResults}
-                    totalPages={totalPages}
-                    page={page}
-                    setPage={setPage}
-                />
-            )}
+            {totalResults > 20 && <Paginator totalPages={totalPages} page={page} setPage={setPage} />}
         </Container>
     );
 };
