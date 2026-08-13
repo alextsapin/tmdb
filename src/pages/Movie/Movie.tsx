@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-magic-numbers */
 import { JSX, useEffect } from 'react';
 
@@ -32,13 +34,25 @@ export const MoviePage = (): JSX.Element => {
     const loading = useAppSelector(state => state.movie.loading.movie);
     const error = useAppSelector(state => state.movie.error.movie);
 
-    if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
-    if (!movie) return <p>Movie not found</p>;
 
-    const posterUrl = movie.poster_path
-        ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
-        : noImage;
+    if (!movie) {
+        return (
+            <Container id="content" sx={{ mt: 5 }}>
+                <div className={css.loadingState}>
+                    <div className={css.posterSkeleton} />
+                    <div className={css.detailsSkeleton}>
+                        <div className={css.titleSkeleton} />
+                        <div className={css.infoSkeleton} />
+                        <div className={css.textSkeleton} />
+                        <div className={css.textSkeleton} />
+                    </div>
+                </div>
+            </Container>
+        );
+    }
+
+    const posterUrl = movie.poster_path ? `https://image.tmdb.org/t/p/original${movie.poster_path}` : noImage;
 
     return (
         <Container id="content" sx={{ mt: 5 }}>
