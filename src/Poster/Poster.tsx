@@ -1,5 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
-import { JSX, useEffect, useState } from 'react';
+import { JSX, useEffect, useMemo, useState } from 'react';
 
 import Container from '@mui/material/Container';
 
@@ -16,11 +16,19 @@ type PosterProps = {
 export const Poster = ({ movies }: PosterProps): JSX.Element => {
     const error = useAppSelector(state => state.movies.error.popular);
 
-    const moviesWithBackdrop = movies.filter(movie => movie.backdrop_path);
-    const randomIndex = Math.floor(Math.random() * moviesWithBackdrop.length);
-    const randomMovie = moviesWithBackdrop[randomIndex];
-
     const [imageLoaded, setImageLoaded] = useState(false);
+
+    const randomMovie = useMemo(() => {
+        const moviesWithBackdrop = movies.filter(movie => movie.backdrop_path);
+
+        if (!moviesWithBackdrop.length) {
+            return undefined;
+        }
+
+        const randomIndex = Math.floor(Math.random() * moviesWithBackdrop.length);
+
+        return moviesWithBackdrop[randomIndex];
+    }, [movies]);
 
     useEffect(() => {
         if (!randomMovie?.backdrop_path) return;
@@ -31,7 +39,7 @@ export const Poster = ({ movies }: PosterProps): JSX.Element => {
 
         const image = new Image();
 
-        image.src = `https://image.tmdb.org/t/p/original${randomMovie.backdrop_path}`;
+        image.src = `https://image.tmdb.org/t/p/w1280${randomMovie.backdrop_path}`;
 
         image.onload = () => {
             if (!cancelled) {
@@ -46,7 +54,9 @@ export const Poster = ({ movies }: PosterProps): JSX.Element => {
         };
     }, [randomMovie]);
 
-    if (error) return <div className={css.poster}>{error}</div>;
+    if (error) {
+        return <div className={css.poster}>{error}</div>;
+    }
 
     return (
         <div className={css.poster}>
@@ -54,7 +64,7 @@ export const Poster = ({ movies }: PosterProps): JSX.Element => {
                 className={`${css.background} ${!imageLoaded ? css.isLoading : ''}`}
                 style={{
                     backgroundImage: randomMovie?.backdrop_path
-                        ? `url(https://image.tmdb.org/t/p/original${randomMovie.backdrop_path})`
+                        ? `url(https://image.tmdb.org/t/p/w1280${randomMovie.backdrop_path})`
                         : undefined,
                 }}
             />

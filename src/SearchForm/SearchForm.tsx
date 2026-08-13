@@ -1,26 +1,35 @@
 import { JSX } from 'react';
 
 import { Formik, Form, Field } from 'formik';
-import { useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import css from './searchForm.module.less';
 
-export const SearchForm = (): JSX.Element => {
+type SearchFormProps = {
+    onResetMovies?: () => void;
+};
+
+export const SearchForm = ({ onResetMovies }: SearchFormProps): JSX.Element => {
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const query = searchParams.get('query') || '';
 
     return (
         <Formik
-            initialValues={{ search: '' }}
+            enableReinitialize
+            initialValues={{ search: query }}
             onSubmit={(values, { setSubmitting }) => {
-                const query = values.search.trim();
+                const search = values.search.trim();
 
-                if (!query) {
+                if (!search) {
+                    navigate('/search/');
                     setSubmitting(false);
+                    onResetMovies?.();
 
                     return;
                 }
 
-                navigate(`/search/?query=${encodeURIComponent(query)}`);
+                navigate(`/search/?query=${encodeURIComponent(search)}`);
                 setSubmitting(false);
             }}
         >
@@ -34,7 +43,7 @@ export const SearchForm = (): JSX.Element => {
                                 className={css.input}
                                 type="text"
                                 name="search"
-                                placeholder="Search for a movie"
+                                placeholder="Enter movie title..."
                             />
 
                             {values.search && (
@@ -43,6 +52,8 @@ export const SearchForm = (): JSX.Element => {
                                     className={css.clearBtn}
                                     onClick={() => {
                                         resetForm();
+                                        navigate('/search/');
+                                        onResetMovies?.();
                                     }}
                                 >
                                     ×

@@ -35,7 +35,11 @@ export const loadSearchMovies = createAsyncThunk(
 const searchSlice = createSlice({
     name: 'search',
     initialState,
-    reducers: {},
+    reducers: {
+        resetMovies: () => ({
+            ...initialState,
+        }),
+    },
     extraReducers: builder => {
         builder
             .addCase(loadSearchMovies.pending, state => {
@@ -56,4 +60,5 @@ const searchSlice = createSlice({
     },
 });
 
+export const { resetMovies } = searchSlice.actions;
 export default searchSlice.reducer;

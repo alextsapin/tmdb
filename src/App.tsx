@@ -10,7 +10,7 @@ import { FilteredMovies } from './pages/Filtered';
 import { Home } from './pages/Home';
 import { MoviePage } from './pages/Movie/Movie';
 import { NotFoundPage } from './pages/NotFound';
-import { SearchPage } from './pages/Search';
+import { SearchPage } from './pages/Search/Search';
 
 import './less/App.less';
 

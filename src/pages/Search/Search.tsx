@@ -1,16 +1,18 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-magic-numbers */
-import { JSX, useEffect, useState } from 'react';
+import { JSX, useCallback, useEffect, useState } from 'react';
 
 import { Container, Grid } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 
-import { Card } from '../Card/Card';
-import { Paginator } from '../Paginator/Paginator';
-import { SearchForm } from '../SearchForm/SearchForm';
-import { Spinner } from '../Spinner/Spinner';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { loadSearchMovies } from '../store/searchSlice';
+import { Card } from '../../Card/Card';
+import { Paginator } from '../../Paginator/Paginator';
+import { SearchForm } from '../../SearchForm/SearchForm';
+import { Spinner } from '../../Spinner/Spinner';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { loadSearchMovies, resetMovies } from '../../store/searchSlice';
+
+import css from './search.module.less';
 
 export const SearchPage = (): JSX.Element => {
     const dispatch = useAppDispatch();
@@ -31,17 +33,24 @@ export const SearchPage = (): JSX.Element => {
         dispatch(loadSearchMovies({ query, page }));
     }, [dispatch, query, page]);
 
+    const resetMoviesHandler = useCallback(() => {
+        dispatch(resetMovies());
+    }, [dispatch]);
+
     if (loading) return <Spinner />;
 
     return (
         <Container id="content">
-            <h1 className="title title_first">Search</h1>
+            <h1>Search</h1>
 
-            <SearchForm />
+            <SearchForm onResetMovies={resetMoviesHandler} />
 
-            {!query && <small>Enter movie title</small>}
-
-            {query && <p className="search-results">Search results for: <strong>{query}</strong></p>}
+            {query && (
+                <div className={css.resultsHeader}>
+                    <p>Search results for: <b>{query}</b></p>
+                    {totalResults > 0 && <span>{totalResults} movies found</span>}
+                </div>
+            )}
 
             {error && <p>{error}</p>}
 
