@@ -8,7 +8,6 @@ import { useSearchParams } from 'react-router-dom';
 import { Card } from '../../Card/Card';
 import { Paginator } from '../../Paginator/Paginator';
 import { SearchForm } from '../../SearchForm/SearchForm';
-import { Spinner } from '../../Spinner/Spinner';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { loadSearchMovies, resetMovies } from '../../store/searchSlice';
 
@@ -36,8 +35,6 @@ export const SearchPage = (): JSX.Element => {
     const resetMoviesHandler = useCallback(() => {
         dispatch(resetMovies());
     }, [dispatch]);
-
-    if (loading) return <Spinner />;
 
     return (
         <Container id="content">

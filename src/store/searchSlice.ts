@@ -45,6 +45,7 @@ const searchSlice = createSlice({
             .addCase(loadSearchMovies.pending, state => {
                 state.loading = true;
                 state.error = null;
+                state.movies = [];
             })
             .addCase(loadSearchMovies.fulfilled, (state, action) => {
                 state.loading = false;
