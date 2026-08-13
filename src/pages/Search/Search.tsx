@@ -43,9 +43,16 @@ export const SearchPage = (): JSX.Element => {
             <SearchForm onResetMovies={resetMoviesHandler} />
 
             {query && (
-                <div className={css.results}>
+                <div className={css.header}>
                     <p>Search results for: <b>{query}</b></p>
                     {totalResults > 0 && <span>{totalResults} movies found</span>}
+                </div>
+            )}
+
+            {loading && (
+                <div className={css.loading}>
+                    <span>Loading movies</span>
+                    <span className={css.dots}>...</span>
                 </div>
             )}
 
@@ -53,15 +60,18 @@ export const SearchPage = (): JSX.Element => {
 
             {!loading && query && totalResults === 0 && <p>No movies found</p>}
 
-            {!loading && movies && movies.length > 0 && (
-                <Grid container columnSpacing={2} rowSpacing={4}>
-                    {movies.map(movie => (
-                        <Card key={movie.id} {...movie} />
-                    ))}
-                </Grid>
-            )}
+            <div className={css.results}>
+                {!loading && movies && movies.length > 0 && (
+                    <Grid container sx={{ mt: 5 }} columnSpacing={2} rowSpacing={4}>
+                        {movies.map(movie => (
+                            <Card key={movie.id} {...movie} />
+                        ))}
+                    </Grid>
+                )}
 
-            {totalResults > 20 && <Paginator totalPages={totalPages} page={page} setPage={setPage} />}
+                {totalResults > 20 && <Paginator totalPages={totalPages} page={page} setPage={setPage} />}
+            </div>
+
         </Container>
     );
 };
