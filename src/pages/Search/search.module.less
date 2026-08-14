@@ -8,23 +8,31 @@
     p {
         margin: 0;
     }
+
     b {
         color: #ffffff;
         font-weight: 600;
     }
+    
     span {
         color: #8b98aa;
         font-size: 14px;
     }
 }
 
+.body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
 .loading {
     display: flex;
+    flex: 1;
     align-items: center;
     justify-content: center;
     gap: 4px;
     min-height: 160px;
-
     color: #8b98aa;
     font-size: 15px;
 }
@@ -43,10 +51,3 @@
         width: 18px;
     }
 }
-
-.results {
-    display: flex;
-    flex-direction: column;
-    min-height: 700px;
-}
-

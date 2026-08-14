@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { Footer } from './Footer/Footer';
 import { Header } from './Header/Header';
-import { Category } from './pages/Category';
+import { Category } from './pages/Category/Category';
 import { FavoritesPage } from './pages/Favorites';
 import { FilteredMovies } from './pages/Filtered';
 import { Home } from './pages/Home';

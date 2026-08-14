@@ -49,18 +49,18 @@ export const SearchPage = (): JSX.Element => {
                 </div>
             )}
 
-            {loading && (
-                <div className={css.loading}>
-                    <span>Loading movies</span>
-                    <span className={css.dots}>...</span>
-                </div>
-            )}
+            <div className={css.body}>
+                {loading && (
+                    <div className={css.loading}>
+                        <span>Loading movies</span>
+                        <span className={css.dots}>...</span>
+                    </div>
+                )}
 
-            {error && <p>{error}</p>}
+                {error && <p>{error}</p>}
 
-            {!loading && query && totalResults === 0 && <p>No movies found</p>}
+                {!loading && query && totalResults === 0 && <p>No movies found</p>}
 
-            <div className={css.results}>
                 {!loading && movies && movies.length > 0 && (
                     <Grid container sx={{ mt: 5 }} columnSpacing={2} rowSpacing={4}>
                         {movies.map(movie => (
@@ -68,9 +68,9 @@ export const SearchPage = (): JSX.Element => {
                         ))}
                     </Grid>
                 )}
-
-                {totalResults > 20 && <Paginator totalPages={totalPages} page={page} setPage={setPage} />}
             </div>
+
+            {totalResults > 20 && <Paginator totalPages={totalPages} page={page} setPage={setPage} />}
 
         </Container>
     );

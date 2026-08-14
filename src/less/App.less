@@ -5,6 +5,7 @@ body {
     font-family: 'Roboto', Arial, sans-serif;
     background-color: @dark;
     color: white;
+    height: 100%;
 }
 
 em, i {
@@ -34,6 +35,16 @@ small {
 
 #content {
     flex: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+button:disabled {
+    color: white !important;
+    background-color: #2d3748 !important;
+    pointer-events: auto !important;
+    cursor: not-allowed !important;
+    opacity: 1;
 }
 
 // Заголовки
