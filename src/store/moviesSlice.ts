@@ -1,6 +1,6 @@
 /* eslint-disable no-magic-numbers */
 /* eslint-disable no-promise-executor-return */
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { getMoviesByCategory, Movie, MovieCategory } from '../api/api';
 
@@ -56,7 +56,6 @@ type LoadMoviesByCategoryArgs = {
 export const loadMoviesByCategory = createAsyncThunk(
     'movies/loadMoviesByCategory',
     async ({ category, page = 1 }: LoadMoviesByCategoryArgs) => {
-        // await new Promise(resolve => setTimeout(resolve, 1000));
         const { results: movies } = await getMoviesByCategory(category, page);
 
         return { category, movies };
@@ -66,7 +65,11 @@ export const loadMoviesByCategory = createAsyncThunk(
 const moviesSlice = createSlice({
     name: 'movies',
     initialState,
-    reducers: {},
+    reducers: {
+        clearCategoryError: (state, action: PayloadAction<MovieCategory>) => {
+            state.error[action.payload] = null;
+        },
+    },
     extraReducers: builder => {
         builder.addCase(loadMoviesByCategory.pending, (state, action) => {
             const { category } = action.meta.arg;
@@ -86,5 +89,7 @@ const moviesSlice = createSlice({
         });
     },
 });
+
+export const { clearCategoryError } = moviesSlice.actions;
 
 export default moviesSlice.reducer;

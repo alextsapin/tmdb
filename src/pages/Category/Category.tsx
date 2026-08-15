@@ -5,8 +5,9 @@ import { Button, Container, Grid } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 
 import { Card } from '../../Card/Card';
+import { ErrorSnackbar } from '../../Snackbar/Snackbar';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { loadMoviesByCategory } from '../../store/moviesSlice';
+import { loadMoviesByCategory, clearCategoryError } from '../../store/moviesSlice';
 
 import css from './category.module.less';
 
@@ -28,6 +29,10 @@ export const Category = (): JSX.Element => {
     const movies = useAppSelector(state => state.movies.categories[category]);
     const loading = useAppSelector(state => state.movies.loading[category]);
     const error = useAppSelector(state => state.movies.error[category]);
+
+    const handleCloseError = (): void => {
+        dispatch(clearCategoryError(category));
+    };
 
     useEffect(() => {
         dispatch(loadMoviesByCategory({ category }));
@@ -62,6 +67,8 @@ export const Category = (): JSX.Element => {
                     ))}
                 </Grid>
             )}
+
+            <ErrorSnackbar error={error} onClose={handleCloseError} />
         </Container>
     );
 };
