@@ -1,7 +1,12 @@
-import { JSX } from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { JSX, useEffect } from 'react';
 
-import { Button, Container } from '@mui/material';
+import { Button, Container, Grid } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
+
+import { Card } from '../../Card/Card';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { loadMoviesByCategory } from '../../store/moviesSlice';
 
 import css from './category.module.less';
 
@@ -17,7 +22,16 @@ const categories: { key: CategoryKey; label: string }[] = [
 export const Category = (): JSX.Element => {
     const [searchParams, setSearchParams] = useSearchParams();
 
+    const dispatch = useAppDispatch();
+
     const category = (searchParams.get('category') as CategoryKey) || 'popular';
+    const movies = useAppSelector(state => state.movies.categories[category]);
+    const loading = useAppSelector(state => state.movies.loading[category]);
+    const error = useAppSelector(state => state.movies.error[category]);
+
+    useEffect(() => {
+        dispatch(loadMoviesByCategory({ category }));
+    }, [dispatch, category]);
 
     return (
         <Container id="content">
@@ -35,6 +49,19 @@ export const Category = (): JSX.Element => {
                     </Button>
                 ))}
             </div>
+
+            {loading ? (
+                <div className={css.loading}>
+                    <span>Loading movies</span>
+                    <span className={css.dots}>...</span>
+                </div>
+            ) : (
+                <Grid container columnSpacing={2} rowSpacing={4} sx={{ mt: 5 }}>
+                    {movies.map(movie => (
+                        <Card key={movie.id} {...movie} />
+                    ))}
+                </Grid>
+            )}
         </Container>
     );
 };

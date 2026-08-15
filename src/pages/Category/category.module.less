@@ -4,3 +4,27 @@
     gap: 12px;
     margin-bottom: 24px;
 }
+
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: #8b98aa;
+    font-size: 15px;
+}
+
+.dots {
+    display: inline-block;
+    width: 18px;
+    animation: dots 1.2s steps(4, end) infinite;
+}
+
+@keyframes dots {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 18px;
+    }
+}
