@@ -5,6 +5,7 @@ import { Button, Container, Grid } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 
 import { Card } from '../../Card/Card';
+import { Paginator } from '../../Paginator/Paginator';
 import { ErrorSnackbar } from '../../Snackbar/Snackbar';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { loadMoviesByCategory, clearCategoryError } from '../../store/moviesSlice';
@@ -15,9 +16,9 @@ type CategoryKey = 'popular' | 'top' | 'upcoming' | 'nowPlaying';
 
 const categories: { key: CategoryKey; label: string }[] = [
     { key: 'popular', label: 'Popular' },
-    { key: 'top', label: 'Top Rated' },
+    { key: 'top', label: 'Top rated' },
     { key: 'upcoming', label: 'Upcoming' },
-    { key: 'nowPlaying', label: 'Now Playing' },
+    { key: 'nowPlaying', label: 'Now playing' },
 ];
 
 export const Category = (): JSX.Element => {
@@ -26,8 +27,11 @@ export const Category = (): JSX.Element => {
     const dispatch = useAppDispatch();
 
     const category = (searchParams.get('category') as CategoryKey) || 'popular';
+    const title = categories.find(item => item.key === category)?.label || 'Popular';
     const movies = useAppSelector(state => state.movies.categories[category]);
     const loading = useAppSelector(state => state.movies.loading[category]);
+    const page = useAppSelector(state => state.movies.page[category]);
+    const totalPages = useAppSelector(state => state.movies.totalPages[category]);
     const error = useAppSelector(state => state.movies.error[category]);
 
     const handleCloseError = (): void => {
@@ -38,17 +42,25 @@ export const Category = (): JSX.Element => {
         dispatch(loadMoviesByCategory({ category }));
     }, [dispatch, category]);
 
+    const handlePageChange = (newPage: number): void => {
+        dispatch(
+            loadMoviesByCategory({
+                category,
+                page: newPage,
+            }),
+        );
+    };
+
     return (
         <Container id="content">
-            <h1>Category Movies</h1>
+            <h1>{title}</h1>
 
             <div className={css.buttons}>
                 {categories.map(item => (
                     <Button
                         key={item.key}
-                        variant="contained"
+                        variant={category === item.key ? 'contained' : 'outlined'}
                         onClick={() => setSearchParams({ category: item.key })}
-                        disabled={category === item.key}
                     >
                         {item.label}
                     </Button>
@@ -69,6 +81,12 @@ export const Category = (): JSX.Element => {
             )}
 
             <ErrorSnackbar error={error} onClose={handleCloseError} />
+            <Paginator
+                totalResults={movies.length}
+                totalPages={totalPages}
+                page={page}
+                onPageChange={handlePageChange}
+            />
         </Container>
     );
 };

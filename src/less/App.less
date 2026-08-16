@@ -34,7 +34,14 @@ small {
 }
 
 #content {
+    display: flex;
+    flex-direction: column;
     flex: auto;
+
+    // flex-колонка растягивает прямых потомков; кнопки «View more» оставляем по контенту
+    > .MuiButton-root {
+        align-self: flex-start;
+    }
 }
 
 button:disabled {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-magic-numbers */
 import { JSX } from 'react';
@@ -7,12 +8,18 @@ import { Button } from '@mui/material';
 import css from './paginator.module.less';
 
 type PaginatorProps = {
+    totalResults: number;
     totalPages: number;
     page: number;
-    setPage: (page: number) => void;
+    onPageChange: (page: number) => void;
 };
 
-export const Paginator = ({ totalPages, page, setPage }: PaginatorProps): JSX.Element => {
+export const Paginator = ({
+    totalResults,
+    totalPages,
+    page,
+    onPageChange,
+}: PaginatorProps): JSX.Element => {
     const pages = [];
 
     for (let i = 1; i <= totalPages; i += 1) {
@@ -28,22 +35,31 @@ export const Paginator = ({ totalPages, page, setPage }: PaginatorProps): JSX.El
 
     return (
         <div className={css.paginator}>
-            {page > 1 && <Button variant="contained" onClick={() => setPage(page - 1)}>Prev</Button>}
+            {page > 1 && (
+                <Button variant="contained" onClick={() => onPageChange(page - 1)}>
+                    Prev
+                </Button>
+            )}
 
-            {pages.filter(p => Number(p) >= leftPage && Number(p) <= rightPage)
+            {pages
+                .filter(p => Number(p) >= leftPage && Number(p) <= rightPage)
                 .map(p =>
                     p === page ? (
-                        <Button key={p} variant="contained" disabled>
+                        <Button key={p} variant="contained">
                             {p}
                         </Button>
                     ) : (
-                        <Button key={p} variant="contained" onClick={() => setPage(p)}>
+                        <Button key={p} variant="outlined" onClick={() => onPageChange(p)}>
                             {p}
                         </Button>
                     ),
                 )}
 
-            {page < totalPages && <Button variant="contained" onClick={() => setPage(page + 1)}>Next</Button>}
+            {page < totalPages && (
+                <Button variant="contained" onClick={() => onPageChange(page + 1)}>
+                    Next
+                </Button>
+            )}
         </div>
     );
 };

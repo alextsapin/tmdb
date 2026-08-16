@@ -21,6 +21,10 @@ export const SearchPage = (): JSX.Element => {
     const query = searchParams.get('query') || '';
     const [page, setPage] = useState<number>(Number(searchParams.get('page')) || 1);
 
+    const handlePageChange = (newPage: number): void => {
+        setPage(newPage);
+    };
+
     const movies = useAppSelector(state => state.search.movies);
     const loading = useAppSelector(state => state.search.loading);
     const error = useAppSelector(state => state.search.error);
@@ -44,7 +48,9 @@ export const SearchPage = (): JSX.Element => {
 
             {query && (
                 <div className={css.header}>
-                    <p>Search results for: <b>{query}</b></p>
+                    <p>
+                        Search results for: <b>{query}</b>
+                    </p>
                     {totalResults > 0 && <span>{totalResults} movies found</span>}
                 </div>
             )}
@@ -70,8 +76,9 @@ export const SearchPage = (): JSX.Element => {
                 )}
             </div>
 
-            {totalResults > 20 && <Paginator totalPages={totalPages} page={page} setPage={setPage} />}
-
+            {totalResults > 20 && (
+                <Paginator totalResults={totalResults} totalPages={totalPages} page={page} onPageChange={handlePageChange} />
+            )}
         </Container>
     );
 };

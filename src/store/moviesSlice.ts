@@ -17,6 +17,18 @@ type State = {
         upcoming: boolean;
         nowPlaying: boolean;
     };
+    page: {
+        popular: number;
+        top: number;
+        upcoming: number;
+        nowPlaying: number;
+    };
+    totalPages: {
+        popular: number;
+        top: number;
+        upcoming: number;
+        nowPlaying: number;
+    };
     error: {
         popular: string | null;
         top: string | null;
@@ -40,6 +52,20 @@ const initialState: State = {
         nowPlaying: false,
     },
 
+    page: {
+        popular: 1,
+        top: 1,
+        upcoming: 1,
+        nowPlaying: 1,
+    },
+
+    totalPages: {
+        popular: 1,
+        top: 1,
+        upcoming: 1,
+        nowPlaying: 1,
+    },
+
     error: {
         popular: null,
         top: null,
@@ -56,9 +82,14 @@ type LoadMoviesByCategoryArgs = {
 export const loadMoviesByCategory = createAsyncThunk(
     'movies/loadMoviesByCategory',
     async ({ category, page = 1 }: LoadMoviesByCategoryArgs) => {
-        const { results: movies } = await getMoviesByCategory(category, page);
+        const response = await getMoviesByCategory(category, page);
 
-        return { category, movies };
+        return {
+            category,
+            movies: response.results,
+            page: response.page,
+            totalPages: response.total_pages,
+        };
     },
 );
 
@@ -79,6 +110,8 @@ const moviesSlice = createSlice({
         });
         builder.addCase(loadMoviesByCategory.fulfilled, (state, action) => {
             state.categories[action.payload.category] = action.payload.movies;
+            state.page[action.payload.category] = action.payload.page;
+            state.totalPages[action.payload.category] = action.payload.totalPages;
             state.loading[action.payload.category] = false;
         });
         builder.addCase(loadMoviesByCategory.rejected, (state, action) => {
