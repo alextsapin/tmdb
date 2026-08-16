@@ -8,14 +8,12 @@ import { Button } from '@mui/material';
 import css from './paginator.module.less';
 
 type PaginatorProps = {
-    totalResults: number;
     totalPages: number;
     page: number;
     onPageChange: (page: number) => void;
 };
 
 export const Paginator = ({
-    totalResults,
     totalPages,
     page,
     onPageChange,

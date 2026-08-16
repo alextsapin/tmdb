@@ -81,12 +81,13 @@ export const Category = (): JSX.Element => {
             )}
 
             <ErrorSnackbar error={error} onClose={handleCloseError} />
-            <Paginator
-                totalResults={movies.length}
-                totalPages={totalPages}
-                page={page}
-                onPageChange={handlePageChange}
-            />
+            {totalPages > 1 && (
+                <Paginator
+                    totalPages={totalPages}
+                    page={page}
+                    onPageChange={handlePageChange}
+                />
+            )}
         </Container>
     );
 };

@@ -76,8 +76,12 @@ export const SearchPage = (): JSX.Element => {
                 )}
             </div>
 
-            {totalResults > 20 && (
-                <Paginator totalResults={totalResults} totalPages={totalPages} page={page} onPageChange={handlePageChange} />
+            {totalPages > 1 && (
+                <Paginator
+                    totalPages={totalPages}
+                    page={page}
+                    onPageChange={handlePageChange}
+                />
             )}
         </Container>
     );

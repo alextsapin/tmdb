@@ -103,10 +103,11 @@ const moviesSlice = createSlice({
     },
     extraReducers: builder => {
         builder.addCase(loadMoviesByCategory.pending, (state, action) => {
-            const { category } = action.meta.arg;
+            const { category, page = 1 } = action.meta.arg;
 
             state.loading[category] = true;
             state.error[category] = null;
+            state.page[category] = page;
         });
         builder.addCase(loadMoviesByCategory.fulfilled, (state, action) => {
             state.categories[action.payload.category] = action.payload.movies;
