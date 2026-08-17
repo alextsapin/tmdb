@@ -21,3 +21,75 @@
     font-size: 20px;
     color: #fff;
 }
+
+.sortControl {
+    :global(.MuiInputLabel-root) {
+        color: #8b98aa;
+    }
+
+    :global(.MuiInputLabel-root.Mui-focused) {
+        color: #2196f3;
+    }
+
+    :global(.MuiOutlinedInput-root) {
+        color: #fff;
+
+        fieldset {
+            border-color: #5f6f82;
+        }
+
+        &:hover fieldset {
+            border-color: #8b98aa;
+        }
+
+        &.Mui-focused fieldset {
+            border-color: #2196f3;
+        }
+    }
+
+    :global(.MuiSelect-icon) {
+        color: #8b98aa;
+    }
+}
+
+.menuPaper {
+    background: #1e2737 !important;
+    color: #fff !important;
+
+    :global(.MuiMenuItem-root:hover) {
+        background: #2a374a;
+    }
+
+    :global(.MuiMenuItem-root.Mui-selected) {
+        background: #1f4f7a;
+
+        &:hover {
+            background: #285d8c;
+        }
+    }
+}
+
+.ratingFilter {
+    margin-top: 30px;
+}
+
+.ratingHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #8b98aa;
+    font-size: 14px;
+}
+
+.ratingHeader span:last-child {
+    color: #fff;
+}
+
+.ratingFilter {
+    :global(.MuiSlider-root) {
+        color: #2196f3;
+    }
+    :global(.MuiSlider-thumb) {
+        background: #fff;
+    }
+}
