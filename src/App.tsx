@@ -6,7 +6,7 @@ import { Footer } from './Footer/Footer';
 import { Header } from './Header/Header';
 import { Category } from './pages/Category/Category';
 import { FavoritesPage } from './pages/Favorites';
-import { FilteredMovies } from './pages/Filtered';
+import { FilteredMovies } from './pages/Filtered/Filtered';
 import { Home } from './pages/Home';
 import { MoviePage } from './pages/Movie/Movie';
 import { NotFoundPage } from './pages/NotFound';

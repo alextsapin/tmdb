@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prettier/prettier */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import {
@@ -46,19 +46,13 @@ export const loadMovieById = createAsyncThunk('movie/loadMovie', async (id: numb
     return getMovieById(id);
 });
 
-export const loadMovieCast = createAsyncThunk(
-    'movie/loadMovieCast',
-    async (id: number) => {
-        return getMovieCast(id);
-    },
-);
+export const loadMovieCast = createAsyncThunk('movie/loadMovieCast', async (id: number) => {
+    return getMovieCast(id);
+});
 
-export const loadSimilarMovies = createAsyncThunk(
-    'movie/loadSimilarMovies',
-    async (id: number) => {
-        return getSimilarMovies(id);
-    },
-);
+export const loadSimilarMovies = createAsyncThunk('movie/loadSimilarMovies', async (id: number) => {
+    return getSimilarMovies(id);
+});
 
 const movieSlice = createSlice({
     name: 'movie',
@@ -66,7 +60,7 @@ const movieSlice = createSlice({
     reducers: {},
     extraReducers: builder => {
         // Movie
-        builder.addCase(loadMovieById.pending, (state, action) => {
+        builder.addCase(loadMovieById.pending, state => {
             state.loading.movie = true;
             state.error.movie = null;
         });
@@ -82,7 +76,7 @@ const movieSlice = createSlice({
         });
 
         // Cast
-        builder.addCase(loadMovieCast.pending, (state, action) => {
+        builder.addCase(loadMovieCast.pending, state => {
             state.loading.cast = true;
             state.error.cast = null;
         });
@@ -98,7 +92,7 @@ const movieSlice = createSlice({
         });
 
         // Similar
-        builder.addCase(loadSimilarMovies.pending, (state, action) => {
+        builder.addCase(loadSimilarMovies.pending, state => {
             state.loading.similar = true;
             state.error.similar = null;
         });

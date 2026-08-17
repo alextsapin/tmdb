@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import axios from 'axios';
 
 const TMDB_ACCESS_TOKEN =
@@ -15,6 +16,24 @@ export const tmdbApi = axios.create({
 });
 
 export type MovieCategory = 'popular' | 'top' | 'upcoming' | 'nowPlaying';
+
+export type MovieSort =
+    | 'popularity.desc'
+    | 'popularity.asc'
+    | 'vote_average.desc'
+    | 'vote_average.asc'
+    | 'primary_release_date.desc'
+    | 'primary_release_date.asc'
+    | 'title.asc'
+    | 'title.desc';
+
+export type DiscoverMovieParams = {
+    page?: number;
+    sortBy: MovieSort;
+    voteAverageGte?: number;
+    voteAverageLte?: number;
+    withGenres?: number[];
+};
 
 const categoryEndpoints: Record<MovieCategory, string> = {
     popular: '/movie/popular',
@@ -102,4 +121,19 @@ export const getSimilarMovies = async (id: number): Promise<Movie[]> => {
     const { data } = await tmdbApi.get<MoviesResponse>(`/movie/${id}/similar`);
 
     return data.results;
+};
+
+// Получение фильмов по параметрам
+export const discoverMovies = async ( params: DiscoverMovieParams ): Promise<MoviesResponse> => {
+    const { data } = await tmdbApi.get<MoviesResponse>('/discover/movie', {
+        params: {
+            page: params.page || 1,
+            sort_by: params.sortBy,
+            vote_average_gte: params.voteAverageGte,
+            vote_average_lte: params.voteAverageLte,
+            with_genres: params.withGenres?.join(','),
+        },
+    });
+
+    return data;
 };
