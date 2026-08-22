@@ -70,7 +70,12 @@ export const SearchPage = (): JSX.Element => {
                 {!loading && movies && movies.length > 0 && (
                     <Grid container sx={{ mt: 5 }} columnSpacing={2} rowSpacing={4}>
                         {movies.map(movie => (
-                            <Card key={movie.id} {...movie} />
+                            <Grid
+                                key={movie.id}
+                                size={{ xs: 12, sm: 6, md: 4, lg: 2 }}
+                            >
+                                <Card {...movie} />
+                            </Grid>
                         ))}
                     </Grid>
                 )}

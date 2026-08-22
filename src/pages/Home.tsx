@@ -40,7 +40,11 @@ export const Home = (): JSX.Element => {
                         ? Array.from({ length: 6 }).map((_, index) => (
                               <MovieCardSkeleton key={`popular-${index}`} />
                           ))
-                        : popMovies?.slice(0, 6).map(m => <Card key={m.id} {...m} />)}
+                        : popMovies?.slice(0, 6).map(m => (
+                              <Grid key={m.id} size={{ xs: 12, sm: 6, md: 4, lg: 2 }}>
+                                  <Card {...m} />
+                              </Grid>
+                          ))}
                 </Grid>
 
                 <Button
@@ -58,7 +62,11 @@ export const Home = (): JSX.Element => {
                         ? Array.from({ length: 6 }).map((_, index) => (
                               <MovieCardSkeleton key={index} />
                           ))
-                        : topMovies?.slice(0, 6).map(m => <Card key={m.id} {...m} />)}
+                        : topMovies?.slice(0, 6).map(m => (
+                              <Grid key={m.id} size={{ xs: 12, sm: 6, md: 4, lg: 2 }}>
+                                  <Card {...m} />
+                              </Grid>
+                          ))}
                 </Grid>
                 <Button
                     component={Link}
@@ -75,9 +83,11 @@ export const Home = (): JSX.Element => {
                         ? Array.from({ length: 6 }).map((_, index) => (
                               <MovieCardSkeleton key={index} />
                           ))
-                        : upcomingMovies
-                              ?.slice(0, 6)
-                              .map(m => <Card key={m.id} {...m} />)}
+                        : upcomingMovies?.slice(0, 6).map(m => (
+                              <Grid key={m.id} size={{ xs: 12, sm: 6, md: 4, lg: 2 }}>
+                                  <Card {...m} />
+                              </Grid>
+                          ))}
                 </Grid>
                 <Button
                     component={Link}
@@ -94,9 +104,11 @@ export const Home = (): JSX.Element => {
                         ? Array.from({ length: 6 }).map((_, index) => (
                               <MovieCardSkeleton key={index} />
                           ))
-                        : nowPlayingMovies
-                              ?.slice(0, 6)
-                              .map(m => <Card key={m.id} {...m} />)}
+                        : nowPlayingMovies?.slice(0, 6).map(m => (
+                              <Grid key={m.id} size={{ xs: 12, sm: 6, md: 4, lg: 2 }}>
+                                  <Card {...m} />
+                              </Grid>
+                          ))}
                 </Grid>
                 <Button
                     component={Link}

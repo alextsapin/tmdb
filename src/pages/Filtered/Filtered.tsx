@@ -10,6 +10,7 @@ import {
     Select,
     Slider,
     Grid,
+    Button,
 } from '@mui/material';
 
 import { MovieSort } from '../../api/api';
@@ -19,10 +20,32 @@ import {
     setSortBy,
     setVoteAverageGte,
     setVoteAverageLte,
+    toggleGenre,
 } from '../../store/filteredSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 import css from './filtered.module.less';
+
+const genres = [
+    { id: 28, name: 'Action' },
+    { id: 12, name: 'Adventure' },
+    { id: 16, name: 'Animation' },
+    { id: 35, name: 'Comedy' },
+    { id: 80, name: 'Crime' },
+    { id: 99, name: 'Documentary' },
+    { id: 18, name: 'Drama' },
+    { id: 10751, name: 'Family' },
+    { id: 14, name: 'Fantasy' },
+    { id: 36, name: 'History' },
+    { id: 27, name: 'Horror' },
+    { id: 10402, name: 'Music' },
+    { id: 9648, name: 'Mystery' },
+    { id: 10749, name: 'Romance' },
+    { id: 878, name: 'Science Fiction' },
+    { id: 53, name: 'Thriller' },
+    { id: 10752, name: 'War' },
+    { id: 37, name: 'Western' },
+];
 
 export const FilteredMovies = (): JSX.Element => {
     const dispatch = useAppDispatch();
@@ -30,6 +53,10 @@ export const FilteredMovies = (): JSX.Element => {
     const sortBy = useAppSelector(state => state.filtered.sortBy);
     const voteAverageGte = useAppSelector(state => state.filtered.voteAverageGte);
     const voteAverageLte = useAppSelector(state => state.filtered.voteAverageLte);
+    const withGenres = useAppSelector(state => state.filtered.withGenres);
+    const movies = useAppSelector(state => state.filtered.movies);
+    const loading = useAppSelector(state => state.filtered.loading);
+    const error = useAppSelector(state => state.filtered.error);
 
     const handleSortChange = (value: MovieSort): void => {
         dispatch(setSortBy(value));
@@ -42,9 +69,9 @@ export const FilteredMovies = (): JSX.Element => {
         dispatch(setVoteAverageLte(max));
     };
 
-    const movies = useAppSelector(state => state.filtered.movies);
-    const loading = useAppSelector(state => state.filtered.loading);
-    const error = useAppSelector(state => state.filtered.error);
+    const handleGenreChange = (genreId: number): void => {
+        dispatch(toggleGenre(genreId));
+    };
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -54,13 +81,13 @@ export const FilteredMovies = (): JSX.Element => {
                     sortBy,
                     voteAverageGte,
                     voteAverageLte,
-                    withGenres: [],
+                    withGenres,
                 }),
             );
         }, 200);
 
         return () => clearTimeout(timer);
-    }, [dispatch, sortBy, voteAverageGte, voteAverageLte]);
+    }, [dispatch, sortBy, voteAverageGte, voteAverageLte, withGenres]);
 
     return (
         <Container id="content">
@@ -116,6 +143,25 @@ export const FilteredMovies = (): JSX.Element => {
                                 valueLabelDisplay="auto"
                             />
                         </div>
+                        <div className={css.genres}>
+                            <div className={css.genreTitle}>Genres</div>
+                            <div className={css.genreList}>
+                                {genres.map(genre => (
+                                    <Button
+                                        key={genre.id}
+                                        variant={
+                                            withGenres.includes(genre.id)
+                                                ? 'contained'
+                                                : 'outlined'
+                                        }
+                                        color="primary"
+                                        onClick={() => handleGenreChange(genre.id)}
+                                    >
+                                        {genre.name}
+                                    </Button>
+                                ))}
+                            </div>
+                        </div>
                     </FormControl>
                 </aside>
 
@@ -129,7 +175,12 @@ export const FilteredMovies = (): JSX.Element => {
                     {!loading && movies.length > 0 && (
                         <Grid container columnSpacing={2} rowSpacing={4}>
                             {movies.map(movie => (
-                                <Card key={movie.id} {...movie} />
+                                <Grid
+                                    key={movie.id}
+                                    size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
+                                >
+                                    <Card {...movie} />
+                                </Grid>
                             ))}
                         </Grid>
                     )}

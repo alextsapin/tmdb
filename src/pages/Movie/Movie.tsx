@@ -121,7 +121,14 @@ export const MoviePage = (): JSX.Element => {
             <Grid container spacing={2}>
                 {similar &&
                     similar.length > 0 &&
-                    similar.slice(0, 6).map(m => <Card key={m.id} {...m} />)}
+                    similar.slice(0, 6).map(m => (
+                        <Grid
+                            key={m.id}
+                            size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
+                        >
+                            <Card {...m} />
+                        </Grid>
+                    ))}
             </Grid>
         </Container>
     );

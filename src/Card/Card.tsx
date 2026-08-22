@@ -1,7 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 import { JSX, useState } from 'react';
 
-import { Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import { Movie } from '../api/api';
@@ -20,7 +19,7 @@ export const Card = (props: Movie): JSX.Element => {
         : noImage;
 
     return (
-        <Grid className={css.card} size={{ xs: 12, sm: 6, md: 4, lg: 2 }}>
+        <div className={css.card}>
             <Link className={css.link} to={`/movie/${props.id}`}>
                 <ImageLoader
                     src={posterUrl}
@@ -47,6 +46,6 @@ export const Card = (props: Movie): JSX.Element => {
                     {props.title}
                 </div>
             )}
-        </Grid>
+        </div>
     );
 };
