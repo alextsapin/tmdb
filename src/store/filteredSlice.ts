@@ -35,8 +35,15 @@ type LoadFilteredMoviesArgs = {
     withGenres: number[];
 };
 
-export const loadFilteredMovies = createAsyncThunk('filtered/loadFilteredMovies',
-    async ({ page = 1, sortBy, voteAverageGte, voteAverageLte, withGenres}: LoadFilteredMoviesArgs) => {
+export const loadFilteredMovies = createAsyncThunk(
+    'filtered/loadFilteredMovies',
+    async ({
+        page = 1,
+        sortBy,
+        voteAverageGte,
+        voteAverageLte,
+        withGenres,
+    }: LoadFilteredMoviesArgs) => {
         const response = await discoverMovies({
             page,
             sortBy,
@@ -88,9 +95,10 @@ const filteredSlice = createSlice({
     },
     extraReducers: builder => {
         builder
-            .addCase(loadFilteredMovies.pending, state => {
+            .addCase(loadFilteredMovies.pending, (state, action) => {
                 state.loading = true;
                 state.error = null;
+                state.page = action.meta.arg.page || 1;
             })
             .addCase(loadFilteredMovies.fulfilled, (state, action) => {
                 state.loading = false;

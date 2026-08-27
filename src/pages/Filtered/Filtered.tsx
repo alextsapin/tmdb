@@ -15,8 +15,10 @@ import {
 
 import { MovieSort } from '../../api/api';
 import { Card } from '../../Card/Card';
+import { Paginator } from '../../Paginator/Paginator';
 import {
     loadFilteredMovies,
+    resetFilters,
     setSortBy,
     setVoteAverageGte,
     setVoteAverageLte,
@@ -57,6 +59,8 @@ export const FilteredMovies = (): JSX.Element => {
     const movies = useAppSelector(state => state.filtered.movies);
     const loading = useAppSelector(state => state.filtered.loading);
     const error = useAppSelector(state => state.filtered.error);
+    const page = useAppSelector(state => state.filtered.page);
+    const totalPages = useAppSelector(state => state.filtered.totalPages);
 
     const handleSortChange = (value: MovieSort): void => {
         dispatch(setSortBy(value));
@@ -71,6 +75,18 @@ export const FilteredMovies = (): JSX.Element => {
 
     const handleGenreChange = (genreId: number): void => {
         dispatch(toggleGenre(genreId));
+    };
+
+    const handlePageChange = (newPage: number): void => {
+        dispatch(
+            loadFilteredMovies({
+                page: newPage,
+                sortBy,
+                voteAverageGte,
+                voteAverageLte,
+                withGenres,
+            }),
+        );
     };
 
     useEffect(() => {
@@ -95,8 +111,6 @@ export const FilteredMovies = (): JSX.Element => {
 
             <div className={css.layout}>
                 <aside className={css.filters}>
-                    <h2>Filters</h2>
-
                     <FormControl fullWidth className={css.sortControl}>
                         <InputLabel id="sort-label">Sort by</InputLabel>
                         <Select
@@ -162,12 +176,20 @@ export const FilteredMovies = (): JSX.Element => {
                                 ))}
                             </div>
                         </div>
+
+                        <div className={css.reset}>
+                            <Button
+                                variant="outlined"
+                                color="warning"
+                                onClick={() => dispatch(resetFilters())}
+                            >
+                                Reset filters
+                            </Button>
+                        </div>
                     </FormControl>
                 </aside>
 
                 <section className={css.results}>
-                    <h2>Results</h2>
-
                     {loading && <p>Loading movies...</p>}
 
                     {!loading && !error && movies.length === 0 && <p>No movies found</p>}
@@ -183,6 +205,14 @@ export const FilteredMovies = (): JSX.Element => {
                                 </Grid>
                             ))}
                         </Grid>
+                    )}
+
+                    {totalPages > 1 && (
+                        <Paginator
+                            totalPages={totalPages}
+                            page={page}
+                            onPageChange={handlePageChange}
+                        />
                     )}
                 </section>
             </div>
