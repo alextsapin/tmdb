@@ -16,7 +16,9 @@ import {
 import { MovieSort } from '../../api/api';
 import { Card } from '../../Card/Card';
 import { Paginator } from '../../Paginator/Paginator';
+import { ErrorSnackbar } from '../../Snackbar/Snackbar';
 import {
+    clearError,
     loadFilteredMovies,
     resetFilters,
     setSortBy,
@@ -87,6 +89,10 @@ export const FilteredMovies = (): JSX.Element => {
                 withGenres,
             }),
         );
+    };
+
+    const handleCloseError = (): void => {
+        dispatch(clearError());
     };
 
     useEffect(() => {
@@ -179,7 +185,7 @@ export const FilteredMovies = (): JSX.Element => {
 
                         <div className={css.reset}>
                             <Button
-                                variant="outlined"
+                                variant="contained"
                                 color="warning"
                                 onClick={() => dispatch(resetFilters())}
                             >
@@ -190,11 +196,13 @@ export const FilteredMovies = (): JSX.Element => {
                 </aside>
 
                 <section className={css.results}>
-                    {loading && <p>Loading movies...</p>}
+                    {loading && (
+                        <div className={css.resultsLoading}>Loading movies...</div>
+                    )}
 
                     {!loading && !error && movies.length === 0 && <p>No movies found</p>}
 
-                    {!loading && movies.length > 0 && (
+                    {movies.length > 0 && (
                         <Grid container columnSpacing={2} rowSpacing={4}>
                             {movies.map(movie => (
                                 <Grid
@@ -214,6 +222,8 @@ export const FilteredMovies = (): JSX.Element => {
                             onPageChange={handlePageChange}
                         />
                     )}
+
+                    <ErrorSnackbar error={error} onClose={handleCloseError} />
                 </section>
             </div>
         </Container>
