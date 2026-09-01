@@ -1,5 +1,8 @@
-import { ReactElement } from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable import/order */
+import { ReactElement, useEffect, useMemo } from 'react';
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Route, Routes } from 'react-router-dom';
 
 import { Footer } from './Footer/Footer';
@@ -11,12 +14,21 @@ import { Home } from './pages/Home';
 import { MoviePage } from './pages/Movie/Movie';
 import { NotFoundPage } from './pages/NotFound';
 import { SearchPage } from './pages/Search/Search';
-
+import { getDesignTokens } from './theme';
 import './less/App.less';
+import { useAppSelector } from './store/hooks';
 
 export const App = (): ReactElement => {
+    const themeMode = useAppSelector(state => state.theme.mode);
+
+    const theme = useMemo(() => createTheme(getDesignTokens(themeMode)), [themeMode]);
+
+    useEffect(() => {
+        document.body.setAttribute('data-theme', themeMode);
+    }, [themeMode]);
+
     return (
-        <>
+        <ThemeProvider theme={theme}>
             <Header />
             <Routes>
                 <Route path="/" element={<Home />} />
@@ -28,6 +40,6 @@ export const App = (): ReactElement => {
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
             <Footer />
-        </>
+        </ThemeProvider>
     );
 };

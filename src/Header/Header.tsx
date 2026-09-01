@@ -1,13 +1,21 @@
 import { JSX } from 'react';
 
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import { IconButton } from '@mui/material';
 import Container from '@mui/material/Container';
 import { Link, NavLink } from 'react-router-dom';
 
 import logo from '../images/tmdb.png';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { toggleTheme } from '../store/themeSlice';
 
 import css from './header.module.less';
 
 export const Header = (): JSX.Element => {
+    const dispatch = useAppDispatch();
+    const themeMode = useAppSelector(state => state.theme.mode);
+
     return (
         <header className={css.header}>
             <Container className={css.wrapper}>
@@ -46,6 +54,15 @@ export const Header = (): JSX.Element => {
                         </NavLink>
                     </li>
                 </ul>
+
+                <IconButton
+                    className={css.switcher}
+                    aria-label="toggle theme"
+                    onClick={() => dispatch(toggleTheme())}
+                    color="inherit"
+                >
+                    {themeMode === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
+                </IconButton>
             </Container>
         </header>
     );

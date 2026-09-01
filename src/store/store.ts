@@ -5,6 +5,7 @@ import filteredReducer from './filteredSlice';
 import movieReducer from './movieSlice';
 import moviesReducer from './moviesSlice';
 import searchReducer from './searchSlice';
+import themeReducer from './themeSlice';
 
 export const store = configureStore({
     reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
         search: searchReducer,
         favorites: favoritesReducer,
         filtered: filteredReducer,
+        theme: themeReducer,
     },
 });
 
