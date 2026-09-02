@@ -7,7 +7,7 @@
 
 .filters {
     padding: 20px;
-    background: #1e2737;
+    background: var(--surface-color);
     border-radius: 8px;
     align-self: start;
 }
@@ -28,7 +28,7 @@
 
 .sortControl {
     :global(.MuiInputLabel-root) {
-        color: #8b98aa;
+        color: var(--muted-color);
     }
 
     :global(.MuiInputLabel-root.Mui-focused) {
@@ -36,14 +36,14 @@
     }
 
     :global(.MuiOutlinedInput-root) {
-        color: #fff;
+        color: var(--text-color);
 
         fieldset {
-            border-color: #5f6f82;
+            border-color: var(--border-color);
         }
 
         &:hover fieldset {
-            border-color: #8b98aa;
+            border-color: var(--muted-color);
         }
 
         &.Mui-focused fieldset {
@@ -52,23 +52,23 @@
     }
 
     :global(.MuiSelect-icon) {
-        color: #8b98aa;
+        color: var(--muted-color);
     }
 }
 
 .menuPaper {
-    background: #1e2737 !important;
-    color: #fff !important;
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
 
     :global(.MuiMenuItem-root:hover) {
-        background: #2a374a;
+        background: var(--bg-color);
     }
 
     :global(.MuiMenuItem-root.Mui-selected) {
-        background: #1f4f7a;
+        background: rgba(33, 150, 243, 0.15);
 
         &:hover {
-            background: #285d8c;
+            background: rgba(33, 150, 243, 0.25);
         }
     }
 }

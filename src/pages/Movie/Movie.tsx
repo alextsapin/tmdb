@@ -52,7 +52,7 @@ export const MoviePage = (): JSX.Element => {
         );
     }
 
-    const posterUrl = movie.poster_path ? `https://image.tmdb.org/t/p/original${movie.poster_path}` : noImage;
+    const posterUrl = movie.poster_path ? `https://image.tmdb.org/t/p/w300${movie.poster_path}` : noImage;
 
     return (
         <Container id="content" sx={{ mt: 5 }}>
@@ -124,7 +124,7 @@ export const MoviePage = (): JSX.Element => {
                     similar.slice(0, 6).map(m => (
                         <Grid
                             key={m.id}
-                            size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
+                            size={{ xs: 12, sm: 6, md: 4, lg: 2 }}
                         >
                             <Card {...m} />
                         </Grid>

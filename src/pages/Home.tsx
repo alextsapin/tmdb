@@ -70,7 +70,7 @@ export const Home = (): JSX.Element => {
                 </Grid>
                 <Button
                     component={Link}
-                    to="/category-movies/"
+                    to="/category-movies/?category=top"
                     sx={{ mt: 3 }}
                     variant="contained"
                 >
@@ -91,7 +91,7 @@ export const Home = (): JSX.Element => {
                 </Grid>
                 <Button
                     component={Link}
-                    to="/category-movies/"
+                    to="/category-movies/?category=upcoming"
                     sx={{ mt: 3 }}
                     variant="contained"
                 >
@@ -112,7 +112,7 @@ export const Home = (): JSX.Element => {
                 </Grid>
                 <Button
                     component={Link}
-                    to="/category-movies/"
+                    to="/category-movies/?category=nowPlaying"
                     sx={{ mt: 3 }}
                     variant="contained"
                 >
