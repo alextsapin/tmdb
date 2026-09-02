@@ -12,11 +12,15 @@ export const FavoritesPage = (): JSX.Element => {
         <Container id="content">
             <h1>Favorites</h1>
             <Grid container spacing={2}>
-                {favorites.map(movie => (
-                    <Grid key={movie.id} size={{ xs: 12, sm: 6, md: 4, lg: 2 }}>
-                        <Card {...movie} />
-                    </Grid>
-                ))}
+                {favorites.length > 0 ? (
+                    favorites.map(movie => (
+                        <Grid key={movie.id} size={{ xs: 12, sm: 6, md: 4, lg: 2 }}>
+                            <Card {...movie} />
+                        </Grid>
+                    ))
+                ) : (
+                    <p>No favorites yet...</p>
+                )}
             </Grid>
         </Container>
     );

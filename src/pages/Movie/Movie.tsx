@@ -3,11 +3,12 @@
 /* eslint-disable no-magic-numbers */
 import { JSX, useEffect } from 'react';
 
-import { Container, Grid } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import ReplyIcon from '@mui/icons-material/Reply';
+import { Button, Container, Grid, IconButton } from '@mui/material';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { Card } from '../../Card/Card';
-import noImage from '../../images/no-image-available.webp';
+import noImage from '../../images/unknown.png';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { loadMovieById, loadMovieCast, loadSimilarMovies } from '../../store/movieSlice';
 import { getRatingColor, runtimeConverter } from '../../utils/utils';
@@ -17,6 +18,7 @@ import css from './movie.module.less';
 export const MoviePage = (): JSX.Element => {
     const { id } = useParams();
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!id) return;
@@ -30,8 +32,6 @@ export const MoviePage = (): JSX.Element => {
     const movie = useAppSelector(state => state.movie.movie);
     const cast = useAppSelector(state => state.movie.cast);
     const similar = useAppSelector(state => state.movie.similar);
-
-    const loading = useAppSelector(state => state.movie.loading.movie);
     const error = useAppSelector(state => state.movie.error.movie);
 
     if (error) return <p>{error}</p>;
@@ -52,10 +52,21 @@ export const MoviePage = (): JSX.Element => {
         );
     }
 
-    const posterUrl = movie.poster_path ? `https://image.tmdb.org/t/p/w300${movie.poster_path}` : noImage;
+    const posterUrl = movie.poster_path
+        ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
+        : noImage;
 
     return (
         <Container id="content" sx={{ mt: 5 }}>
+            <Button
+                sx={{ mb: 5 }}
+                variant="contained"
+                color="secondary"
+                onClick={() => navigate(-1)}
+            >
+                <ReplyIcon />
+            </Button>
+
             <Grid container spacing={2}>
                 <Grid size={3}>
                     <img src={posterUrl} alt={movie.title} />
@@ -89,46 +100,48 @@ export const MoviePage = (): JSX.Element => {
                 </Grid>
             </Grid>
 
-            <h2 className={css.title}>В ролях</h2>
             <Grid container spacing={2}>
                 {cast && cast.length > 0 && (
-                    <section className={css.cast}>
-                        <ul className={css.list}>
-                            {[...cast]
-                                .sort((a, b) => b.popularity - a.popularity)
-                                .slice(0, 6)
-                                .map(actor => (
-                                    <li key={actor.id} className={css.item}>
+                    <>
+                        <h2 className={css.title}>В ролях</h2>
+                        {[...cast]
+                            .sort((a, b) => b.popularity - a.popularity)
+                            .slice(0, 6)
+                            .map(actor => (
+                                <Grid
+                                    key={actor.id}
+                                    size={{ xs: 12, sm: 6, md: 4, lg: 2 }}
+                                >
+                                    <div className={css.item}>
                                         <img
                                             className={css.photo}
                                             src={
                                                 actor.profile_path
-                                                    ? `https://image.tmdb.org/t/p/original${actor.profile_path}`
+                                                    ? `https://image.tmdb.org/t/p/w300${actor.profile_path}`
                                                     : noImage
                                             }
                                             alt={actor.name}
                                         />
                                         <p className={css.name}>{actor.name}</p>
                                         <p className={css.character}>{actor.character}</p>
-                                    </li>
-                                ))}
-                        </ul>
-                    </section>
+                                    </div>
+                                </Grid>
+                            ))}
+                    </>
                 )}
             </Grid>
 
-            <h2 className={css.title}>Похожие</h2>
             <Grid container spacing={2}>
-                {similar &&
-                    similar.length > 0 &&
-                    similar.slice(0, 6).map(m => (
-                        <Grid
-                            key={m.id}
-                            size={{ xs: 12, sm: 6, md: 4, lg: 2 }}
-                        >
-                            <Card {...m} />
-                        </Grid>
-                    ))}
+                {similar && similar.length > 0 && (
+                    <>
+                        <h2 className={css.title}>Похожие</h2>
+                        {similar.slice(0, 6).map(m => (
+                            <Grid key={m.id} size={{ xs: 12, sm: 6, md: 4, lg: 2 }}>
+                                <Card {...m} />
+                            </Grid>
+                        ))}
+                    </>
+                )}
             </Grid>
         </Container>
     );

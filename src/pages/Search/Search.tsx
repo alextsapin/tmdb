@@ -36,6 +36,12 @@ export const SearchPage = (): JSX.Element => {
         dispatch(loadSearchMovies({ query, page }));
     }, [dispatch, query, page]);
 
+    useEffect(() => {
+        return () => {
+            dispatch(resetMovies());
+        };
+    }, [dispatch]);
+
     const resetMoviesHandler = useCallback(() => {
         dispatch(resetMovies());
     }, [dispatch]);
