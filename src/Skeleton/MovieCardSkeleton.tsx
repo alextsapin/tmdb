@@ -2,7 +2,7 @@ import { JSX } from 'react';
 
 import { Grid, Skeleton } from '@mui/material';
 
-import css from './movieCardSkeleton.module.less';
+import css from './MovieCardSkeleton.module.less';
 
 export const MovieCardSkeleton = (): JSX.Element => {
     return (
