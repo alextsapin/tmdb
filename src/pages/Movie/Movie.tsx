@@ -59,13 +59,14 @@ export const MoviePage = (): JSX.Element => {
     return (
         <Container id="content" sx={{ mt: 5 }}>
             <Button
-                sx={{ mb: 5 }}
                 variant="contained"
-                color="secondary"
+                size="small"
                 onClick={() => navigate(-1)}
             >
                 <ReplyIcon />
             </Button>
+
+            <hr />
 
             <Grid container spacing={2}>
                 <Grid size={3}>
@@ -103,7 +104,7 @@ export const MoviePage = (): JSX.Element => {
             <Grid container spacing={2}>
                 {cast && cast.length > 0 && (
                     <>
-                        <h2 className={css.title}>В ролях</h2>
+                        <h2>In the cast</h2>
                         {[...cast]
                             .sort((a, b) => b.popularity - a.popularity)
                             .slice(0, 6)
@@ -134,7 +135,7 @@ export const MoviePage = (): JSX.Element => {
             <Grid container spacing={2}>
                 {similar && similar.length > 0 && (
                     <>
-                        <h2 className={css.title}>Похожие</h2>
+                        <h2>Similar movies</h2>
                         {similar.slice(0, 6).map(m => (
                             <Grid key={m.id} size={{ xs: 12, sm: 6, md: 4, lg: 2 }}>
                                 <Card {...m} />
