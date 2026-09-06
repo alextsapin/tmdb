@@ -17,9 +17,20 @@ import { SearchPage } from './pages/Search/Search';
 import { getDesignTokens } from './theme';
 import './less/App.less';
 import { useAppSelector } from './store/hooks';
+import { LinearProgress } from '@mui/material';
 
 export const App = (): ReactElement => {
     const themeMode = useAppSelector(state => state.theme.mode);
+    const moviesLoading = useAppSelector(state => state.movies.loading);
+    const movieLoading = useAppSelector(state => state.movie.loading);
+    const searchLoading = useAppSelector(state => state.search.loading);
+    const filteredLoading = useAppSelector(state => state.filtered.loading);
+
+    const isLoading =
+        Object.values(moviesLoading).some(Boolean) ||
+        Object.values(movieLoading).some(Boolean) ||
+        searchLoading ||
+        filteredLoading;
 
     const theme = useMemo(() => createTheme(getDesignTokens(themeMode)), [themeMode]);
 
@@ -30,6 +41,7 @@ export const App = (): ReactElement => {
     return (
         <ThemeProvider theme={theme}>
             <Header />
+            {isLoading && <LinearProgress />}
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/movie/:id" element={<MoviePage />} />
