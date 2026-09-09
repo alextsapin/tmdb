@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { Movie } from '../api/api';
 import { ImageLoader } from '../ImageLoader/ImageLoader';
-import noImage from '../images/no-image-available.webp';
+import noImage from '../images/no-poster.webp';
 import { Like } from '../Like/Like';
 import { getRatingColor } from '../utils/utils';
 

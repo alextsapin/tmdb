@@ -57,7 +57,13 @@ export const loadSimilarMovies = createAsyncThunk('movie/loadSimilarMovies', asy
 const movieSlice = createSlice({
     name: 'movie',
     initialState,
-    reducers: {},
+    reducers: {
+        clearErrors: state => {
+            state.error.movie = null;
+            state.error.cast = null;
+            state.error.similar = null;
+        },
+    },
     extraReducers: builder => {
         // Movie
         builder.addCase(loadMovieById.pending, state => {
@@ -109,4 +115,5 @@ const movieSlice = createSlice({
     },
 });
 
+export const { clearErrors } = movieSlice.actions;
 export default movieSlice.reducer;

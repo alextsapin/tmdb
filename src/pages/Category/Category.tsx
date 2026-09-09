@@ -6,9 +6,8 @@ import { useSearchParams } from 'react-router-dom';
 
 import { Card } from '../../Card/Card';
 import { Paginator } from '../../Paginator/Paginator';
-import { ErrorSnackbar } from '../../Snackbar/Snackbar';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { loadMoviesByCategory, clearCategoryError } from '../../store/moviesSlice';
+import { loadMoviesByCategory } from '../../store/moviesSlice';
 
 import css from './category.module.less';
 
@@ -32,11 +31,6 @@ export const Category = (): JSX.Element => {
     const loading = useAppSelector(state => state.movies.loading[category]);
     const page = useAppSelector(state => state.movies.page[category]);
     const totalPages = useAppSelector(state => state.movies.totalPages[category]);
-    const error = useAppSelector(state => state.movies.error[category]);
-
-    const handleCloseError = (): void => {
-        dispatch(clearCategoryError(category));
-    };
 
     useEffect(() => {
         dispatch(loadMoviesByCategory({ category }));
@@ -82,7 +76,6 @@ export const Category = (): JSX.Element => {
                 </Grid>
             )}
 
-            <ErrorSnackbar error={error} onClose={handleCloseError} />
             {totalPages > 1 && (
                 <Paginator
                     totalPages={totalPages}

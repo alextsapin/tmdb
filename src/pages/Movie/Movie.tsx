@@ -8,7 +8,8 @@ import { Button, Container, Grid, IconButton } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { Card } from '../../Card/Card';
-import noImage from '../../images/unknown.png';
+import noPhoto from '../../images/no-photo.png';
+import noPoster from '../../images/no-poster.webp';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { loadMovieById, loadMovieCast, loadSimilarMovies } from '../../store/movieSlice';
 import { getRatingColor, runtimeConverter } from '../../utils/utils';
@@ -32,9 +33,6 @@ export const MoviePage = (): JSX.Element => {
     const movie = useAppSelector(state => state.movie.movie);
     const cast = useAppSelector(state => state.movie.cast);
     const similar = useAppSelector(state => state.movie.similar);
-    const error = useAppSelector(state => state.movie.error.movie);
-
-    if (error) return <p>{error}</p>;
 
     if (!movie) {
         return (
@@ -54,15 +52,11 @@ export const MoviePage = (): JSX.Element => {
 
     const posterUrl = movie.poster_path
         ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
-        : noImage;
+        : noPoster;
 
     return (
         <Container id="content" sx={{ mt: 5 }}>
-            <Button
-                variant="contained"
-                size="small"
-                onClick={() => navigate(-1)}
-            >
+            <Button variant="contained" size="small" onClick={() => navigate(-1)}>
                 <ReplyIcon />
             </Button>
 
@@ -119,7 +113,7 @@ export const MoviePage = (): JSX.Element => {
                                             src={
                                                 actor.profile_path
                                                     ? `https://image.tmdb.org/t/p/w300${actor.profile_path}`
-                                                    : noImage
+                                                    : noPhoto
                                             }
                                             alt={actor.name}
                                         />

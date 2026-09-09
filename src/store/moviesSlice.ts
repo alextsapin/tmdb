@@ -100,6 +100,12 @@ const moviesSlice = createSlice({
         clearCategoryError: (state, action: PayloadAction<MovieCategory>) => {
             state.error[action.payload] = null;
         },
+        clearErrors: state => {
+            state.error.popular = null;
+            state.error.top = null;
+            state.error.upcoming = null;
+            state.error.nowPlaying = null;
+        },
     },
     extraReducers: builder => {
         builder.addCase(loadMoviesByCategory.pending, (state, action) => {
@@ -124,6 +130,6 @@ const moviesSlice = createSlice({
     },
 });
 
-export const { clearCategoryError } = moviesSlice.actions;
+export const { clearCategoryError, clearErrors } = moviesSlice.actions;
 
 export default moviesSlice.reducer;

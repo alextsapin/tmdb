@@ -39,6 +39,9 @@ const searchSlice = createSlice({
         resetMovies: () => ({
             ...initialState,
         }),
+        clearError: state => {
+            state.error = null;
+        },
     },
     extraReducers: builder => {
         builder
@@ -61,5 +64,5 @@ const searchSlice = createSlice({
     },
 });
 
-export const { resetMovies } = searchSlice.actions;
+export const { resetMovies, clearError } = searchSlice.actions;
 export default searchSlice.reducer;

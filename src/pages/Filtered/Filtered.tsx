@@ -16,9 +16,7 @@ import {
 import { MovieSort } from '../../api/api';
 import { Card } from '../../Card/Card';
 import { Paginator } from '../../Paginator/Paginator';
-import { ErrorSnackbar } from '../../Snackbar/Snackbar';
 import {
-    clearError,
     loadFilteredMovies,
     resetFilters,
     setSortBy,
@@ -60,7 +58,6 @@ export const FilteredMovies = (): JSX.Element => {
     const withGenres = useAppSelector(state => state.filtered.withGenres);
     const movies = useAppSelector(state => state.filtered.movies);
     const loading = useAppSelector(state => state.filtered.loading);
-    const error = useAppSelector(state => state.filtered.error);
     const page = useAppSelector(state => state.filtered.page);
     const totalPages = useAppSelector(state => state.filtered.totalPages);
 
@@ -89,10 +86,6 @@ export const FilteredMovies = (): JSX.Element => {
                 withGenres,
             }),
         );
-    };
-
-    const handleCloseError = (): void => {
-        dispatch(clearError());
     };
 
     useEffect(() => {
@@ -200,7 +193,7 @@ export const FilteredMovies = (): JSX.Element => {
                         <div className={css.resultsLoading}>Loading movies...</div>
                     )}
 
-                    {!loading && !error && movies.length === 0 && <p>No movies found</p>}
+                    {!loading && movies.length === 0 && <p>No movies found</p>}
 
                     {movies.length > 0 && (
                         <Grid container columnSpacing={2} rowSpacing={4}>
@@ -222,8 +215,6 @@ export const FilteredMovies = (): JSX.Element => {
                             onPageChange={handlePageChange}
                         />
                     )}
-
-                    <ErrorSnackbar error={error} onClose={handleCloseError} />
                 </section>
             </div>
         </Container>

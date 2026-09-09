@@ -27,7 +27,6 @@ export const SearchPage = (): JSX.Element => {
 
     const movies = useAppSelector(state => state.search.movies);
     const loading = useAppSelector(state => state.search.loading);
-    const error = useAppSelector(state => state.search.error);
     const totalResults = useAppSelector(state => state.search.totalResults);
     const totalPages = useAppSelector(state => state.search.totalPages);
 
@@ -69,17 +68,12 @@ export const SearchPage = (): JSX.Element => {
                     </div>
                 )}
 
-                {error && <p>{error}</p>}
-
                 {!loading && query && totalResults === 0 && <p>No movies found</p>}
 
                 {!loading && movies && movies.length > 0 && (
                     <Grid container sx={{ mt: 5 }} columnSpacing={2} rowSpacing={4}>
                         {movies.map(movie => (
-                            <Grid
-                                key={movie.id}
-                                size={{ xs: 12, sm: 6, md: 4, lg: 2 }}
-                            >
+                            <Grid key={movie.id} size={{ xs: 12, sm: 6, md: 4, lg: 2 }}>
                                 <Card {...movie} />
                             </Grid>
                         ))}
