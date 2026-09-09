@@ -2,6 +2,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { discoverMovies, Movie, MovieSort } from '../api/api';
+import { RATING_MAX, RATING_MIN } from '../constants';
 
 type FilteredState = {
     movies: Movie[];
@@ -20,8 +21,8 @@ const initialState: FilteredState = {
     page: 1,
     totalPages: 1,
     sortBy: 'popularity.desc',
-    voteAverageGte: 0,
-    voteAverageLte: 10,
+    voteAverageGte: RATING_MIN,
+    voteAverageLte: RATING_MAX,
     withGenres: [],
     loading: false,
     error: null,

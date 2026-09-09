@@ -1,23 +1,28 @@
-/* eslint-disable no-magic-numbers */
+import {
+    MINUTES_PER_HOUR,
+    RATING_HIGH_THRESHOLD,
+    RATING_MEDIUM_THRESHOLD,
+} from '../constants';
+
 export function getRatingColor(rating: number): string {
-    if (rating >= 7) {
-        return '#21d07a'; // зелёный
+    if (rating >= RATING_HIGH_THRESHOLD) {
+        return '#21d07a'; // green
     }
 
-    if (rating >= 4) {
-        return '#d2d531'; // жёлтый
+    if (rating >= RATING_MEDIUM_THRESHOLD) {
+        return '#d2d531'; // yellow
     }
 
     if (rating > 0) {
-        return '#db2360'; // красный
+        return '#db2360'; // red
     }
 
-    return '#666666'; // если рейтинга нет
+    return '#666666'; // no rating
 }
 
 export function runtimeConverter(time: number): string {
-    const h = Math.floor(time / 60); // 60 минут в часе
-    const m = time - h * 60;
+    const h = Math.floor(time / MINUTES_PER_HOUR);
+    const m = time - h * MINUTES_PER_HOUR;
 
     if (h < 1) return `${time}m`;
     if (m === 0) return `${h}h`;

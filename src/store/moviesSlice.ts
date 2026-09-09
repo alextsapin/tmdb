@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 /* eslint-disable no-promise-executor-return */
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 

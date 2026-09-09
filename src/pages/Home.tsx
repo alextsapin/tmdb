@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 /* eslint-disable react/no-array-index-key */
 import { JSX, useEffect } from 'react';
 
@@ -6,6 +5,12 @@ import { Button, Container, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import { Card } from '../Card/Card';
+import {
+    BUTTON_MARGIN_TOP,
+    GRID_SIZE_MOVIE_CARD,
+    GRID_SPACING,
+    PREVIEW_ITEMS_COUNT,
+} from '../constants';
 import { Poster } from '../Poster/Poster';
 import { MovieCardSkeleton } from '../Skeleton/MovieCardSkeleton';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
@@ -35,13 +40,13 @@ export const Home = (): JSX.Element => {
             <Container id="content">
                 <h2 className="title title_second">Popular movies</h2>
 
-                <Grid container spacing={2}>
+                <Grid container spacing={GRID_SPACING}>
                     {loading.popular
-                        ? Array.from({ length: 6 }).map((_, index) => (
+                        ? Array.from({ length: PREVIEW_ITEMS_COUNT }).map((_, index) => (
                               <MovieCardSkeleton key={`popular-${index}`} />
                           ))
-                        : popMovies?.slice(0, 6).map(m => (
-                              <Grid key={m.id} size={{ xs: 12, sm: 6, md: 4, lg: 2 }}>
+                        : popMovies?.slice(0, PREVIEW_ITEMS_COUNT).map(m => (
+                              <Grid key={m.id} size={GRID_SIZE_MOVIE_CARD}>
                                   <Card {...m} />
                               </Grid>
                           ))}
@@ -50,20 +55,20 @@ export const Home = (): JSX.Element => {
                 <Button
                     component={Link}
                     to="/category-movies/"
-                    sx={{ mt: 3 }}
+                    sx={{ mt: BUTTON_MARGIN_TOP }}
                     variant="contained"
                 >
                     View more
                 </Button>
 
                 <h2 className="title title_second">Top rated movies</h2>
-                <Grid container spacing={2}>
+                <Grid container spacing={GRID_SPACING}>
                     {loading.top
-                        ? Array.from({ length: 6 }).map((_, index) => (
+                        ? Array.from({ length: PREVIEW_ITEMS_COUNT }).map((_, index) => (
                               <MovieCardSkeleton key={index} />
                           ))
-                        : topMovies?.slice(0, 6).map(m => (
-                              <Grid key={m.id} size={{ xs: 12, sm: 6, md: 4, lg: 2 }}>
+                        : topMovies?.slice(0, PREVIEW_ITEMS_COUNT).map(m => (
+                              <Grid key={m.id} size={GRID_SIZE_MOVIE_CARD}>
                                   <Card {...m} />
                               </Grid>
                           ))}
@@ -71,20 +76,20 @@ export const Home = (): JSX.Element => {
                 <Button
                     component={Link}
                     to="/category-movies/?category=top"
-                    sx={{ mt: 3 }}
+                    sx={{ mt: BUTTON_MARGIN_TOP }}
                     variant="contained"
                 >
                     View more
                 </Button>
 
                 <h2 className="title title_second">Upcoming</h2>
-                <Grid container spacing={2}>
+                <Grid container spacing={GRID_SPACING}>
                     {loading.upcoming
-                        ? Array.from({ length: 6 }).map((_, index) => (
+                        ? Array.from({ length: PREVIEW_ITEMS_COUNT }).map((_, index) => (
                               <MovieCardSkeleton key={index} />
                           ))
-                        : upcomingMovies?.slice(0, 6).map(m => (
-                              <Grid key={m.id} size={{ xs: 12, sm: 6, md: 4, lg: 2 }}>
+                        : upcomingMovies?.slice(0, PREVIEW_ITEMS_COUNT).map(m => (
+                              <Grid key={m.id} size={GRID_SIZE_MOVIE_CARD}>
                                   <Card {...m} />
                               </Grid>
                           ))}
@@ -92,20 +97,20 @@ export const Home = (): JSX.Element => {
                 <Button
                     component={Link}
                     to="/category-movies/?category=upcoming"
-                    sx={{ mt: 3 }}
+                    sx={{ mt: BUTTON_MARGIN_TOP }}
                     variant="contained"
                 >
                     View more
                 </Button>
 
                 <h2 className="title title_second">Now playing movies</h2>
-                <Grid container spacing={2}>
+                <Grid container spacing={GRID_SPACING}>
                     {loading.nowPlaying
-                        ? Array.from({ length: 6 }).map((_, index) => (
+                        ? Array.from({ length: PREVIEW_ITEMS_COUNT }).map((_, index) => (
                               <MovieCardSkeleton key={index} />
                           ))
-                        : nowPlayingMovies?.slice(0, 6).map(m => (
-                              <Grid key={m.id} size={{ xs: 12, sm: 6, md: 4, lg: 2 }}>
+                        : nowPlayingMovies?.slice(0, PREVIEW_ITEMS_COUNT).map(m => (
+                              <Grid key={m.id} size={GRID_SIZE_MOVIE_CARD}>
                                   <Card {...m} />
                               </Grid>
                           ))}
@@ -113,7 +118,7 @@ export const Home = (): JSX.Element => {
                 <Button
                     component={Link}
                     to="/category-movies/?category=nowPlaying"
-                    sx={{ mt: 3 }}
+                    sx={{ mt: BUTTON_MARGIN_TOP }}
                     variant="contained"
                 >
                     View more

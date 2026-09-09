@@ -5,6 +5,12 @@ import { Button, Container, Grid } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 
 import { Card } from '../../Card/Card';
+import {
+    CONTENT_MARGIN_TOP,
+    GRID_COLUMN_SPACING,
+    GRID_ROW_SPACING,
+    GRID_SIZE_MOVIE_CARD,
+} from '../../constants';
 import { Paginator } from '../../Paginator/Paginator';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { loadMoviesByCategory } from '../../store/moviesSlice';
@@ -67,9 +73,14 @@ export const Category = (): JSX.Element => {
                     <span className={css.dots}>...</span>
                 </div>
             ) : (
-                <Grid container columnSpacing={2} rowSpacing={4} sx={{ mt: 5 }}>
+                <Grid
+                    container
+                    columnSpacing={GRID_COLUMN_SPACING}
+                    rowSpacing={GRID_ROW_SPACING}
+                    sx={{ mt: CONTENT_MARGIN_TOP }}
+                >
                     {movies.map(movie => (
-                        <Grid key={movie.id} size={{ xs: 12, sm: 6, md: 4, lg: 2 }}>
+                        <Grid key={movie.id} size={GRID_SIZE_MOVIE_CARD}>
                             <Card {...movie} />
                         </Grid>
                     ))}

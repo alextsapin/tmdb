@@ -1,13 +1,21 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-magic-numbers */
 import { JSX, useEffect } from 'react';
 
 import ReplyIcon from '@mui/icons-material/Reply';
-import { Button, Container, Grid, IconButton } from '@mui/material';
+import { Button, Container, Grid } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { Card } from '../../Card/Card';
+import {
+    CONTENT_MARGIN_TOP,
+    GRID_SIZE_DETAILS,
+    GRID_SIZE_MOVIE_CARD,
+    GRID_SIZE_POSTER,
+    GRID_SPACING,
+    PREVIEW_ITEMS_COUNT,
+    RATING_DECIMAL_PLACES,
+} from '../../constants';
 import noPhoto from '../../images/no-photo.png';
 import noPoster from '../../images/no-poster.webp';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -36,7 +44,7 @@ export const MoviePage = (): JSX.Element => {
 
     if (!movie) {
         return (
-            <Container id="content" sx={{ mt: 5 }}>
+            <Container id="content" sx={{ mt: CONTENT_MARGIN_TOP }}>
                 <div className={css.loadingState}>
                     <div className={css.posterSkeleton} />
                     <div className={css.detailsSkeleton}>
@@ -55,18 +63,18 @@ export const MoviePage = (): JSX.Element => {
         : noPoster;
 
     return (
-        <Container id="content" sx={{ mt: 5 }}>
+        <Container id="content" sx={{ mt: CONTENT_MARGIN_TOP }}>
             <Button variant="contained" size="small" onClick={() => navigate(-1)}>
                 <ReplyIcon />
             </Button>
 
             <hr />
 
-            <Grid container spacing={2}>
-                <Grid size={3}>
+            <Grid container spacing={GRID_SPACING}>
+                <Grid size={GRID_SIZE_POSTER}>
                     <img src={posterUrl} alt={movie.title} />
                 </Grid>
-                <Grid size={9}>
+                <Grid size={GRID_SIZE_DETAILS}>
                     <h1 className={css.title}>{movie.title}</h1>
                     <div className={css.info}>
                         <p>Release year: {new Date(movie.release_date).getFullYear()}</p>
@@ -77,7 +85,7 @@ export const MoviePage = (): JSX.Element => {
                                 backgroundColor: getRatingColor(movie.vote_average),
                             }}
                         >
-                            {movie.vote_average.toFixed(1)}
+                            {movie.vote_average.toFixed(RATING_DECIMAL_PLACES)}
                         </span>
 
                         <p>Runtime: {runtimeConverter(movie.runtime)}</p>
@@ -95,17 +103,17 @@ export const MoviePage = (): JSX.Element => {
                 </Grid>
             </Grid>
 
-            <Grid container spacing={2}>
+            <Grid container spacing={GRID_SPACING}>
                 {cast && cast.length > 0 && (
                     <>
                         <h2>In the cast</h2>
                         {[...cast]
                             .sort((a, b) => b.popularity - a.popularity)
-                            .slice(0, 6)
+                            .slice(0, PREVIEW_ITEMS_COUNT)
                             .map(actor => (
                                 <Grid
                                     key={actor.id}
-                                    size={{ xs: 12, sm: 6, md: 4, lg: 2 }}
+                                    size={GRID_SIZE_MOVIE_CARD}
                                 >
                                     <div className={css.item}>
                                         <img
@@ -126,12 +134,12 @@ export const MoviePage = (): JSX.Element => {
                 )}
             </Grid>
 
-            <Grid container spacing={2}>
+            <Grid container spacing={GRID_SPACING}>
                 {similar && similar.length > 0 && (
                     <>
                         <h2>Similar movies</h2>
-                        {similar.slice(0, 6).map(m => (
-                            <Grid key={m.id} size={{ xs: 12, sm: 6, md: 4, lg: 2 }}>
+                        {similar.slice(0, PREVIEW_ITEMS_COUNT).map(m => (
+                            <Grid key={m.id} size={GRID_SIZE_MOVIE_CARD}>
                                 <Card {...m} />
                             </Grid>
                         ))}

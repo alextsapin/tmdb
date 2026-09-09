@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { JSX, useEffect } from 'react';
 
@@ -15,6 +14,17 @@ import {
 
 import { MovieSort } from '../../api/api';
 import { Card } from '../../Card/Card';
+import {
+    FILTER_DEBOUNCE_MS,
+    GENRES,
+    GRID_COLUMN_SPACING,
+    GRID_ROW_SPACING,
+    GRID_SIZE_FILTERED_CARD,
+    RATING_DECIMAL_PLACES,
+    RATING_MAX,
+    RATING_MIN,
+    RATING_STEP,
+} from '../../constants';
 import { Paginator } from '../../Paginator/Paginator';
 import {
     loadFilteredMovies,
@@ -27,27 +37,6 @@ import {
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 import css from './filtered.module.less';
-
-const genres = [
-    { id: 28, name: 'Action' },
-    { id: 12, name: 'Adventure' },
-    { id: 16, name: 'Animation' },
-    { id: 35, name: 'Comedy' },
-    { id: 80, name: 'Crime' },
-    { id: 99, name: 'Documentary' },
-    { id: 18, name: 'Drama' },
-    { id: 10751, name: 'Family' },
-    { id: 14, name: 'Fantasy' },
-    { id: 36, name: 'History' },
-    { id: 27, name: 'Horror' },
-    { id: 10402, name: 'Music' },
-    { id: 9648, name: 'Mystery' },
-    { id: 10749, name: 'Romance' },
-    { id: 878, name: 'Science Fiction' },
-    { id: 53, name: 'Thriller' },
-    { id: 10752, name: 'War' },
-    { id: 37, name: 'Western' },
-];
 
 export const FilteredMovies = (): JSX.Element => {
     const dispatch = useAppDispatch();
@@ -99,7 +88,7 @@ export const FilteredMovies = (): JSX.Element => {
                     withGenres,
                 }),
             );
-        }, 200);
+        }, FILTER_DEBOUNCE_MS);
 
         return () => clearTimeout(timer);
     }, [dispatch, sortBy, voteAverageGte, voteAverageLte, withGenres]);
@@ -143,23 +132,23 @@ export const FilteredMovies = (): JSX.Element => {
                             <div className={css.ratingHeader}>
                                 <span>Rating</span>
                                 <span>
-                                    {voteAverageGte.toFixed(1)} –{' '}
-                                    {voteAverageLte.toFixed(1)}
+                                    {voteAverageGte.toFixed(RATING_DECIMAL_PLACES)} –{' '}
+                                    {voteAverageLte.toFixed(RATING_DECIMAL_PLACES)}
                                 </span>
                             </div>
                             <Slider
                                 value={[voteAverageGte, voteAverageLte]}
                                 onChange={handleRatingChange}
-                                min={0}
-                                max={10}
-                                step={0.1}
+                                min={RATING_MIN}
+                                max={RATING_MAX}
+                                step={RATING_STEP}
                                 valueLabelDisplay="auto"
                             />
                         </div>
                         <div className={css.genres}>
                             <div className={css.genreTitle}>Genres</div>
                             <div className={css.genreList}>
-                                {genres.map(genre => (
+                                {GENRES.map(genre => (
                                     <Button
                                         key={genre.id}
                                         variant={
@@ -196,12 +185,13 @@ export const FilteredMovies = (): JSX.Element => {
                     {!loading && movies.length === 0 && <p>No movies found</p>}
 
                     {movies.length > 0 && (
-                        <Grid container columnSpacing={2} rowSpacing={4}>
+                        <Grid
+                            container
+                            columnSpacing={GRID_COLUMN_SPACING}
+                            rowSpacing={GRID_ROW_SPACING}
+                        >
                             {movies.map(movie => (
-                                <Grid
-                                    key={movie.id}
-                                    size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
-                                >
+                                <Grid key={movie.id} size={GRID_SIZE_FILTERED_CARD}>
                                     <Card {...movie} />
                                 </Grid>
                             ))}

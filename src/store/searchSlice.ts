@@ -57,9 +57,9 @@ const searchSlice = createSlice({
                 state.totalPages = action.payload.total_pages;
                 state.totalResults = action.payload.total_results;
             })
-            .addCase(loadSearchMovies.rejected, state => {
+            .addCase(loadSearchMovies.rejected, (state, action) => {
                 state.loading = false;
-                state.error = 'Search error';
+                state.error = action.error.message || 'Произошла ошибка';
             });
     },
 });

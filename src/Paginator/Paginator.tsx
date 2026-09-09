@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
-/* eslint-disable no-magic-numbers */
 import { JSX } from 'react';
 
 import { Button } from '@mui/material';
+
+import { PAGINATOR_SECTION_SIZE } from '../constants';
 
 import css from './paginator.module.less';
 
@@ -24,12 +25,12 @@ export const Paginator = ({
         pages.push(i);
     }
 
-    const sectionNumber = Math.ceil(page / 5);
+    const sectionNumber = Math.ceil(page / PAGINATOR_SECTION_SIZE);
 
-    // Крайняя левая страница
-    const leftPage = (sectionNumber - 1) * 5 + 1;
-    // Крайняя правая страница
-    const rightPage = sectionNumber * 5;
+    // Leftmost page of the section
+    const leftPage = (sectionNumber - 1) * PAGINATOR_SECTION_SIZE + 1;
+    // Rightmost page of the section
+    const rightPage = sectionNumber * PAGINATOR_SECTION_SIZE;
 
     return (
         <div className={css.paginator}>

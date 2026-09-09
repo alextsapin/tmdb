@@ -4,6 +4,7 @@ import { JSX, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Movie } from '../api/api';
+import { RATING_DECIMAL_PLACES } from '../constants';
 import { ImageLoader } from '../ImageLoader/ImageLoader';
 import noImage from '../images/no-poster.webp';
 import { Like } from '../Like/Like';
@@ -35,7 +36,7 @@ export const Card = (props: Movie): JSX.Element => {
                             backgroundColor: getRatingColor(props.vote_average),
                         }}
                     >
-                        {props.vote_average.toFixed(1)}
+                        {props.vote_average.toFixed(RATING_DECIMAL_PLACES)}
                     </span>
                 )}
             </Link>

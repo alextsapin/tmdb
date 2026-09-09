@@ -1,11 +1,16 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable no-magic-numbers */
 import { JSX, useCallback, useEffect, useState } from 'react';
 
 import { Container, Grid } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 
 import { Card } from '../../Card/Card';
+import {
+    CONTENT_MARGIN_TOP,
+    GRID_COLUMN_SPACING,
+    GRID_ROW_SPACING,
+    GRID_SIZE_MOVIE_CARD,
+} from '../../constants';
 import { Paginator } from '../../Paginator/Paginator';
 import { SearchForm } from '../../SearchForm/SearchForm';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -71,9 +76,14 @@ export const SearchPage = (): JSX.Element => {
                 {!loading && query && totalResults === 0 && <p>No movies found</p>}
 
                 {!loading && movies && movies.length > 0 && (
-                    <Grid container sx={{ mt: 5 }} columnSpacing={2} rowSpacing={4}>
+                    <Grid
+                        container
+                        sx={{ mt: CONTENT_MARGIN_TOP }}
+                        columnSpacing={GRID_COLUMN_SPACING}
+                        rowSpacing={GRID_ROW_SPACING}
+                    >
                         {movies.map(movie => (
-                            <Grid key={movie.id} size={{ xs: 12, sm: 6, md: 4, lg: 2 }}>
+                            <Grid key={movie.id} size={GRID_SIZE_MOVIE_CARD}>
                                 <Card {...movie} />
                             </Grid>
                         ))}

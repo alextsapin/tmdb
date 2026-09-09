@@ -1,5 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+
+import {
+    HTTP_BAD_GATEWAY,
+    HTTP_GATEWAY_TIMEOUT,
+    HTTP_INTERNAL_SERVER_ERROR,
+    HTTP_NOT_FOUND,
+    HTTP_SERVICE_UNAVAILABLE,
+    HTTP_UNAUTHORIZED,
+} from '../constants';
 
 const TMDB_ACCESS_TOKEN =
     'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlZGI3YmNkZTYwMmE2ODIxM2Y3MWI5YjUwNTU1Mjk2YSIsIm5iZiI6MTc3NzI4ODgzOC4xNzYsInN1YiI6IjY5ZWY0Njg2OWRlYTczNDZlNDZiMjIxYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.hOoajQFmbun0U6uQzNt2nver0jrFoJmnyL0gyrtqfZ0';
@@ -14,6 +24,29 @@ export const tmdbApi = axios.create({
         language: 'en',
     },
 });
+
+tmdbApi.interceptors.response.use(
+    response => response,
+    (error: AxiosError) => {
+        if (!error.response) {
+            return Promise.reject(new Error('No internet connection...'));
+        }
+
+        switch (error.response.status) {
+            case HTTP_UNAUTHORIZED:
+                return Promise.reject(new Error('API authorization error...'));
+            case HTTP_NOT_FOUND:
+                return Promise.reject(new Error('Requested resource not found...'));
+            case HTTP_INTERNAL_SERVER_ERROR:
+            case HTTP_BAD_GATEWAY:
+            case HTTP_SERVICE_UNAVAILABLE:
+            case HTTP_GATEWAY_TIMEOUT:
+                return Promise.reject(new Error('Server error. Please try again later...'));
+            default:
+                return Promise.reject(new Error('An error occurred while requesting the API...'));
+        }
+    },
+);
 
 export type MovieCategory = 'popular' | 'top' | 'upcoming' | 'nowPlaying';
 
@@ -124,7 +157,9 @@ export const getSimilarMovies = async (id: number): Promise<Movie[]> => {
 };
 
 // Получение фильмов по параметрам
-export const discoverMovies = async ( params: DiscoverMovieParams ): Promise<MoviesResponse> => {
+export const discoverMovies = async (
+    params: DiscoverMovieParams,
+): Promise<MoviesResponse> => {
     const { data } = await tmdbApi.get<MoviesResponse>('/discover/movie', {
         params: {
             page: params.page || 1,

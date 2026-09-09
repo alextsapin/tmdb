@@ -3,6 +3,7 @@ import { JSX } from 'react';
 import { Container, Grid } from '@mui/material';
 
 import { Card } from '../Card/Card';
+import { GRID_SIZE_MOVIE_CARD, GRID_SPACING } from '../constants';
 import { useAppSelector } from '../store/hooks';
 
 export const FavoritesPage = (): JSX.Element => {
@@ -11,10 +12,10 @@ export const FavoritesPage = (): JSX.Element => {
     return (
         <Container id="content">
             <h1>Favorites</h1>
-            <Grid container spacing={2}>
+            <Grid container spacing={GRID_SPACING}>
                 {favorites.length > 0 ? (
                     favorites.map(movie => (
-                        <Grid key={movie.id} size={{ xs: 12, sm: 6, md: 4, lg: 2 }}>
+                        <Grid key={movie.id} size={GRID_SIZE_MOVIE_CARD}>
                             <Card {...movie} />
                         </Grid>
                     ))
