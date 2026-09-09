@@ -5,7 +5,6 @@ import Container from '@mui/material/Container';
 
 import { Movie } from '../api/api';
 import { SearchForm } from '../SearchForm/SearchForm';
-import { useAppSelector } from '../store/hooks';
 
 import css from './poster.module.less';
 
@@ -14,8 +13,6 @@ type PosterProps = {
 };
 
 export const Poster = ({ movies }: PosterProps): JSX.Element => {
-    const error = useAppSelector(state => state.movies.error.popular);
-
     const [imageLoaded, setImageLoaded] = useState(false);
 
     const randomMovie = useMemo(() => {
@@ -53,10 +50,6 @@ export const Poster = ({ movies }: PosterProps): JSX.Element => {
             cancelled = true;
         };
     }, [randomMovie]);
-
-    if (error) {
-        return <div className={css.poster}>{error}</div>;
-    }
 
     return (
         <div className={css.poster}>

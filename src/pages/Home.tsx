@@ -38,91 +38,119 @@ export const Home = (): JSX.Element => {
             <Poster movies={popMovies} />
 
             <Container id="content">
-                <h2 className="title title_second">Popular movies</h2>
+                {popMovies.length > 0 && (
+                    <>
+                        <h2 className="title title_second">Popular movies</h2>
 
-                <Grid container spacing={GRID_SPACING}>
-                    {loading.popular
-                        ? Array.from({ length: PREVIEW_ITEMS_COUNT }).map((_, index) => (
-                              <MovieCardSkeleton key={`popular-${index}`} />
-                          ))
-                        : popMovies?.slice(0, PREVIEW_ITEMS_COUNT).map(m => (
-                              <Grid key={m.id} size={GRID_SIZE_MOVIE_CARD}>
-                                  <Card {...m} />
-                              </Grid>
-                          ))}
-                </Grid>
+                        <Grid container spacing={GRID_SPACING}>
+                            {loading.popular
+                                ? Array.from({ length: PREVIEW_ITEMS_COUNT }).map(
+                                      (_, index) => (
+                                          <MovieCardSkeleton key={`popular-${index}`} />
+                                      ),
+                                  )
+                                : popMovies?.slice(0, PREVIEW_ITEMS_COUNT).map(m => (
+                                      <Grid key={m.id} size={GRID_SIZE_MOVIE_CARD}>
+                                          <Card {...m} />
+                                      </Grid>
+                                  ))}
+                        </Grid>
 
-                <Button
-                    component={Link}
-                    to="/category-movies/"
-                    sx={{ mt: BUTTON_MARGIN_TOP }}
-                    variant="contained"
-                >
-                    View more
-                </Button>
+                        <Button
+                            component={Link}
+                            to="/category-movies/"
+                            sx={{ mt: BUTTON_MARGIN_TOP }}
+                            variant="contained"
+                        >
+                            View more
+                        </Button>
+                    </>
+                )}
 
-                <h2 className="title title_second">Top rated movies</h2>
-                <Grid container spacing={GRID_SPACING}>
-                    {loading.top
-                        ? Array.from({ length: PREVIEW_ITEMS_COUNT }).map((_, index) => (
-                              <MovieCardSkeleton key={index} />
-                          ))
-                        : topMovies?.slice(0, PREVIEW_ITEMS_COUNT).map(m => (
-                              <Grid key={m.id} size={GRID_SIZE_MOVIE_CARD}>
-                                  <Card {...m} />
-                              </Grid>
-                          ))}
-                </Grid>
-                <Button
-                    component={Link}
-                    to="/category-movies/?category=top"
-                    sx={{ mt: BUTTON_MARGIN_TOP }}
-                    variant="contained"
-                >
-                    View more
-                </Button>
+                {topMovies.length > 0 && (
+                    <>
+                        <h2 className="title title_second">Top rated movies</h2>
+                        <Grid container spacing={GRID_SPACING}>
+                            {loading.top
+                                ? Array.from({ length: PREVIEW_ITEMS_COUNT }).map(
+                                      (_, index) => (
+                                          <MovieCardSkeleton key={`top-${index}`} />
+                                      ),
+                                  )
+                                : topMovies?.slice(0, PREVIEW_ITEMS_COUNT).map(m => (
+                                      <Grid key={m.id} size={GRID_SIZE_MOVIE_CARD}>
+                                          <Card {...m} />
+                                      </Grid>
+                                  ))}
+                        </Grid>
+                        <Button
+                            component={Link}
+                            to="/category-movies/?category=top"
+                            sx={{ mt: BUTTON_MARGIN_TOP }}
+                            variant="contained"
+                        >
+                            View more
+                        </Button>
+                    </>
+                )}
 
-                <h2 className="title title_second">Upcoming</h2>
-                <Grid container spacing={GRID_SPACING}>
-                    {loading.upcoming
-                        ? Array.from({ length: PREVIEW_ITEMS_COUNT }).map((_, index) => (
-                              <MovieCardSkeleton key={index} />
-                          ))
-                        : upcomingMovies?.slice(0, PREVIEW_ITEMS_COUNT).map(m => (
-                              <Grid key={m.id} size={GRID_SIZE_MOVIE_CARD}>
-                                  <Card {...m} />
-                              </Grid>
-                          ))}
-                </Grid>
-                <Button
-                    component={Link}
-                    to="/category-movies/?category=upcoming"
-                    sx={{ mt: BUTTON_MARGIN_TOP }}
-                    variant="contained"
-                >
-                    View more
-                </Button>
+                {upcomingMovies.length > 0 && (
+                    <>
+                        <h2 className="title title_second">Upcoming</h2>
+                        <Grid container spacing={GRID_SPACING}>
+                            {loading.upcoming
+                                ? Array.from({ length: PREVIEW_ITEMS_COUNT }).map(
+                                      (_, index) => (
+                                          <MovieCardSkeleton key={`upcoming-${index}`} />
+                                      ),
+                                  )
+                                : upcomingMovies?.slice(0, PREVIEW_ITEMS_COUNT).map(m => (
+                                      <Grid key={m.id} size={GRID_SIZE_MOVIE_CARD}>
+                                          <Card {...m} />
+                                      </Grid>
+                                  ))}
+                        </Grid>
+                        <Button
+                            component={Link}
+                            to="/category-movies/?category=upcoming"
+                            sx={{ mt: BUTTON_MARGIN_TOP }}
+                            variant="contained"
+                        >
+                            View more
+                        </Button>
+                    </>
+                )}
 
-                <h2 className="title title_second">Now playing movies</h2>
-                <Grid container spacing={GRID_SPACING}>
-                    {loading.nowPlaying
-                        ? Array.from({ length: PREVIEW_ITEMS_COUNT }).map((_, index) => (
-                              <MovieCardSkeleton key={index} />
-                          ))
-                        : nowPlayingMovies?.slice(0, PREVIEW_ITEMS_COUNT).map(m => (
-                              <Grid key={m.id} size={GRID_SIZE_MOVIE_CARD}>
-                                  <Card {...m} />
-                              </Grid>
-                          ))}
-                </Grid>
-                <Button
-                    component={Link}
-                    to="/category-movies/?category=nowPlaying"
-                    sx={{ mt: BUTTON_MARGIN_TOP }}
-                    variant="contained"
-                >
-                    View more
-                </Button>
+                {nowPlayingMovies.length > 0 && (
+                    <>
+                        <h2 className="title title_second">Now playing movies</h2>
+                        <Grid container spacing={GRID_SPACING}>
+                            {loading.nowPlaying
+                                ? Array.from({ length: PREVIEW_ITEMS_COUNT }).map(
+                                      (_, index) => (
+                                          <MovieCardSkeleton
+                                              key={`nowPlaying-${index}`}
+                                          />
+                                      ),
+                                  )
+                                : nowPlayingMovies
+                                      ?.slice(0, PREVIEW_ITEMS_COUNT)
+                                      .map(m => (
+                                          <Grid key={m.id} size={GRID_SIZE_MOVIE_CARD}>
+                                              <Card {...m} />
+                                          </Grid>
+                                      ))}
+                        </Grid>
+                        <Button
+                            component={Link}
+                            to="/category-movies/?category=nowPlaying"
+                            sx={{ mt: BUTTON_MARGIN_TOP }}
+                            variant="contained"
+                        >
+                            View more
+                        </Button>
+                    </>
+                )}
             </Container>
         </>
     );

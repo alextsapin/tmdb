@@ -29,7 +29,11 @@ tmdbApi.interceptors.response.use(
     response => response,
     (error: AxiosError) => {
         if (!error.response) {
-            return Promise.reject(new Error('No internet connection...'));
+            if (!navigator.onLine) {
+                return Promise.reject(new Error('No internet connection...'));
+            }
+
+            return Promise.reject(new Error('Network error. Please try again...'));
         }
 
         switch (error.response.status) {
@@ -41,9 +45,13 @@ tmdbApi.interceptors.response.use(
             case HTTP_BAD_GATEWAY:
             case HTTP_SERVICE_UNAVAILABLE:
             case HTTP_GATEWAY_TIMEOUT:
-                return Promise.reject(new Error('Server error. Please try again later...'));
+                return Promise.reject(
+                    new Error('Server error. Please try again later...'),
+                );
             default:
-                return Promise.reject(new Error('An error occurred while requesting the API...'));
+                return Promise.reject(
+                    new Error('An error occurred while requesting the API...'),
+                );
         }
     },
 );

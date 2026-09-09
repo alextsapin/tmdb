@@ -90,7 +90,7 @@ export const App = (): ReactElement => {
     return (
         <ThemeProvider theme={theme}>
             <Header />
-            {isLoading && <LinearProgress />}
+            {isLoading && <LinearProgress color="error" />}
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/movie/:id" element={<MoviePage />} />
