@@ -6,8 +6,16 @@ type ThemeState = {
     mode: ThemeMode;
 };
 
+const loadTheme = (): ThemeMode => {
+    const data = localStorage.getItem('theme');
+
+    if (!data) return 'dark';
+
+    return JSON.parse(data);
+};
+
 const initialState: ThemeState = {
-    mode: 'dark',
+    mode: loadTheme(),
 };
 
 const themeSlice = createSlice({
@@ -16,6 +24,7 @@ const themeSlice = createSlice({
     reducers: {
         toggleTheme: state => {
             state.mode = state.mode === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('theme', JSON.stringify(state.mode));
         },
     },
 });

@@ -33,7 +33,7 @@ export const MoviePage = (): JSX.Element => {
         if (!id) return;
         const movieId = Number(id);
 
-        dispatch(loadMovieById(movieId));
+        // dispatch(loadMovieById(movieId));
         dispatch(loadMovieCast(movieId));
         dispatch(loadSimilarMovies(movieId));
     }, [dispatch, id]);

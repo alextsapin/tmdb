@@ -4,7 +4,7 @@ import { Grid, Skeleton } from '@mui/material';
 
 import { GRID_SIZE_SKELETON } from '../constants';
 
-import css from './MovieCardSkeleton.module.less';
+import css from './movieCardSkeleton.module.less';
 
 export const MovieCardSkeleton = (): JSX.Element => {
     return (
