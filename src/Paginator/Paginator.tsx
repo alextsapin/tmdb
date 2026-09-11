@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
 import { JSX } from 'react';
@@ -14,11 +15,7 @@ type PaginatorProps = {
     onPageChange: (page: number) => void;
 };
 
-export const Paginator = ({
-    totalPages,
-    page,
-    onPageChange,
-}: PaginatorProps): JSX.Element => {
+export const Paginator = ({totalPages, page, onPageChange}: PaginatorProps): JSX.Element => {
     const pages = [];
 
     for (let i = 1; i <= totalPages; i += 1) {
@@ -34,6 +31,12 @@ export const Paginator = ({
 
     return (
         <div className={css.paginator}>
+            {page > 5 && (
+                <Button variant="outlined" onClick={() => onPageChange(1)}>
+                    Start
+                </Button>
+            )}
+
             {page > 1 && (
                 <Button variant="contained" onClick={() => onPageChange(page - 1)}>
                     Prev
@@ -48,7 +51,11 @@ export const Paginator = ({
                             {p}
                         </Button>
                     ) : (
-                        <Button key={p} variant="outlined" onClick={() => onPageChange(p)}>
+                        <Button
+                            key={p}
+                            variant="outlined"
+                            onClick={() => onPageChange(p)}
+                        >
                             {p}
                         </Button>
                     ),
@@ -57,6 +64,12 @@ export const Paginator = ({
             {page < totalPages && (
                 <Button variant="contained" onClick={() => onPageChange(page + 1)}>
                     Next
+                </Button>
+            )}
+
+            {page < totalPages - 4 && (
+                <Button variant="outlined" onClick={() => onPageChange(totalPages)}>
+                    Last
                 </Button>
             )}
         </div>

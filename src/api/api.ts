@@ -172,8 +172,8 @@ export const discoverMovies = async (
         params: {
             page: params.page || 1,
             sort_by: params.sortBy,
-            vote_average_gte: params.voteAverageGte,
-            vote_average_lte: params.voteAverageLte,
+            'vote_average.gte': params.voteAverageGte,
+            'vote_average.lte': params.voteAverageLte,
             with_genres: params.withGenres?.join(','),
         },
     });

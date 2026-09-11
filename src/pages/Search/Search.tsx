@@ -25,6 +25,13 @@ export const SearchPage = (): JSX.Element => {
 
     const query = searchParams.get('query') || '';
     const [page, setPage] = useState<number>(Number(searchParams.get('page')) || 1);
+    const [prevQuery, setPrevQuery] = useState(query);
+
+    // Reset page when the search query changes (including clear via ×)
+    if (query !== prevQuery) {
+        setPrevQuery(query);
+        setPage(1);
+    }
 
     const handlePageChange = (newPage: number): void => {
         setPage(newPage);
