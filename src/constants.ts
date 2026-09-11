@@ -24,7 +24,10 @@ export const SNACKBAR_AUTO_HIDE_MS = 5000;
 export const FILTER_DEBOUNCE_MS = 200;
 
 /** Lists / pagination */
+export const PAGINATOR_FIRST_PAGE = 1;
 export const PAGINATOR_SECTION_SIZE = 5;
+export const PAGINATOR_PAGE_STEP = 1;
+export const TMDB_MAX_PAGE = 500;
 export const PREVIEW_ITEMS_COUNT = 6;
 
 /** MUI layout */

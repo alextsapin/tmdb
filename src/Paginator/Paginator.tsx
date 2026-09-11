@@ -1,11 +1,14 @@
-/* eslint-disable no-magic-numbers */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
 import { JSX } from 'react';
 
 import { Button } from '@mui/material';
 
-import { PAGINATOR_SECTION_SIZE } from '../constants';
+import {
+    PAGINATOR_FIRST_PAGE,
+    PAGINATOR_PAGE_STEP,
+    PAGINATOR_SECTION_SIZE,
+    TMDB_MAX_PAGE,
+} from '../constants';
 
 import css from './paginator.module.less';
 
@@ -16,31 +19,45 @@ type PaginatorProps = {
 };
 
 export const Paginator = ({totalPages, page, onPageChange}: PaginatorProps): JSX.Element => {
+    const maxPage = Math.min(TMDB_MAX_PAGE, totalPages);
+
     const pages = [];
 
-    for (let i = 1; i <= totalPages; i += 1) {
+    for (let i = PAGINATOR_FIRST_PAGE; i <= maxPage; i += PAGINATOR_PAGE_STEP) {
         pages.push(i);
     }
 
     const sectionNumber = Math.ceil(page / PAGINATOR_SECTION_SIZE);
 
     // Leftmost page of the section
-    const leftPage = (sectionNumber - 1) * PAGINATOR_SECTION_SIZE + 1;
+    const leftPage = (sectionNumber - PAGINATOR_PAGE_STEP) * PAGINATOR_SECTION_SIZE + PAGINATOR_FIRST_PAGE;
     // Rightmost page of the section
-    const rightPage = sectionNumber * PAGINATOR_SECTION_SIZE;
+    const rightPage = Math.min(maxPage, sectionNumber * PAGINATOR_SECTION_SIZE);
 
     return (
         <div className={css.paginator}>
-            {page > 5 && (
-                <Button variant="outlined" onClick={() => onPageChange(1)}>
-                    Start
-                </Button>
+            {page > PAGINATOR_SECTION_SIZE && (
+                <>
+                    <Button
+                        variant="outlined"
+                        onClick={() => onPageChange(PAGINATOR_FIRST_PAGE)}
+                    >
+                        {PAGINATOR_FIRST_PAGE}
+                    </Button>
+                    ...
+                </>
             )}
 
-            {page > 1 && (
-                <Button variant="contained" onClick={() => onPageChange(page - 1)}>
-                    Prev
-                </Button>
+            {leftPage > PAGINATOR_SECTION_SIZE && (
+                <>
+                    <Button
+                        variant="outlined"
+                        onClick={() => onPageChange(leftPage - PAGINATOR_PAGE_STEP)}
+                    >
+                        {leftPage - PAGINATOR_PAGE_STEP}
+                    </Button>
+                    ...
+                </>
             )}
 
             {pages
@@ -61,16 +78,25 @@ export const Paginator = ({totalPages, page, onPageChange}: PaginatorProps): JSX
                     ),
                 )}
 
-            {page < totalPages && (
-                <Button variant="contained" onClick={() => onPageChange(page + 1)}>
-                    Next
-                </Button>
+            {rightPage < maxPage && (
+                <>
+                    ...
+                    <Button
+                        variant="outlined"
+                        onClick={() => onPageChange(rightPage + PAGINATOR_PAGE_STEP)}
+                    >
+                        {rightPage + PAGINATOR_PAGE_STEP}
+                    </Button>
+                </>
             )}
 
-            {page < totalPages - 4 && (
-                <Button variant="outlined" onClick={() => onPageChange(totalPages)}>
-                    Last
-                </Button>
+            {page <= maxPage - PAGINATOR_SECTION_SIZE && (
+                <>
+                    ...
+                    <Button variant="outlined" onClick={() => onPageChange(maxPage)}>
+                        {maxPage}
+                    </Button>
+                </>
             )}
         </div>
     );

@@ -59,7 +59,7 @@ const searchSlice = createSlice({
             })
             .addCase(loadSearchMovies.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.message || 'Произошла ошибка';
+                state.error = action.error.message || 'An error occurred';
             });
     },
 });
