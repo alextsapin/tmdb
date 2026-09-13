@@ -8,7 +8,7 @@ import {
     getMovieCast,
     Movie,
     getSimilarMovies,
-} from '../api/api';
+} from '@/api/api';
 
 type MovieState = {
     movie: MovieDetails | null;

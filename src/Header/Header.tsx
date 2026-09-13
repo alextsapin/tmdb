@@ -8,11 +8,10 @@ import { IconButton } from '@mui/material';
 import Container from '@mui/material/Container';
 import { Link, NavLink } from 'react-router-dom';
 
-import logo from '../images/tmdb.png';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { toggleTheme } from '../store/themeSlice';
-
-import css from './header.module.less';
+import css from '@/Header/header.module.less';
+import logo from '@/images/tmdb.png';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { toggleTheme } from '@/store/themeSlice';
 
 const navItems = [
     { to: '/', label: 'Main' },

@@ -2,7 +2,7 @@ import {
     MINUTES_PER_HOUR,
     RATING_HIGH_THRESHOLD,
     RATING_MEDIUM_THRESHOLD,
-} from '../constants';
+} from '@/shared/constants';
 
 export function getRatingColor(rating: number): string {
     if (rating >= RATING_HIGH_THRESHOLD) {

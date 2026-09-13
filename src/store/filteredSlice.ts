@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { discoverMovies, Movie, MovieSort } from '../api/api';
-import { RATING_MAX, RATING_MIN } from '../constants';
+import { discoverMovies, Movie, MovieSort } from '@/api/api';
+import { RATING_MAX, RATING_MIN } from '@/shared/constants';
 
 type FilteredState = {
     movies: Movie[];

@@ -52,6 +52,7 @@
                 "groups": [
                     "builtin",
                     "external",
+                    "internal",
                     "parent",
                     "sibling",
                     "index"
@@ -60,6 +61,11 @@
                     {
                         "pattern": "react",
                         "group": "external",
+                        "position": "before"
+                    },
+                    {
+                        "pattern": "@/**",
+                        "group": "internal",
                         "position": "before"
                     }
                 ]
@@ -129,10 +135,11 @@
     },
     "settings": {
         "import/resolver": {
+            "typescript": {
+                "alwaysTryTypes": true,
+                "project": "./tsconfig.json"
+            },
             "node": {
-                "paths": [
-                    "src"
-                ],
                 "extensions": [
                     ".js",
                     ".jsx",

@@ -12,8 +12,10 @@ import {
     Button,
 } from '@mui/material';
 
-import { MovieSort } from '../../api/api';
-import { Card } from '../../Card/Card';
+import { MovieSort } from '@/api/api';
+import { Card } from '@/Card/Card';
+import css from '@/pages/Filtered/filtered.module.less';
+import { Paginator } from '@/Paginator/Paginator';
 import {
     FILTER_DEBOUNCE_MS,
     GENRES,
@@ -24,8 +26,7 @@ import {
     RATING_MAX,
     RATING_MIN,
     RATING_STEP,
-} from '../../constants';
-import { Paginator } from '../../Paginator/Paginator';
+} from '@/shared/constants';
 import {
     loadFilteredMovies,
     resetFilters,
@@ -33,10 +34,8 @@ import {
     setVoteAverageGte,
     setVoteAverageLte,
     toggleGenre,
-} from '../../store/filteredSlice';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-
-import css from './filtered.module.less';
+} from '@/store/filteredSlice';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 
 export const FilteredMovies = (): JSX.Element => {
     const dispatch = useAppDispatch();

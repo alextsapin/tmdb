@@ -4,18 +4,17 @@ import { JSX, useEffect } from 'react';
 import { Button, Container, Grid } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 
-import { Card } from '../../Card/Card';
+import { Card } from '@/Card/Card';
+import css from '@/pages/Category/category.module.less';
+import { Paginator } from '@/Paginator/Paginator';
 import {
     CONTENT_MARGIN_TOP,
     GRID_COLUMN_SPACING,
     GRID_ROW_SPACING,
     GRID_SIZE_MOVIE_CARD,
-} from '../../constants';
-import { Paginator } from '../../Paginator/Paginator';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { loadMoviesByCategory } from '../../store/moviesSlice';
-
-import css from './category.module.less';
+} from '@/shared/constants';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { loadMoviesByCategory } from '@/store/moviesSlice';
 
 type CategoryKey = 'popular' | 'top' | 'upcoming' | 'nowPlaying';
 

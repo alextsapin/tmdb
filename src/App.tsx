@@ -5,24 +5,24 @@ import { ReactElement, useEffect, useMemo } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Route, Routes } from 'react-router-dom';
 
-import { Footer } from './Footer/Footer';
-import { Header } from './Header/Header';
-import { Category } from './pages/Category/Category';
-import { FavoritesPage } from './pages/Favorites';
-import { FilteredMovies } from './pages/Filtered/Filtered';
-import { Home } from './pages/Home';
-import { MoviePage } from './pages/Movie/Movie';
-import { NotFoundPage } from './pages/NotFound';
-import { SearchPage } from './pages/Search/Search';
-import { getDesignTokens } from './theme';
-import './less/App.less';
-import { useAppDispatch, useAppSelector } from './store/hooks';
+import { Footer } from '@/Footer/Footer';
+import { Header } from '@/Header/Header';
+import { Category } from '@/pages/Category/Category';
+import { FavoritesPage } from '@/pages/Favorites';
+import { FilteredMovies } from '@/pages/Filtered/Filtered';
+import { Home } from '@/pages/Home';
+import { MoviePage } from '@/pages/Movie/Movie';
+import { NotFoundPage } from '@/pages/NotFound';
+import { SearchPage } from '@/pages/Search/Search';
+import { getDesignTokens } from '@/theme';
+import '@/less/App.less';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { LinearProgress } from '@mui/material';
-import { ErrorSnackbar } from './Snackbar/Snackbar';
-import { clearError as clearSearchError } from './store/searchSlice';
-import { clearError as clearFilteredError } from './store/filteredSlice';
-import { clearErrors as clearMovieErrors } from './store/movieSlice';
-import { clearErrors as clearMoviesErrors } from './store/moviesSlice';
+import { ErrorSnackbar } from '@/Snackbar/Snackbar';
+import { clearError as clearSearchError } from '@/store/searchSlice';
+import { clearError as clearFilteredError } from '@/store/filteredSlice';
+import { clearErrors as clearMovieErrors } from '@/store/movieSlice';
+import { clearErrors as clearMoviesErrors } from '@/store/moviesSlice';
 
 export const App = (): ReactElement => {
     // eslint-disable-next-line prettier/prettier

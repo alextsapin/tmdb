@@ -3,14 +3,13 @@ import { JSX } from 'react';
 
 import { Button } from '@mui/material';
 
+import css from '@/Paginator/paginator.module.less';
 import {
     PAGINATOR_FIRST_PAGE,
     PAGINATOR_PAGE_STEP,
     PAGINATOR_SECTION_SIZE,
     TMDB_MAX_PAGE,
-} from '../constants';
-
-import css from './paginator.module.less';
+} from '@/shared/constants';
 
 type PaginatorProps = {
     totalPages: number;
@@ -18,7 +17,11 @@ type PaginatorProps = {
     onPageChange: (page: number) => void;
 };
 
-export const Paginator = ({totalPages, page, onPageChange}: PaginatorProps): JSX.Element => {
+export const Paginator = ({
+    totalPages,
+    page,
+    onPageChange,
+}: PaginatorProps): JSX.Element => {
     const maxPage = Math.min(TMDB_MAX_PAGE, totalPages);
 
     const pages = [];
@@ -30,7 +33,9 @@ export const Paginator = ({totalPages, page, onPageChange}: PaginatorProps): JSX
     const sectionNumber = Math.ceil(page / PAGINATOR_SECTION_SIZE);
 
     // Leftmost page of the section
-    const leftPage = (sectionNumber - PAGINATOR_PAGE_STEP) * PAGINATOR_SECTION_SIZE + PAGINATOR_FIRST_PAGE;
+    const leftPage =
+        (sectionNumber - PAGINATOR_PAGE_STEP) * PAGINATOR_SECTION_SIZE +
+        PAGINATOR_FIRST_PAGE;
     // Rightmost page of the section
     const rightPage = Math.min(maxPage, sectionNumber * PAGINATOR_SECTION_SIZE);
 

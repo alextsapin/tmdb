@@ -4,19 +4,18 @@ import { JSX, useCallback, useEffect, useState } from 'react';
 import { Container, Grid } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 
-import { Card } from '../../Card/Card';
+import { Card } from '@/Card/Card';
+import css from '@/pages/Search/search.module.less';
+import { Paginator } from '@/Paginator/Paginator';
+import { SearchForm } from '@/SearchForm/SearchForm';
 import {
     CONTENT_MARGIN_TOP,
     GRID_COLUMN_SPACING,
     GRID_ROW_SPACING,
     GRID_SIZE_MOVIE_CARD,
-} from '../../constants';
-import { Paginator } from '../../Paginator/Paginator';
-import { SearchForm } from '../../SearchForm/SearchForm';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { loadSearchMovies, resetMovies } from '../../store/searchSlice';
-
-import css from './search.module.less';
+} from '@/shared/constants';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { loadSearchMovies, resetMovies } from '@/store/searchSlice';
 
 export const SearchPage = (): JSX.Element => {
     const dispatch = useAppDispatch();

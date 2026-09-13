@@ -3,14 +3,13 @@ import { JSX, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { Movie } from '../api/api';
-import { RATING_DECIMAL_PLACES } from '../constants';
-import { ImageLoader } from '../ImageLoader/ImageLoader';
-import noImage from '../images/no-poster.webp';
-import { Like } from '../Like/Like';
-import { getRatingColor } from '../utils/utils';
-
-import css from './card.module.less';
+import { Movie } from '@/api/api';
+import css from '@/Card/card.module.less';
+import { ImageLoader } from '@/ImageLoader/ImageLoader';
+import noImage from '@/images/no-poster.webp';
+import { Like } from '@/Like/Like';
+import { RATING_DECIMAL_PLACES } from '@/shared/constants';
+import { getRatingColor } from '@/utils/utils';
 
 export const Card = (props: Movie): JSX.Element => {
     const [imageLoaded, setImageLoaded] = useState(false);

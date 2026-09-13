@@ -6,7 +6,10 @@ import ReplyIcon from '@mui/icons-material/Reply';
 import { Button, Container, Grid } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { Card } from '../../Card/Card';
+import { Card } from '@/Card/Card';
+import noPhoto from '@/images/no-photo.png';
+import noPoster from '@/images/no-poster.webp';
+import css from '@/pages/Movie/movie.module.less';
 import {
     CONTENT_MARGIN_TOP,
     GRID_SIZE_DETAILS,
@@ -15,14 +18,10 @@ import {
     GRID_SPACING,
     PREVIEW_ITEMS_COUNT,
     RATING_DECIMAL_PLACES,
-} from '../../constants';
-import noPhoto from '../../images/no-photo.png';
-import noPoster from '../../images/no-poster.webp';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { loadMovieById, loadMovieCast, loadSimilarMovies } from '../../store/movieSlice';
-import { getRatingColor, runtimeConverter } from '../../utils/utils';
-
-import css from './movie.module.less';
+} from '@/shared/constants';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { loadMovieById, loadMovieCast, loadSimilarMovies } from '@/store/movieSlice';
+import { getRatingColor, runtimeConverter } from '@/utils/utils';
 
 export const MoviePage = (): JSX.Element => {
     const { id } = useParams();
@@ -111,10 +110,7 @@ export const MoviePage = (): JSX.Element => {
                             .sort((a, b) => b.popularity - a.popularity)
                             .slice(0, PREVIEW_ITEMS_COUNT)
                             .map(actor => (
-                                <Grid
-                                    key={actor.id}
-                                    size={GRID_SIZE_MOVIE_CARD}
-                                >
+                                <Grid key={actor.id} size={GRID_SIZE_MOVIE_CARD}>
                                     <div className={css.item}>
                                         <img
                                             className={css.photo}

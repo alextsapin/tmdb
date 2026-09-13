@@ -3,10 +3,9 @@ import { JSX, useEffect, useMemo, useState } from 'react';
 
 import Container from '@mui/material/Container';
 
-import { Movie } from '../api/api';
-import { SearchForm } from '../SearchForm/SearchForm';
-
-import css from './poster.module.less';
+import { Movie } from '@/api/api';
+import css from '@/Poster/poster.module.less';
+import { SearchForm } from '@/SearchForm/SearchForm';
 
 type PosterProps = {
     movies: Movie[];

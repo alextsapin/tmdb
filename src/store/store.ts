@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import favoritesReducer from './favoritesSlice';
-import filteredReducer from './filteredSlice';
-import movieReducer from './movieSlice';
-import moviesReducer from './moviesSlice';
-import searchReducer from './searchSlice';
-import themeReducer from './themeSlice';
+import favoritesReducer from '@/store/favoritesSlice';
+import filteredReducer from '@/store/filteredSlice';
+import movieReducer from '@/store/movieSlice';
+import moviesReducer from '@/store/moviesSlice';
+import searchReducer from '@/store/searchSlice';
+import themeReducer from '@/store/themeSlice';
 
 export const store = configureStore({
     reducer: {

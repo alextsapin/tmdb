@@ -3,7 +3,7 @@ import { JSX } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
-import css from './searchForm.module.less';
+import css from '@/SearchForm/searchForm.module.less';
 
 type SearchFormProps = {
     onResetMovies?: () => void;

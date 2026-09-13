@@ -4,17 +4,17 @@ import { JSX, useEffect } from 'react';
 import { Button, Container, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-import { Card } from '../Card/Card';
+import { Card } from '@/Card/Card';
+import { Poster } from '@/Poster/Poster';
 import {
     BUTTON_MARGIN_TOP,
     GRID_SIZE_MOVIE_CARD,
     GRID_SPACING,
     PREVIEW_ITEMS_COUNT,
-} from '../constants';
-import { Poster } from '../Poster/Poster';
-import { MovieCardSkeleton } from '../Skeleton/MovieCardSkeleton';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { loadMoviesByCategory } from '../store/moviesSlice';
+} from '@/shared/constants';
+import { MovieCardSkeleton } from '@/Skeleton/MovieCardSkeleton';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { loadMoviesByCategory } from '@/store/moviesSlice';
 
 export const Home = (): JSX.Element => {
     const dispatch = useAppDispatch();
