@@ -17,31 +17,37 @@ type PaginatorProps = {
     onPageChange: (page: number) => void;
 };
 
-export const Paginator = ({
-    totalPages,
-    page,
-    onPageChange,
-}: PaginatorProps): JSX.Element => {
+export const Paginator = ({totalPages, page, onPageChange}: PaginatorProps): JSX.Element => {
     const maxPage = Math.min(TMDB_MAX_PAGE, totalPages);
+    // eslint-disable-next-line no-magic-numbers -- half of visible page window
+    const halfWindow = Math.floor(PAGINATOR_SECTION_SIZE / 2);
 
-    const pages = [];
+    let leftPage = page - halfWindow;
+    let rightPage = page + halfWindow;
 
-    for (let i = PAGINATOR_FIRST_PAGE; i <= maxPage; i += PAGINATOR_PAGE_STEP) {
+    if (leftPage < PAGINATOR_FIRST_PAGE) {
+        rightPage += PAGINATOR_FIRST_PAGE - leftPage;
+        leftPage = PAGINATOR_FIRST_PAGE;
+    }
+
+    if (rightPage > maxPage) {
+        leftPage -= rightPage - maxPage;
+        rightPage = maxPage;
+    }
+
+    if (leftPage < PAGINATOR_FIRST_PAGE) {
+        leftPage = PAGINATOR_FIRST_PAGE;
+    }
+
+    const pages: number[] = [];
+
+    for (let i = leftPage; i <= rightPage; i += PAGINATOR_PAGE_STEP) {
         pages.push(i);
     }
 
-    const sectionNumber = Math.ceil(page / PAGINATOR_SECTION_SIZE);
-
-    // Leftmost page of the section
-    const leftPage =
-        (sectionNumber - PAGINATOR_PAGE_STEP) * PAGINATOR_SECTION_SIZE +
-        PAGINATOR_FIRST_PAGE;
-    // Rightmost page of the section
-    const rightPage = Math.min(maxPage, sectionNumber * PAGINATOR_SECTION_SIZE);
-
     return (
         <div className={css.paginator}>
-            {page > PAGINATOR_SECTION_SIZE && (
+            {leftPage > PAGINATOR_FIRST_PAGE && (
                 <>
                     <Button
                         variant="outlined"
@@ -53,49 +59,19 @@ export const Paginator = ({
                 </>
             )}
 
-            {leftPage > PAGINATOR_SECTION_SIZE && (
-                <>
-                    <Button
-                        variant="outlined"
-                        onClick={() => onPageChange(leftPage - PAGINATOR_PAGE_STEP)}
-                    >
-                        {leftPage - PAGINATOR_PAGE_STEP}
+            {pages.map(p =>
+                p === page ? (
+                    <Button key={p} variant="contained">
+                        {p}
                     </Button>
-                    ...
-                </>
+                ) : (
+                    <Button key={p} variant="outlined" onClick={() => onPageChange(p)}>
+                        {p}
+                    </Button>
+                ),
             )}
-
-            {pages
-                .filter(p => Number(p) >= leftPage && Number(p) <= rightPage)
-                .map(p =>
-                    p === page ? (
-                        <Button key={p} variant="contained">
-                            {p}
-                        </Button>
-                    ) : (
-                        <Button
-                            key={p}
-                            variant="outlined"
-                            onClick={() => onPageChange(p)}
-                        >
-                            {p}
-                        </Button>
-                    ),
-                )}
 
             {rightPage < maxPage && (
-                <>
-                    ...
-                    <Button
-                        variant="outlined"
-                        onClick={() => onPageChange(rightPage + PAGINATOR_PAGE_STEP)}
-                    >
-                        {rightPage + PAGINATOR_PAGE_STEP}
-                    </Button>
-                </>
-            )}
-
-            {page <= maxPage - PAGINATOR_SECTION_SIZE && (
                 <>
                     ...
                     <Button variant="outlined" onClick={() => onPageChange(maxPage)}>
