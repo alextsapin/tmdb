@@ -10,6 +10,15 @@ import {
     HTTP_SERVICE_UNAVAILABLE,
     HTTP_UNAUTHORIZED,
 } from '@/shared/constants';
+import {
+    Actor,
+    Movie,
+    MovieCast,
+    MovieCategory,
+    MovieDetails,
+    MovieSort,
+} from '@/entities/movie';
+
 
 const TMDB_ACCESS_TOKEN =
     'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlZGI3YmNkZTYwMmE2ODIxM2Y3MWI5YjUwNTU1Mjk2YSIsIm5iZiI6MTc3NzI4ODgzOC4xNzYsInN1YiI6IjY5ZWY0Njg2OWRlYTczNDZlNDZiMjIxYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.hOoajQFmbun0U6uQzNt2nver0jrFoJmnyL0gyrtqfZ0';
@@ -56,18 +65,6 @@ tmdbApi.interceptors.response.use(
     },
 );
 
-export type MovieCategory = 'popular' | 'top' | 'upcoming' | 'nowPlaying';
-
-export type MovieSort =
-    | 'popularity.desc'
-    | 'popularity.asc'
-    | 'vote_average.desc'
-    | 'vote_average.asc'
-    | 'primary_release_date.desc'
-    | 'primary_release_date.asc'
-    | 'title.asc'
-    | 'title.desc';
-
 export type DiscoverMovieParams = {
     page?: number;
     sortBy: MovieSort;
@@ -83,43 +80,11 @@ const categoryEndpoints: Record<MovieCategory, string> = {
     nowPlaying: '/movie/now_playing',
 };
 
-export type Movie = {
-    id: number;
-    title: string;
-    original_title: string;
-    overview: string;
-    poster_path: string | null;
-    backdrop_path: string | null;
-    release_date: string;
-    vote_average: number;
-};
-
-export type MovieDetails = Movie & {
-    runtime: number;
-    genres: {
-        id: number;
-        name: string;
-    }[];
-};
-
 export type MoviesResponse = {
     page: number;
     results: Movie[];
     total_pages: number;
     total_results: number;
-};
-
-export type Actor = {
-    id: number;
-    name: string;
-    popularity: number;
-    profile_path: string;
-    character: string;
-};
-
-export type MovieCast = {
-    id: number;
-    cast: Actor[];
 };
 
 // Получение фильмов по категории

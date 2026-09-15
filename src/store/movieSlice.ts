@@ -1,14 +1,9 @@
 /* eslint-disable prettier/prettier */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import {
-    MovieDetails,
-    Actor,
-    getMovieById,
-    getMovieCast,
-    Movie,
-    getSimilarMovies,
-} from '@/api/api';
+import { getMovieById, getMovieCast, getSimilarMovies } from '@/api/api';
+import { Actor, Movie, MovieDetails } from '@/entities/movie';
+
 
 type MovieState = {
     movie: MovieDetails | null;

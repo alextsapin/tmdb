@@ -1,7 +1,9 @@
 /* eslint-disable no-promise-executor-return */
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { getMoviesByCategory, Movie, MovieCategory } from '@/api/api';
+import { getMoviesByCategory } from '@/api/api';
+import { Movie, MovieCategory } from '@/entities/movie';
+
 
 type State = {
     categories: {

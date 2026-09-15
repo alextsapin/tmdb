@@ -3,8 +3,8 @@ import { JSX, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { Movie } from '@/api/api';
 import css from '@/Card/card.module.less';
+import { Movie } from '@/entities/movie';
 import { ImageLoader } from '@/ImageLoader/ImageLoader';
 import noImage from '@/images/no-poster.webp';
 import { Like } from '@/Like/Like';

@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { Movie, searchMovies } from '@/api/api';
+import { searchMovies } from '@/api/api';
+import { Movie } from '@/entities/movie';
+
 
 type State = {
     movies: Movie[];

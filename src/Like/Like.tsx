@@ -1,7 +1,8 @@
 /* eslint-disable react/destructuring-assignment */
 import { JSX } from 'react';
 
-import { Movie } from '@/api/api';
+import { Movie } from '@/entities/movie';
+
 import like from '@/images/like-red.png';
 import noLike from '@/images/like.png';
 import css from '@/Like/like.module.less';

@@ -12,7 +12,8 @@ import {
     Button,
 } from '@mui/material';
 
-import { MovieSort } from '@/api/api';
+import { MovieSort } from '@/entities/movie';
+
 import { Card } from '@/Card/Card';
 import css from '@/pages/Filtered/filtered.module.less';
 import { Paginator } from '@/Paginator/Paginator';

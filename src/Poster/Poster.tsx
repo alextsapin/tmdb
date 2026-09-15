@@ -3,7 +3,8 @@ import { JSX, useEffect, useMemo, useState } from 'react';
 
 import Container from '@mui/material/Container';
 
-import { Movie } from '@/api/api';
+import { Movie } from '@/entities/movie';
+
 import css from '@/Poster/poster.module.less';
 import { SearchForm } from '@/SearchForm/SearchForm';
 
