@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Movie } from '@/entities/movie';
 
-
 const loadFavorites = (): Movie[] => {
     const data = localStorage.getItem('favorites');
 

@@ -9,12 +9,27 @@ export type Movie = {
     vote_average: number;
 };
 
+export type MoviesResponse = {
+    page: number;
+    results: Movie[];
+    total_pages: number;
+    total_results: number;
+};
+
 export type MovieDetails = Movie & {
     runtime: number;
     genres: {
         id: number;
         name: string;
     }[];
+};
+
+export type DiscoverMovieParams = {
+    page?: number;
+    sortBy: MovieSort;
+    voteAverageGte?: number;
+    voteAverageLte?: number;
+    withGenres?: number[];
 };
 
 export type Actor = {

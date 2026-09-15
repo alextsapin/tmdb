@@ -6,7 +6,7 @@ import ReplyIcon from '@mui/icons-material/Reply';
 import { Button, Container, Grid } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { Card } from '@/Card/Card';
+import { MovieCard } from '@/entities/movie';
 import noPhoto from '@/images/no-photo.png';
 import noPoster from '@/images/no-poster.webp';
 import css from '@/pages/Movie/movie.module.less';
@@ -136,7 +136,7 @@ export const MoviePage = (): JSX.Element => {
                         <h2>Similar movies</h2>
                         {similar.slice(0, PREVIEW_ITEMS_COUNT).map(m => (
                             <Grid key={m.id} size={GRID_SIZE_MOVIE_CARD}>
-                                <Card {...m} />
+                                <MovieCard {...m} />
                             </Grid>
                         ))}
                     </>
