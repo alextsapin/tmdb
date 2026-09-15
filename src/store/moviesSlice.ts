@@ -4,7 +4,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getMoviesByCategory } from '@/api/api';
 import { Movie, MovieCategory } from '@/entities/movie';
 
-
 type State = {
     categories: {
         popular: Movie[];
