@@ -4,9 +4,10 @@ import { JSX } from 'react';
 import { Movie } from '@/entities/movie';
 import like from '@/images/like-red.png';
 import noLike from '@/images/like.png';
-import css from '@/Like/like.module.less';
 import { addFavorite, removeFavorite } from '@/store/favoritesSlice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
+
+import css from './like.module.less';
 
 export const Like = (props: Movie): JSX.Element => {
     const dispatch = useAppDispatch();

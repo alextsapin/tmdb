@@ -4,7 +4,7 @@ import { JSX, useEffect } from 'react';
 import { Button, Container, Grid } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 
-import { MovieCard } from '@/entities/movie';
+import { Card } from '@/entities/movie';
 import css from '@/pages/Category/category.module.less';
 import { Paginator } from '@/Paginator/Paginator';
 import {
@@ -80,7 +80,7 @@ export const Category = (): JSX.Element => {
                 >
                     {movies.map(movie => (
                         <Grid key={movie.id} size={GRID_SIZE_MOVIE_CARD}>
-                            <MovieCard {...movie} />
+                            <Card {...movie} />
                         </Grid>
                     ))}
                 </Grid>

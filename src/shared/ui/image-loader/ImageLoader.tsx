@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { JSX, useState } from 'react';
 
-import css from '@/ImageLoader/imageLoader.module.less';
+import css from './image-loader.module.less';
 
 type ImageLoaderProps = {
     src: string;

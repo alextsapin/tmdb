@@ -3,17 +3,17 @@ import { JSX, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { ImageLoader } from '@/ImageLoader/ImageLoader';
+import { Like } from '@/features/like-movie';
 import noImage from '@/images/no-poster.webp';
-import { Like } from '@/Like/Like';
 import { RATING_DECIMAL_PLACES } from '@/shared/constants';
+import { ImageLoader } from '@/shared/ui/image-loader';
 import { getRatingColor } from '@/utils/utils';
 
 import { Movie } from '../../model/types';
 
 import css from './card.module.less';
 
-export const MovieCard = (props: Movie): JSX.Element => {
+export const Card = (props: Movie): JSX.Element => {
     const [imageLoaded, setImageLoaded] = useState(false);
 
     const posterUrl = props.poster_path

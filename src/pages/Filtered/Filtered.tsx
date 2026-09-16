@@ -12,7 +12,7 @@ import {
     Button,
 } from '@mui/material';
 
-import { MovieCard, MovieSort } from '@/entities/movie';
+import { Card, MovieSort } from '@/entities/movie';
 import css from '@/pages/Filtered/filtered.module.less';
 import { Paginator } from '@/Paginator/Paginator';
 import {
@@ -190,7 +190,7 @@ export const FilteredMovies = (): JSX.Element => {
                         >
                             {movies.map(movie => (
                                 <Grid key={movie.id} size={GRID_SIZE_FILTERED_CARD}>
-                                    <MovieCard {...movie} />
+                                    <Card {...movie} />
                                 </Grid>
                             ))}
                         </Grid>

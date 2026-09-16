@@ -4,7 +4,7 @@ import { JSX, useCallback, useEffect, useState } from 'react';
 import { Container, Grid } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 
-import { MovieCard } from '@/entities/movie';
+import { Card } from '@/entities/movie';
 import css from '@/pages/Search/search.module.less';
 import { Paginator } from '@/Paginator/Paginator';
 import { SearchForm } from '@/SearchForm/SearchForm';
@@ -90,7 +90,7 @@ export const SearchPage = (): JSX.Element => {
                     >
                         {movies.map(movie => (
                             <Grid key={movie.id} size={GRID_SIZE_MOVIE_CARD}>
-                                <MovieCard {...movie} />
+                                <Card {...movie} />
                             </Grid>
                         ))}
                     </Grid>
