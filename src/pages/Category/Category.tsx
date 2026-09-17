@@ -4,7 +4,6 @@ import { JSX, useEffect } from 'react';
 import { Button, Container, Grid } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 
-import { Card } from '@/entities/movie';
 import css from '@/pages/Category/category.module.less';
 import { Paginator } from '@/Paginator/Paginator';
 import {
@@ -15,6 +14,7 @@ import {
 } from '@/shared/constants';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { loadMoviesByCategory } from '@/store/moviesSlice';
+import { MovieCard } from '@/widgets/movie-card';
 
 type CategoryKey = 'popular' | 'top' | 'upcoming' | 'nowPlaying';
 
@@ -80,7 +80,7 @@ export const Category = (): JSX.Element => {
                 >
                     {movies.map(movie => (
                         <Grid key={movie.id} size={GRID_SIZE_MOVIE_CARD}>
-                            <Card {...movie} />
+                            <MovieCard movie={movie} />
                         </Grid>
                     ))}
                 </Grid>

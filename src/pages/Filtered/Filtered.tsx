@@ -12,7 +12,7 @@ import {
     Button,
 } from '@mui/material';
 
-import { Card, MovieSort } from '@/entities/movie';
+import { MovieSort } from '@/entities/movie';
 import css from '@/pages/Filtered/filtered.module.less';
 import { Paginator } from '@/Paginator/Paginator';
 import {
@@ -35,6 +35,7 @@ import {
     toggleGenre,
 } from '@/store/filteredSlice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { MovieCard } from '@/widgets/movie-card';
 
 export const FilteredMovies = (): JSX.Element => {
     const dispatch = useAppDispatch();
@@ -190,7 +191,7 @@ export const FilteredMovies = (): JSX.Element => {
                         >
                             {movies.map(movie => (
                                 <Grid key={movie.id} size={GRID_SIZE_FILTERED_CARD}>
-                                    <Card {...movie} />
+                                    <MovieCard movie={movie} />
                                 </Grid>
                             ))}
                         </Grid>

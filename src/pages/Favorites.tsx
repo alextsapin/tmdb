@@ -2,9 +2,9 @@ import { JSX } from 'react';
 
 import { Container, Grid } from '@mui/material';
 
-import { Card } from '@/entities/movie';
 import { GRID_SIZE_MOVIE_CARD, GRID_SPACING } from '@/shared/constants';
 import { useAppSelector } from '@/store/hooks';
+import { MovieCard } from '@/widgets/movie-card';
 
 export const FavoritesPage = (): JSX.Element => {
     const favorites = useAppSelector(state => state.favorites.movies);
@@ -16,7 +16,7 @@ export const FavoritesPage = (): JSX.Element => {
                 {favorites.length > 0 ? (
                     favorites.map(movie => (
                         <Grid key={movie.id} size={GRID_SIZE_MOVIE_CARD}>
-                            <Card {...movie} />
+                            <MovieCard movie={movie} />
                         </Grid>
                     ))
                 ) : (

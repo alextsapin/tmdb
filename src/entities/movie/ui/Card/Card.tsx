@@ -3,7 +3,6 @@ import { JSX, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { Like } from '@/features/like-movie';
 import noImage from '@/images/no-poster.webp';
 import { RATING_DECIMAL_PLACES } from '@/shared/constants';
 import { ImageLoader } from '@/shared/ui/image-loader';
@@ -21,7 +20,7 @@ export const Card = (props: Movie): JSX.Element => {
         : noImage;
 
     return (
-        <div className={css.card}>
+        <>
             <Link className={css.link} to={`/movie/${props.id}`}>
                 <ImageLoader
                     src={posterUrl}
@@ -41,13 +40,12 @@ export const Card = (props: Movie): JSX.Element => {
                     </span>
                 )}
             </Link>
-            {imageLoaded && <Like {...props} />}
 
             {imageLoaded && (
                 <div className={css.title} title={props.title}>
                     {props.title}
                 </div>
             )}
-        </div>
+        </>
     );
 };

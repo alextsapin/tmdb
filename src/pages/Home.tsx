@@ -4,7 +4,6 @@ import { JSX, useEffect } from 'react';
 import { Button, Container, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-import { Card } from '@/entities/movie';
 import { Poster } from '@/Poster/Poster';
 import {
     BUTTON_MARGIN_TOP,
@@ -15,6 +14,7 @@ import {
 import { MovieCardSkeleton } from '@/Skeleton/MovieCardSkeleton';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { loadMoviesByCategory } from '@/store/moviesSlice';
+import { MovieCard } from '@/widgets/movie-card';
 
 export const Home = (): JSX.Element => {
     const dispatch = useAppDispatch();
@@ -51,7 +51,7 @@ export const Home = (): JSX.Element => {
                                   )
                                 : popMovies?.slice(0, PREVIEW_ITEMS_COUNT).map(m => (
                                       <Grid key={m.id} size={GRID_SIZE_MOVIE_CARD}>
-                                          <Card {...m} />
+                                          <MovieCard movie={m} />
                                       </Grid>
                                   ))}
                         </Grid>
@@ -79,7 +79,7 @@ export const Home = (): JSX.Element => {
                                   )
                                 : topMovies?.slice(0, PREVIEW_ITEMS_COUNT).map(m => (
                                       <Grid key={m.id} size={GRID_SIZE_MOVIE_CARD}>
-                                          <Card {...m} />
+                                          <MovieCard movie={m} />
                                       </Grid>
                                   ))}
                         </Grid>
@@ -106,7 +106,7 @@ export const Home = (): JSX.Element => {
                                   )
                                 : upcomingMovies?.slice(0, PREVIEW_ITEMS_COUNT).map(m => (
                                       <Grid key={m.id} size={GRID_SIZE_MOVIE_CARD}>
-                                          <Card {...m} />
+                                          <MovieCard movie={m} />
                                       </Grid>
                                   ))}
                         </Grid>
@@ -137,7 +137,7 @@ export const Home = (): JSX.Element => {
                                       ?.slice(0, PREVIEW_ITEMS_COUNT)
                                       .map(m => (
                                           <Grid key={m.id} size={GRID_SIZE_MOVIE_CARD}>
-                                              <Card {...m} />
+                                              <MovieCard movie={m} />
                                           </Grid>
                                       ))}
                         </Grid>

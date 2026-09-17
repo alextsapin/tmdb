@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react/destructuring-assignment */
 import { JSX } from 'react';
 
@@ -27,11 +28,7 @@ export const Like = (props: Movie): JSX.Element => {
                 }
             }}
         >
-            {isFavorite ? (
-                <img src={like} alt="like" />
-            ) : (
-                <img src={noLike} alt="no like" />
-            )}
+            {isFavorite ? <img src={like} alt="like" /> : <img src={noLike} alt="no like" />}
         </button>
     );
 };
