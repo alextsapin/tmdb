@@ -4,8 +4,8 @@ import { JSX, useEffect, useMemo, useState } from 'react';
 import Container from '@mui/material/Container';
 
 import { Movie } from '@/entities/movie';
+import { SearchForm } from '@/features/search-movies';
 import css from '@/Poster/poster.module.less';
-import { SearchForm } from '@/SearchForm/SearchForm';
 
 type PosterProps = {
     movies: Movie[];

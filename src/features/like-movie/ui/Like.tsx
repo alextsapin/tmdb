@@ -5,8 +5,9 @@ import { JSX } from 'react';
 import { Movie } from '@/entities/movie';
 import like from '@/images/like-red.png';
 import noLike from '@/images/like.png';
-import { addFavorite, removeFavorite } from '@/store/favoritesSlice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
+
+import { addFavorite, removeFavorite } from '../model/favoritesSlice';
 
 import css from './like.module.less';
 

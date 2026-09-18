@@ -15,14 +15,15 @@ import { MoviePage } from '@/pages/Movie/Movie';
 import { NotFoundPage } from '@/pages/NotFound';
 import { SearchPage } from '@/pages/Search/Search';
 import { getDesignTokens } from '@/theme';
-import '@/less/App.less';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { LinearProgress } from '@mui/material';
 import { ErrorSnackbar } from '@/Snackbar/Snackbar';
-import { clearError as clearSearchError } from '@/store/searchSlice';
+import { clearError as clearSearchError } from '@/features/search-movies';
 import { clearError as clearFilteredError } from '@/store/filteredSlice';
 import { clearErrors as clearMovieErrors } from '@/store/movieSlice';
 import { clearErrors as clearMoviesErrors } from '@/store/moviesSlice';
+
+import '@/less/App.less';
 
 export const App = (): ReactElement => {
     // eslint-disable-next-line prettier/prettier

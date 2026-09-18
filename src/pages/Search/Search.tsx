@@ -4,9 +4,13 @@ import { JSX, useCallback, useEffect, useState } from 'react';
 import { Container, Grid } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 
+import {
+    loadSearchMovies,
+    resetMovies,
+    SearchForm,
+} from '@/features/search-movies';
 import css from '@/pages/Search/search.module.less';
 import { Paginator } from '@/Paginator/Paginator';
-import { SearchForm } from '@/SearchForm/SearchForm';
 import {
     CONTENT_MARGIN_TOP,
     GRID_COLUMN_SPACING,
@@ -14,7 +18,6 @@ import {
     GRID_SIZE_MOVIE_CARD,
 } from '@/shared/constants';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { loadSearchMovies, resetMovies } from '@/store/searchSlice';
 import { MovieCard } from '@/widgets/movie-card';
 
 export const SearchPage = (): JSX.Element => {
