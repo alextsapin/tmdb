@@ -7,8 +7,8 @@ import noImage from '@/images/no-poster.webp';
 import { RATING_DECIMAL_PLACES } from '@/shared/constants';
 import { ImageLoader } from '@/shared/ui/image-loader';
 
-import { getRatingColor } from '../lib/getRatingColor';
-import { Movie } from '../model/types';
+import { getRatingColor } from '../../lib/getRatingColor';
+import { Movie } from '../../model/types';
 
 import css from './card.module.less';
 

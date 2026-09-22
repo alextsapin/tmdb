@@ -8,10 +8,11 @@ import { IconButton } from '@mui/material';
 import Container from '@mui/material/Container';
 import { Link, NavLink } from 'react-router-dom';
 
-import css from '@/Header/header.module.less';
-import logo from '@/images/tmdb.png';
+import tmdbLogo from '@/images/tmdb.png';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { toggleTheme } from '@/store/themeSlice';
+
+import css from './header.module.less';
 
 const navItems = [
     { to: '/', label: 'Main' },
@@ -22,7 +23,9 @@ const navItems = [
 ] as const;
 
 export const Header = (): JSX.Element => {
+    // eslint-disable-next-line prettier/prettier
     const dispatch = useAppDispatch();
+
     const themeMode = useAppSelector(state => state.theme.mode);
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -32,7 +35,7 @@ export const Header = (): JSX.Element => {
         <header className={css.header}>
             <Container className={css.wrapper}>
                 <Link className={css.logo} to="/" onClick={closeMenu}>
-                    <img src={logo} alt="logo" />
+                    <img src={tmdbLogo} alt="logo" />
                 </Link>
 
                 <IconButton

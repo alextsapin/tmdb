@@ -4,6 +4,7 @@ import { JSX, useEffect } from 'react';
 import { Button, Container, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 
+import { Skeleton } from '@/entities/movie';
 import { Poster } from '@/Poster/Poster';
 import {
     BUTTON_MARGIN_TOP,
@@ -11,7 +12,6 @@ import {
     GRID_SPACING,
     PREVIEW_ITEMS_COUNT,
 } from '@/shared/constants';
-import { MovieCardSkeleton } from '@/Skeleton/MovieCardSkeleton';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { loadMoviesByCategory } from '@/store/moviesSlice';
 import { MovieCard } from '@/widgets/movie-card';
@@ -45,9 +45,7 @@ export const Home = (): JSX.Element => {
                         <Grid container spacing={GRID_SPACING}>
                             {loading.popular
                                 ? Array.from({ length: PREVIEW_ITEMS_COUNT }).map(
-                                      (_, index) => (
-                                          <MovieCardSkeleton key={`popular-${index}`} />
-                                      ),
+                                      (_, index) => <Skeleton key={`popular-${index}`} />,
                                   )
                                 : popMovies?.slice(0, PREVIEW_ITEMS_COUNT).map(m => (
                                       <Grid key={m.id} size={GRID_SIZE_MOVIE_CARD}>
@@ -73,9 +71,7 @@ export const Home = (): JSX.Element => {
                         <Grid container spacing={GRID_SPACING}>
                             {loading.top
                                 ? Array.from({ length: PREVIEW_ITEMS_COUNT }).map(
-                                      (_, index) => (
-                                          <MovieCardSkeleton key={`top-${index}`} />
-                                      ),
+                                      (_, index) => <Skeleton key={`top-${index}`} />,
                                   )
                                 : topMovies?.slice(0, PREVIEW_ITEMS_COUNT).map(m => (
                                       <Grid key={m.id} size={GRID_SIZE_MOVIE_CARD}>
@@ -101,7 +97,7 @@ export const Home = (): JSX.Element => {
                             {loading.upcoming
                                 ? Array.from({ length: PREVIEW_ITEMS_COUNT }).map(
                                       (_, index) => (
-                                          <MovieCardSkeleton key={`upcoming-${index}`} />
+                                          <Skeleton key={`upcoming-${index}`} />
                                       ),
                                   )
                                 : upcomingMovies?.slice(0, PREVIEW_ITEMS_COUNT).map(m => (
@@ -128,9 +124,7 @@ export const Home = (): JSX.Element => {
                             {loading.nowPlaying
                                 ? Array.from({ length: PREVIEW_ITEMS_COUNT }).map(
                                       (_, index) => (
-                                          <MovieCardSkeleton
-                                              key={`nowPlaying-${index}`}
-                                          />
+                                          <Skeleton key={`nowPlaying-${index}`} />
                                       ),
                                   )
                                 : nowPlayingMovies

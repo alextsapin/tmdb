@@ -1,6 +1,6 @@
 import { JSX } from 'react';
 
-import css from '@/Footer/footer.module.less';
+import css from './footer.module.less';
 
 export const Footer = (): JSX.Element => {
     return (

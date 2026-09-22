@@ -5,8 +5,8 @@ import { ReactElement, useEffect, useMemo } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Route, Routes } from 'react-router-dom';
 
-import { Footer } from '@/Footer/Footer';
-import { Header } from '@/Header/Header';
+import { Footer } from '@/widgets/footer';
+import { Header } from '@/widgets/header';
 import { Category } from '@/pages/Category/Category';
 import { FavoritesPage } from '@/pages/Favorites';
 import { FilteredMovies } from '@/pages/Filtered/Filtered';

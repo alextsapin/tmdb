@@ -3,7 +3,6 @@ import { JSX } from 'react';
 
 import { Button } from '@mui/material';
 
-import css from '@/Paginator/paginator.module.less';
 import {
     PAGINATOR_FIRST_PAGE,
     PAGINATOR_PAGE_STEP,
@@ -11,13 +10,19 @@ import {
     TMDB_MAX_PAGE,
 } from '@/shared/constants';
 
+import css from './paginator.module.less';
+
 type PaginatorProps = {
     totalPages: number;
     page: number;
     onPageChange: (page: number) => void;
 };
 
-export const Paginator = ({totalPages, page, onPageChange}: PaginatorProps): JSX.Element => {
+export const Paginator = ({
+    totalPages,
+    page,
+    onPageChange,
+}: PaginatorProps): JSX.Element => {
     const maxPage = Math.min(TMDB_MAX_PAGE, totalPages);
     // eslint-disable-next-line no-magic-numbers -- half of visible page window
     const halfWindow = Math.floor(PAGINATOR_SECTION_SIZE / 2);

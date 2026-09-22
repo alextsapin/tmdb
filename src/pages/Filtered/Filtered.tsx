@@ -14,7 +14,6 @@ import {
 
 import { MovieSort } from '@/entities/movie';
 import css from '@/pages/Filtered/filtered.module.less';
-import { Paginator } from '@/Paginator/Paginator';
 import {
     FILTER_DEBOUNCE_MS,
     GENRES,
@@ -26,6 +25,7 @@ import {
     RATING_MIN,
     RATING_STEP,
 } from '@/shared/constants';
+import { Paginator } from '@/shared/ui/paginator';
 import {
     loadFilteredMovies,
     resetFilters,

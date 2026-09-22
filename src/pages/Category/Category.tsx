@@ -5,13 +5,13 @@ import { Button, Container, Grid } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 
 import css from '@/pages/Category/category.module.less';
-import { Paginator } from '@/Paginator/Paginator';
 import {
     CONTENT_MARGIN_TOP,
     GRID_COLUMN_SPACING,
     GRID_ROW_SPACING,
     GRID_SIZE_MOVIE_CARD,
 } from '@/shared/constants';
+import { Paginator } from '@/shared/ui/paginator';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { loadMoviesByCategory } from '@/store/moviesSlice';
 import { MovieCard } from '@/widgets/movie-card';
