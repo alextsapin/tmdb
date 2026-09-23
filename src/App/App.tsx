@@ -14,15 +14,15 @@ import { Home } from '@/pages/Home';
 import { MoviePage } from '@/pages/Movie/Movie';
 import { NotFoundPage } from '@/pages/NotFound';
 import { SearchPage } from '@/pages/Search/Search';
-import { getDesignTokens } from '@/theme';
+import { getDesignTokens } from './theme';
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { LinearProgress } from '@mui/material';
-import { ErrorSnackbar } from '@/Snackbar/Snackbar';
+import { Snackbar } from '@/shared/ui/snackbar';
 import { clearMovieErrors, clearMoviesErrors } from '@/entities/movie';
 import { clearError as clearFilteredError } from '@/features/filter';
 import { clearError as clearSearchError } from '@/features/search';
 
-import '@/less/App.less';
+import './styles/App.less';
 
 export const App = (): ReactElement => {
     // eslint-disable-next-line prettier/prettier
@@ -100,7 +100,7 @@ export const App = (): ReactElement => {
                 <Route path="/favorites/" element={<FavoritesPage />} />
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
-            <ErrorSnackbar error={globalError} onClose={handleCloseError} />
+            <Snackbar error={globalError} onClose={handleCloseError} />
             <Footer />
         </ThemeProvider>
     );

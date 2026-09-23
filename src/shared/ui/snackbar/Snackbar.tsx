@@ -1,6 +1,6 @@
 import { JSX } from 'react';
 
-import { Alert, Snackbar } from '@mui/material';
+import { Alert, Snackbar as SnackbarMUI } from '@mui/material';
 
 import { SNACKBAR_AUTO_HIDE_MS } from '@/shared/constants';
 
@@ -9,9 +9,9 @@ type SnackbarProps = {
     onClose: () => void;
 };
 
-export const ErrorSnackbar = ({ error, onClose }: SnackbarProps): JSX.Element => {
+export const Snackbar = ({ error, onClose }: SnackbarProps): JSX.Element => {
     return (
-        <Snackbar
+        <SnackbarMUI
             open={Boolean(error)}
             autoHideDuration={SNACKBAR_AUTO_HIDE_MS}
             onClose={onClose}
@@ -28,6 +28,6 @@ export const ErrorSnackbar = ({ error, onClose }: SnackbarProps): JSX.Element =>
             >
                 {error}
             </Alert>
-        </Snackbar>
+        </SnackbarMUI>
     );
 };
