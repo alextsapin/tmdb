@@ -8,9 +8,9 @@ import { IconButton } from '@mui/material';
 import Container from '@mui/material/Container';
 import { Link, NavLink } from 'react-router-dom';
 
+import { useAppDispatch, useAppSelector } from '@/App/store/hooks';
+import { toggleTheme } from '@/features/theme';
 import tmdbLogo from '@/images/tmdb.png';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { toggleTheme } from '@/store/themeSlice';
 
 import css from './header.module.less';
 

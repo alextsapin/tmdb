@@ -1,7 +1,7 @@
 import { JSX } from 'react';
 
 import { Card, Movie } from '@/entities/movie';
-import { Like } from '@/features/like-movie';
+import { Like } from '@/features/like';
 
 import css from './movie-card.module.less';
 

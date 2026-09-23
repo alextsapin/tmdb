@@ -4,7 +4,7 @@ import { JSX, useEffect, useMemo, useState } from 'react';
 import Container from '@mui/material/Container';
 
 import { Movie } from '@/entities/movie';
-import { SearchForm } from '@/features/search-movies';
+import { SearchForm } from '@/features/search';
 
 import css from './hero.module.less';
 

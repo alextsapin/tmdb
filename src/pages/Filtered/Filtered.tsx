@@ -12,7 +12,16 @@ import {
     Button,
 } from '@mui/material';
 
+import { useAppDispatch, useAppSelector } from '@/App/store/hooks';
 import { MovieSort } from '@/entities/movie';
+import {
+    loadFilteredMovies,
+    resetFilters,
+    setSortBy,
+    setVoteAverageGte,
+    setVoteAverageLte,
+    toggleGenre,
+} from '@/features/filter';
 import css from '@/pages/Filtered/filtered.module.less';
 import {
     FILTER_DEBOUNCE_MS,
@@ -26,15 +35,6 @@ import {
     RATING_STEP,
 } from '@/shared/constants';
 import { Paginator } from '@/shared/ui/paginator';
-import {
-    loadFilteredMovies,
-    resetFilters,
-    setSortBy,
-    setVoteAverageGte,
-    setVoteAverageLte,
-    toggleGenre,
-} from '@/store/filteredSlice';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { MovieCard } from '@/widgets/movie-card';
 
 export const FilteredMovies = (): JSX.Element => {

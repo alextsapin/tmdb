@@ -2,8 +2,8 @@ import { JSX } from 'react';
 
 import { Container, Grid } from '@mui/material';
 
+import { useAppSelector } from '@/App/store/hooks';
 import { GRID_SIZE_MOVIE_CARD, GRID_SPACING } from '@/shared/constants';
-import { useAppSelector } from '@/store/hooks';
 import { MovieCard } from '@/widgets/movie-card';
 
 export const FavoritesPage = (): JSX.Element => {

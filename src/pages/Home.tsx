@@ -4,15 +4,14 @@ import { JSX, useEffect } from 'react';
 import { Button, Container, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-import { Skeleton } from '@/entities/movie';
+import { useAppDispatch, useAppSelector } from '@/App/store/hooks';
+import { loadMoviesByCategory, Skeleton } from '@/entities/movie';
 import {
     BUTTON_MARGIN_TOP,
     GRID_SIZE_MOVIE_CARD,
     GRID_SPACING,
     PREVIEW_ITEMS_COUNT,
 } from '@/shared/constants';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { loadMoviesByCategory } from '@/store/moviesSlice';
 import { Hero } from '@/widgets/hero';
 import { MovieCard } from '@/widgets/movie-card';
 

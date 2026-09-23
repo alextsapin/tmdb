@@ -6,7 +6,14 @@ import ReplyIcon from '@mui/icons-material/Reply';
 import { Button, Container, Grid } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { getRatingColor, runtimeConverter } from '@/entities/movie';
+import { useAppDispatch, useAppSelector } from '@/App/store/hooks';
+import {
+    getRatingColor,
+    loadMovieById,
+    loadMovieCast,
+    loadSimilarMovies,
+    runtimeConverter,
+} from '@/entities/movie';
 import noPhoto from '@/images/no-photo.png';
 import noPoster from '@/images/no-poster.webp';
 import css from '@/pages/Movie/movie.module.less';
@@ -19,8 +26,6 @@ import {
     PREVIEW_ITEMS_COUNT,
     RATING_DECIMAL_PLACES,
 } from '@/shared/constants';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { loadMovieById, loadMovieCast, loadSimilarMovies } from '@/store/movieSlice';
 import { MovieCard } from '@/widgets/movie-card';
 
 export const MoviePage = (): JSX.Element => {

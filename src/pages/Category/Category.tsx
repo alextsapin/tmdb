@@ -4,6 +4,8 @@ import { JSX, useEffect } from 'react';
 import { Button, Container, Grid } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 
+import { useAppDispatch, useAppSelector } from '@/App/store/hooks';
+import { loadMoviesByCategory } from '@/entities/movie';
 import css from '@/pages/Category/category.module.less';
 import {
     CONTENT_MARGIN_TOP,
@@ -12,8 +14,6 @@ import {
     GRID_SIZE_MOVIE_CARD,
 } from '@/shared/constants';
 import { Paginator } from '@/shared/ui/paginator';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { loadMoviesByCategory } from '@/store/moviesSlice';
 import { MovieCard } from '@/widgets/movie-card';
 
 type CategoryKey = 'popular' | 'top' | 'upcoming' | 'nowPlaying';

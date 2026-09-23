@@ -15,13 +15,12 @@ import { MoviePage } from '@/pages/Movie/Movie';
 import { NotFoundPage } from '@/pages/NotFound';
 import { SearchPage } from '@/pages/Search/Search';
 import { getDesignTokens } from '@/theme';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from './store/hooks';
 import { LinearProgress } from '@mui/material';
 import { ErrorSnackbar } from '@/Snackbar/Snackbar';
-import { clearError as clearSearchError } from '@/features/search-movies';
-import { clearError as clearFilteredError } from '@/store/filteredSlice';
-import { clearErrors as clearMovieErrors } from '@/store/movieSlice';
-import { clearErrors as clearMoviesErrors } from '@/store/moviesSlice';
+import { clearMovieErrors, clearMoviesErrors } from '@/entities/movie';
+import { clearError as clearFilteredError } from '@/features/filter';
+import { clearError as clearSearchError } from '@/features/search';
 
 import '@/less/App.less';
 

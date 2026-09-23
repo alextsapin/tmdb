@@ -1,14 +1,9 @@
 /* eslint-disable prettier/prettier */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import {
-    Actor,
-    getMovieById,
-    getMovieCast,
-    getSimilarMovies,
-    Movie,
-    MovieDetails,
-} from '@/entities/movie';
+import { getMovieById, getMovieCast, getSimilarMovies } from '../api/movieApi';
+
+import { Actor, Movie, MovieDetails } from './types';
 
 type MovieState = {
     movie: MovieDetails | null;
@@ -46,13 +41,19 @@ export const loadMovieById = createAsyncThunk('movie/loadMovie', async (id: numb
     return getMovieById(id);
 });
 
-export const loadMovieCast = createAsyncThunk('movie/loadMovieCast', async (id: number) => {
-    return getMovieCast(id);
-});
+export const loadMovieCast = createAsyncThunk(
+    'movie/loadMovieCast',
+    async (id: number) => {
+        return getMovieCast(id);
+    },
+);
 
-export const loadSimilarMovies = createAsyncThunk('movie/loadSimilarMovies', async (id: number) => {
-    return getSimilarMovies(id);
-});
+export const loadSimilarMovies = createAsyncThunk(
+    'movie/loadSimilarMovies',
+    async (id: number) => {
+        return getSimilarMovies(id);
+    },
+);
 
 const movieSlice = createSlice({
     name: 'movie',
