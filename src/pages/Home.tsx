@@ -5,7 +5,6 @@ import { Button, Container, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import { Skeleton } from '@/entities/movie';
-import { Poster } from '@/Poster/Poster';
 import {
     BUTTON_MARGIN_TOP,
     GRID_SIZE_MOVIE_CARD,
@@ -14,6 +13,7 @@ import {
 } from '@/shared/constants';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { loadMoviesByCategory } from '@/store/moviesSlice';
+import { Hero } from '@/widgets/hero';
 import { MovieCard } from '@/widgets/movie-card';
 
 export const Home = (): JSX.Element => {
@@ -35,7 +35,7 @@ export const Home = (): JSX.Element => {
 
     return (
         <>
-            <Poster movies={popMovies} />
+            <Hero movies={popMovies} />
 
             <Container id="content">
                 {popMovies.length > 0 && (

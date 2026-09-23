@@ -5,13 +5,14 @@ import Container from '@mui/material/Container';
 
 import { Movie } from '@/entities/movie';
 import { SearchForm } from '@/features/search-movies';
-import css from '@/Poster/poster.module.less';
 
-type PosterProps = {
+import css from './hero.module.less';
+
+type HeroProps = {
     movies: Movie[];
 };
 
-export const Poster = ({ movies }: PosterProps): JSX.Element => {
+export const Hero = ({ movies }: HeroProps): JSX.Element => {
     const [imageLoaded, setImageLoaded] = useState(false);
 
     const randomMovie = useMemo(() => {
@@ -51,7 +52,7 @@ export const Poster = ({ movies }: PosterProps): JSX.Element => {
     }, [randomMovie]);
 
     return (
-        <div className={css.poster}>
+        <div className={css.hero}>
             <div
                 className={`${css.background} ${!imageLoaded ? css.isLoading : ''}`}
                 style={{
