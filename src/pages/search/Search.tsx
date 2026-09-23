@@ -6,7 +6,6 @@ import { useSearchParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '@/App/store/hooks';
 import { loadSearchMovies, resetMovies, SearchForm } from '@/features/search';
-import css from '@/pages/Search/search.module.less';
 import {
     CONTENT_MARGIN_TOP,
     GRID_COLUMN_SPACING,
@@ -15,6 +14,8 @@ import {
 } from '@/shared/constants';
 import { Paginator } from '@/shared/ui/paginator';
 import { MovieCard } from '@/widgets/movie-card';
+
+import css from './search.module.less';
 
 export const SearchPage = (): JSX.Element => {
     const dispatch = useAppDispatch();

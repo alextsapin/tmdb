@@ -6,7 +6,6 @@ import { useSearchParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '@/App/store/hooks';
 import { loadMoviesByCategory } from '@/entities/movie';
-import css from '@/pages/Category/category.module.less';
 import {
     CONTENT_MARGIN_TOP,
     GRID_COLUMN_SPACING,
@@ -15,6 +14,8 @@ import {
 } from '@/shared/constants';
 import { Paginator } from '@/shared/ui/paginator';
 import { MovieCard } from '@/widgets/movie-card';
+
+import css from './category.module.less';
 
 type CategoryKey = 'popular' | 'top' | 'upcoming' | 'nowPlaying';
 

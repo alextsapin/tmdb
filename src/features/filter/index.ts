@@ -1,3 +1,5 @@
+export { Panel } from './ui/Panel';
+
 export {
     default as filteredReducer,
     loadFilteredMovies,

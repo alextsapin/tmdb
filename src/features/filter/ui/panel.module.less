@@ -1,29 +1,8 @@
-.layout {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 30px;
-    margin-top: 30px;
-}
-
 .filters {
     padding: 20px;
     background: var(--surface-color);
     border-radius: 8px;
     align-self: start;
-}
-
-.results {
-    position: relative;
-}
-
-.resultsLoading {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #8b98aa;
-    font-size: 15px;
-    z-index: 2;
 }
 
 .sortControl {
@@ -75,6 +54,14 @@
 
 .ratingFilter {
     margin-top: 30px;
+
+    :global(.MuiSlider-root) {
+        color: #2196f3;
+    }
+
+    :global(.MuiSlider-thumb) {
+        background: #fff;
+    }
 }
 
 .ratingHeader {
@@ -83,18 +70,9 @@
     margin-bottom: 10px;
     color: #8b98aa;
     font-size: 14px;
-}
 
-.ratingHeader span:last-child {
-    color: #8b98aa;
-}
-
-.ratingFilter {
-    :global(.MuiSlider-root) {
-        color: #2196f3;
-    }
-    :global(.MuiSlider-thumb) {
-        background: #fff;
+    span:last-child {
+        color: #8b98aa;
     }
 }
 
@@ -107,6 +85,7 @@
     color: #8b98aa;
     font-size: 14px;
 }
+
 .genreList {
     display: flex;
     flex-wrap: wrap;

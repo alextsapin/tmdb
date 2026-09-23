@@ -16,7 +16,6 @@ import {
 } from '@/entities/movie';
 import noPhoto from '@/images/no-photo.png';
 import noPoster from '@/images/no-poster.webp';
-import css from '@/pages/Movie/movie.module.less';
 import {
     CONTENT_MARGIN_TOP,
     GRID_SIZE_DETAILS,
@@ -27,6 +26,8 @@ import {
     RATING_DECIMAL_PLACES,
 } from '@/shared/constants';
 import { MovieCard } from '@/widgets/movie-card';
+
+import css from './movie.module.less';
 
 export const MoviePage = (): JSX.Element => {
     const { id } = useParams();

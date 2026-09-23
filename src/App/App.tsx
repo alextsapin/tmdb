@@ -7,13 +7,13 @@ import { Route, Routes } from 'react-router-dom';
 
 import { Footer } from '@/widgets/footer';
 import { Header } from '@/widgets/header';
-import { Category } from '@/pages/Category/Category';
+import { Category } from '@/pages/category';
 import { FavoritesPage } from '@/pages/Favorites';
-import { FilteredMovies } from '@/pages/Filtered/Filtered';
+import { Filter } from '@/pages/filter';
 import { Home } from '@/pages/Home';
-import { MoviePage } from '@/pages/Movie/Movie';
+import { MoviePage } from '@/pages/movie';
 import { NotFoundPage } from '@/pages/NotFound';
-import { SearchPage } from '@/pages/Search/Search';
+import { SearchPage } from '@/pages/search';
 import { getDesignTokens } from './theme';
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { LinearProgress } from '@mui/material';
@@ -95,7 +95,7 @@ export const App = (): ReactElement => {
                 <Route path="/" element={<Home />} />
                 <Route path="/movie/:id" element={<MoviePage />} />
                 <Route path="/category-movies/" element={<Category />} />
-                <Route path="/filtered-movies/" element={<FilteredMovies />} />
+                <Route path="/filtered-movies/" element={<Filter />} />
                 <Route path="/search/" element={<SearchPage />} />
                 <Route path="/favorites/" element={<FavoritesPage />} />
                 <Route path="*" element={<NotFoundPage />} />
