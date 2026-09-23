@@ -1,1 +1,1 @@
-export { Filter } from './FilterPage';
+export { Filter } from './ui/Filter';

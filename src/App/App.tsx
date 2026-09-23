@@ -8,11 +8,11 @@ import { Route, Routes } from 'react-router-dom';
 import { Footer } from '@/widgets/footer';
 import { Header } from '@/widgets/header';
 import { Category } from '@/pages/category';
-import { FavoritesPage } from '@/pages/Favorites';
+import { Error404 } from '@/pages/error404';
+import { FavoritesPage } from '@/pages/favorites';
 import { Filter } from '@/pages/filter';
-import { Home } from '@/pages/Home';
+import { Home } from '@/pages/home';
 import { MoviePage } from '@/pages/movie';
-import { NotFoundPage } from '@/pages/NotFound';
 import { SearchPage } from '@/pages/search';
 import { getDesignTokens } from './theme';
 import { useAppDispatch, useAppSelector } from './store/hooks';
@@ -98,7 +98,7 @@ export const App = (): ReactElement => {
                 <Route path="/filtered-movies/" element={<Filter />} />
                 <Route path="/search/" element={<SearchPage />} />
                 <Route path="/favorites/" element={<FavoritesPage />} />
-                <Route path="*" element={<NotFoundPage />} />
+                <Route path="*" element={<Error404 />} />
             </Routes>
             <Snackbar error={globalError} onClose={handleCloseError} />
             <Footer />

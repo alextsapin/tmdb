@@ -2,7 +2,7 @@ import { JSX } from 'react';
 
 import { Container } from '@mui/material';
 
-export const NotFoundPage = (): JSX.Element => {
+export const Error404 = (): JSX.Element => {
     return (
         <Container id="content">
             <h1>Error 404 — Page not found</h1>
