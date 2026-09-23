@@ -7,7 +7,7 @@ import {
     HTTP_NOT_FOUND,
     HTTP_SERVICE_UNAVAILABLE,
     HTTP_UNAUTHORIZED,
-} from '@/shared/constants';
+} from '@/shared/config/http';
 
 const TMDB_ACCESS_TOKEN =
     'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlZGI3YmNkZTYwMmE2ODIxM2Y3MWI5YjUwNTU1Mjk2YSIsIm5iZiI6MTc3NzI4ODgzOC4xNzYsInN1YiI6IjY5ZWY0Njg2OWRlYTczNDZlNDZiMjIxYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.hOoajQFmbun0U6uQzNt2nver0jrFoJmnyL0gyrtqfZ0';

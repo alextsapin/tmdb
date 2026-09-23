@@ -3,11 +3,11 @@ import { JSX, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import noImage from '@/images/no-poster.webp';
-import { RATING_DECIMAL_PLACES } from '@/shared/constants';
 import { ImageLoader } from '@/shared/ui/image-loader';
 
+import noImage from '../../assets/no-poster.webp';
 import { getRatingColor } from '../../lib/getRatingColor';
+import { RATING_DECIMAL_PLACES } from '../../model/constants';
 import { Movie } from '../../model/types';
 
 import css from './card.module.less';

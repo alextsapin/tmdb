@@ -1,4 +1,4 @@
-import { RATING_HIGH_THRESHOLD, RATING_MEDIUM_THRESHOLD } from '@/shared/constants';
+import { RATING_HIGH_THRESHOLD, RATING_MEDIUM_THRESHOLD } from '../model/constants';
 
 export function getRatingColor(rating: number): string {
     if (rating >= RATING_HIGH_THRESHOLD) {

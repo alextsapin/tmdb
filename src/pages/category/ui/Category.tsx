@@ -10,10 +10,9 @@ import {
     CONTENT_MARGIN_TOP,
     GRID_COLUMN_SPACING,
     GRID_ROW_SPACING,
-    GRID_SIZE_MOVIE_CARD,
-} from '@/shared/constants';
+} from '@/pages/category/model/constants';
 import { Paginator } from '@/shared/ui/paginator';
-import { MovieCard } from '@/widgets/movie-card';
+import { GRID_SIZE_MOVIE_CARD, MovieCard } from '@/widgets/card';
 
 import css from './category.module.less';
 

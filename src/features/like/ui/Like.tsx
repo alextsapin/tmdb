@@ -4,9 +4,9 @@ import { JSX } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/App/store/hooks';
 import { Movie } from '@/entities/movie';
-import like from '@/images/like-red.png';
-import noLike from '@/images/like.png';
 
+import like from '../assets/like-red.png';
+import noLike from '../assets/like.png';
 import { addFavorite, removeFavorite } from '../model/favoritesSlice';
 
 import css from './like.module.less';

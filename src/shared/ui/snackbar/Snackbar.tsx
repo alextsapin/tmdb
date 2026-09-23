@@ -2,7 +2,7 @@ import { JSX } from 'react';
 
 import { Alert, Snackbar as SnackbarMUI } from '@mui/material';
 
-import { SNACKBAR_AUTO_HIDE_MS } from '@/shared/constants';
+import { SNACKBAR_AUTO_HIDE_MS } from './constants';
 
 type SnackbarProps = {
     error: string | null;

@@ -2,7 +2,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { discoverMovies, Movie, MovieSort } from '@/entities/movie';
-import { RATING_MAX, RATING_MIN } from '@/shared/constants';
+
+import { RATING_MAX, RATING_MIN } from './constants';
 
 type FilteredState = {
     movies: Movie[];

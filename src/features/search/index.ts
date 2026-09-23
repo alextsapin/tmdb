@@ -1,4 +1,4 @@
-export { SearchForm } from './ui/SearchForm';
+export { SearchForm } from './ui/Form';
 
 export {
     default as searchReducer,

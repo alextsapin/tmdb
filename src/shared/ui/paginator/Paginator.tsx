@@ -8,8 +8,7 @@ import {
     PAGINATOR_PAGE_STEP,
     PAGINATOR_SECTION_SIZE,
     TMDB_MAX_PAGE,
-} from '@/shared/constants';
-
+} from './constants';
 import css from './paginator.module.less';
 
 type PaginatorProps = {

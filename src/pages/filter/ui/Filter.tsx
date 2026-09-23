@@ -3,15 +3,14 @@ import { JSX, useEffect } from 'react';
 import { Container, Grid } from '@mui/material';
 
 import { useAppDispatch, useAppSelector } from '@/App/store/hooks';
-import { loadFilteredMovies, Panel } from '@/features/filter';
+import { FILTER_DEBOUNCE_MS, loadFilteredMovies, Panel } from '@/features/filter';
 import {
-    FILTER_DEBOUNCE_MS,
     GRID_COLUMN_SPACING,
     GRID_ROW_SPACING,
     GRID_SIZE_FILTERED_CARD,
-} from '@/shared/constants';
+} from '@/pages/filter/model/constants';
 import { Paginator } from '@/shared/ui/paginator';
-import { MovieCard } from '@/widgets/movie-card';
+import { MovieCard } from '@/widgets/card';
 
 import css from './filter.module.less';
 

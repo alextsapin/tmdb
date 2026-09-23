@@ -3,15 +3,9 @@ import { JSX } from 'react';
 import { Button, FormControl, InputLabel, MenuItem, Select, Slider } from '@mui/material';
 
 import { useAppDispatch, useAppSelector } from '@/App/store/hooks';
-import { MovieSort } from '@/entities/movie';
-import {
-    GENRES,
-    RATING_DECIMAL_PLACES,
-    RATING_MAX,
-    RATING_MIN,
-    RATING_STEP,
-} from '@/shared/constants';
+import { MovieSort, RATING_DECIMAL_PLACES } from '@/entities/movie';
 
+import { GENRES, RATING_MAX, RATING_MIN, RATING_STEP } from '../model/constants';
 import {
     resetFilters,
     setSortBy,

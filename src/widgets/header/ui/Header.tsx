@@ -10,7 +10,8 @@ import { Link, NavLink } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '@/App/store/hooks';
 import { toggleTheme } from '@/features/theme';
-import tmdbLogo from '@/images/tmdb.png';
+
+import tmdbLogo from '../assets/tmdb.png';
 
 import css from './header.module.less';
 

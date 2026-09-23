@@ -1,4 +1,4 @@
-import { MINUTES_PER_HOUR } from '@/shared/constants';
+import { MINUTES_PER_HOUR } from '../model/constants';
 
 export function runtimeConverter(time: number): string {
     const h = Math.floor(time / MINUTES_PER_HOUR);

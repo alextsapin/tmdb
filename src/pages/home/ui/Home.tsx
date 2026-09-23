@@ -5,15 +5,10 @@ import { Button, Container, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '@/App/store/hooks';
-import { loadMoviesByCategory, Skeleton } from '@/entities/movie';
-import {
-    BUTTON_MARGIN_TOP,
-    GRID_SIZE_MOVIE_CARD,
-    GRID_SPACING,
-    PREVIEW_ITEMS_COUNT,
-} from '@/shared/constants';
+import { loadMoviesByCategory, PREVIEW_ITEMS_COUNT, Skeleton } from '@/entities/movie';
+import { BUTTON_MARGIN_TOP } from '@/pages/home/model/constants';
+import { GRID_SIZE_MOVIE_CARD, GRID_SPACING, MovieCard } from '@/widgets/card';
 import { Hero } from '@/widgets/hero';
-import { MovieCard } from '@/widgets/movie-card';
 
 export const Home = (): JSX.Element => {
     const dispatch = useAppDispatch();

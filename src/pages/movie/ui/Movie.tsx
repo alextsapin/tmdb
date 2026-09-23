@@ -12,20 +12,18 @@ import {
     loadMovieById,
     loadMovieCast,
     loadSimilarMovies,
+    PREVIEW_ITEMS_COUNT,
+    RATING_DECIMAL_PLACES,
     runtimeConverter,
 } from '@/entities/movie';
-import noPhoto from '@/images/no-photo.png';
-import noPoster from '@/images/no-poster.webp';
+import noPhoto from '@/entities/movie/assets/no-photo.png';
+import noPoster from '@/entities/movie/assets/no-poster.webp';
 import {
     CONTENT_MARGIN_TOP,
     GRID_SIZE_DETAILS,
-    GRID_SIZE_MOVIE_CARD,
     GRID_SIZE_POSTER,
-    GRID_SPACING,
-    PREVIEW_ITEMS_COUNT,
-    RATING_DECIMAL_PLACES,
-} from '@/shared/constants';
-import { MovieCard } from '@/widgets/movie-card';
+} from '@/pages/movie/model/constants';
+import { GRID_SIZE_MOVIE_CARD, GRID_SPACING, MovieCard } from '@/widgets/card';
 
 import css from './movie.module.less';
 

@@ -2,7 +2,7 @@ import { JSX } from 'react';
 
 import { Grid, Skeleton as MuiSkeleton } from '@mui/material';
 
-import { GRID_SIZE_SKELETON } from '@/shared/constants';
+import { GRID_SIZE_SKELETON } from '../../model/constants';
 
 import css from './skeleton.module.less';
 
