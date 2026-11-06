@@ -1,46 +1,86 @@
-# Getting Started with Create React App
+# TMDB Movie Explorer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Веб-приложение для поиска и просмотра информации о фильмах, разработанное на **React** и **TypeScript** с использованием [The Movie Database (TMDB) API](https://www.themoviedb.org/).
 
-## Available Scripts
+Приложение позволяет просматривать подборки фильмов, искать их по названию, изучать подробную информацию, фильтровать результаты и добавлять понравившиеся фильмы в избранное. Интерфейс адаптирован для разных размеров экрана.
 
-In the project directory, you can run:
+**Стек технологий:** React 19 · TypeScript · Redux Toolkit · React Router · Material UI · Axios · Formik · LESS
 
-### `npm start`
+## Функциональные возможности
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Подборки фильмов:** популярные, с высоким рейтингом, ожидаемые и идущие в кинотеатрах.
+- **Поиск:** поиск фильмов по названию с сохранением поискового запроса в URL.
+- **Расширенные фильтры:** фильтрация по жанру и диапазону рейтинга; сортировка по популярности, рейтингу, дате выхода или названию.
+- **Информация о фильме:** описание сюжета, год выпуска, продолжительность, рейтинг, актёрский состав и похожие фильмы.
+- **Избранное:** добавление и удаление фильмов из личного списка с сохранением данных в `localStorage`.
+- **Светлая и тёмная темы:** переключение оформления с сохранением выбранной темы между посещениями.
+- **Пагинация:** постраничная навигация по большим спискам фильмов.
+- **Состояния загрузки и ошибок:** скелетоны, индикаторы загрузки и уведомления об ошибках при обращении к API.
+- **Адаптивный интерфейс:** карточки фильмов, навигация и содержимое подстраиваются под размер экрана.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Используемые технологии
 
-### `npm test`
+| Область | Технологии |
+| --- | --- |
+| Интерфейс | React, TypeScript, Material UI, LESS Modules |
+| Маршрутизация | React Router |
+| Управление состоянием | Redux Toolkit, React Redux |
+| HTTP-запросы | Axios, TMDB API |
+| Формы | Formik |
+| Инструменты разработки | Create React App, CRACO, ESLint, Prettier |
+| Тестирование (настроено) | Jest, React Testing Library |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Структура проекта
 
-### `npm run build`
+Исходный код организован с разделением ответственности по принципам, вдохновлённым архитектурой **Feature-Sliced Design (FSD)**:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```text
+src/
+├── App/          # Настройка приложения, Redux-хранилище и тема
+├── pages/        # Главная, поиск, фильтры, категории, избранное, информация о фильме
+├── widgets/      # Шапка, подвал, главный баннер и карточки фильмов
+├── features/     # Поиск, фильтрация, избранное и переключение темы
+├── entities/     # Данные фильмов, API-запросы, состояние и переиспользуемый UI
+└── shared/       # Общий API-клиент, конфигурация и UI-компоненты
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Слой API отвечает за получение подборок фильмов, поиск, фильтрацию, подробную информацию о фильмах, актёрский состав и похожие фильмы. Redux Toolkit используется для управления состоянием приложения и асинхронными запросами.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Начало работы
 
-### `npm run eject`
+### Требования
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Node.js 22 и Yarn Classic 1.22.22
+- Доступ к [TMDB API](https://developer.themoviedb.org/)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Локальный запуск
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+git clone https://github.com/alextsapin/tmdb.git
+cd tmdb
+yarn install
+yarn start
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Сервер разработки запускается по адресу **http://localhost:3000**.
 
-## Learn More
+Другие доступные команды:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+yarn build    # Создание production-сборки
+yarn test     # Запуск тестов
+yarn lint     # Проверка ESLint
+yarn typecheck # Проверка типов TypeScript
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+> **Безопасность API-ключей:** запросы к TMDB настроены в `src/shared/api/client.ts`. В импортированной версии проекта Bearer-токен встроен непосредственно в клиентский исходный код. Перед дальнейшим распространением или развёртыванием проекта этот токен необходимо **отозвать и заменить**. Переменная окружения во фронтенде сама по себе не скрывает токен от пользователей браузера. Если учётные данные должны оставаться конфиденциальными, используйте подходящий серверный прокси. Не добавляйте новые секреты в Git.
+
+## О репозитории
+
+Проект был перенесён из [GitLab](https://gitlab.com/it-react-project/tmdb) в GitHub с сохранением истории Git-коммитов.
+
+Репозиторий служит примером для портфолио и демонстрирует разработку React-приложения с интеграцией внешнего API, асинхронным управлением состоянием, клиентской маршрутизацией, переиспользуемыми компонентами и архитектурой с разделением функциональности.
+
+## Благодарности
+
+В приложении используется **TMDB API**, однако проект не одобрен и не сертифицирован TMDB.

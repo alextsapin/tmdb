@@ -2,6 +2,10 @@
     "name": "tmdb",
     "version": "0.5.0",
     "private": true,
+    "packageManager": "yarn@1.22.22",
+    "engines": {
+        "node": "22.x"
+    },
     "dependencies": {
         "@emotion/react": "^11.14.0",
         "@emotion/styled": "^11.14.1",
@@ -9,7 +13,7 @@
         "@mui/material": "^9.0.0",
         "@reduxjs/toolkit": "1.9.7",
         "@testing-library/dom": "^10.4.1",
-        "@testing-library/jest-dom": "^6.9.1",
+        "@testing-library/jest-dom": "6.9.1",
         "@testing-library/react": "^16.3.2",
         "@testing-library/user-event": "^13.5.0",
         "@types/jest": "^27.5.2",
@@ -24,7 +28,7 @@
         "react-router-dom": "^7.14.2",
         "react-scripts": "5.0.1",
         "react-spinners": "^0.17.0",
-        "typescript": "^6.0.3",
+        "typescript": "4.9.5",
         "web-vitals": "^2.1.4",
         "yup": "^1.7.1"
     },
@@ -32,6 +36,8 @@
         "start": "craco start",
         "build": "craco build",
         "test": "craco test",
+        "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+        "typecheck": "tsc --noEmit",
         "eject": "react-scripts eject"
     },
     "eslintConfig": {
